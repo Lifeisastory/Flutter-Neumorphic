@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 /// left -1 <= dx <= 1 right
 /// top -1 <= dy <= 1 bottom
 ///
-/// constants like "top", "topLeft", "topRight" are providen in LightSource
+/// constants like "top", "topLeft", "topRight" are provided in LightSource
 ///
 @immutable
 class LightSource {

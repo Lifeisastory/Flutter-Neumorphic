@@ -42,7 +42,7 @@ class __PageState extends State<_Page> {
   double fontSize = 100;
   int fontWeight = 800;
 
-  final _textController = TextEditingController(text: 'Flutter');
+  final _textController = TextEditingController(text: 'Hello World');
 
   bool displayIcon = false;
 
