@@ -15,7 +15,7 @@ class _WidgetPageState extends State<IconWidgetPage> {
     return NeumorphicTheme(
       themeMode: ThemeMode.light,
       theme: const NeumorphicThemeData(
-          lightSource: LightSource.topLeft, accentColor: NeumorphicColors.accent, depth: 3, intensity: 6.0),
+          lightSource: LightSource.topLeft, accentColor: NeumorphicColors.accent, depth: -3, intensity: 6.0),
       child: _Page(),
     );
   }
@@ -43,16 +43,13 @@ class _PageState extends State<_Page> {
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
           itemCount: icons.length,
           itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: NeumorphicIcon(
-                icons[index],
-                size: 80,
-                style: const NeumorphicStyle(
-                    //shape: NeumorphicShape.convex,
-                    //surfaceIntensity: 1.0
-                    ),
-              ),
+            return NeumorphicIcon(
+              icons[index],
+              size: 80,
+              style: const NeumorphicStyle(
+                  //shape: NeumorphicShape.convex,
+                  //surfaceIntensity: 1.0
+                  ),
             );
           },
         ),

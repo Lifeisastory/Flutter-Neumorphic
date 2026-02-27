@@ -97,8 +97,8 @@ class NeumorphicDebossDecorationPainter extends BoxPainter {
     }
 
     final bool invalidateShadowColors = this._cache.updateShadowColor(
-          newShadowLightColorEmboss: style.shadowLightColorEmboss ?? Color(0xFFFFFFFF),
-          newShadowDarkColorEmboss: style.shadowDarkColorEmboss ?? Color(0xFF000000),
+          newShadowLightColor: style.shadowLightColorDeboss ?? Color(0xFFFFFFFF),
+          newShadowDarkColor: style.shadowDarkColorDeboss ?? Color(0xFF000000),
           newIntensity: style.intensity ?? 0.25,
         );
     if (invalidateShadowColors) {

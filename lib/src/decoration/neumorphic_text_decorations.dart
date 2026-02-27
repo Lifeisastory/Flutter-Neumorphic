@@ -42,7 +42,7 @@ class NeumorphicTextDecoration extends Decoration {
         text: text,
       );
     } else if (style.depth != null && style.depth! < 0) {
-      return NeumorphicDebossTextPainter(
+      return NeumorphicDebossDecorationTextPainter(
         style: style,
         textStyle: textStyle,
         textAlign: textAlign,

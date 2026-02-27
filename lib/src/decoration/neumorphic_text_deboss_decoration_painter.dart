@@ -7,7 +7,7 @@ import 'cache/neumorphic_emboss_painter_cache.dart';
 
 /// 凹入
 
-class NeumorphicDebossTextPainter extends BoxPainter {
+class NeumorphicDebossDecorationTextPainter extends BoxPainter {
   final NeumorphicStyle style;
   final String text;
   final TextStyle textStyle;
@@ -32,7 +32,7 @@ class NeumorphicDebossTextPainter extends BoxPainter {
   late ui.Paragraph _blackShadowTextParagraph;
   late ui.Paragraph _blackShadowTextMaskParagraph;
 
-  NeumorphicDebossTextPainter({
+  NeumorphicDebossDecorationTextPainter({
     required this.style,
     required this.text,
     required this.textStyle,
@@ -101,8 +101,8 @@ class NeumorphicDebossTextPainter extends BoxPainter {
     }
 
     final invalidateShadowColors = _cache.updateShadowColor(
-      newShadowLightColorEmboss: style.shadowLightColorEmboss ?? Colors.white,
-      newShadowDarkColorEmboss: style.shadowDarkColorEmboss ?? Colors.black,
+      newShadowLightColor: style.shadowLightColorDeboss ?? Colors.white,
+      newShadowDarkColor: style.shadowDarkColorDeboss ?? Colors.black,
       newIntensity: style.intensity ?? 0.25,
     );
 
