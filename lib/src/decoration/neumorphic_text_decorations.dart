@@ -2,8 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/widgets.dart';
 
-import 'neumorphic_emboss_decoration_painter.dart';
-import 'neumorphic_text_decoration_painter.dart';
+import 'neumorphic_deboss_decoration_painter.dart';
+import 'neumorphic_text_emboss_decoration_painter.dart';
+import 'neumorphic_text_deboss_decoration_painter.dart';
 
 @immutable
 class NeumorphicTextDecoration extends Decoration {
@@ -27,7 +28,7 @@ class NeumorphicTextDecoration extends Decoration {
   BoxPainter createBoxPainter([VoidCallback? onChanged]) {
     //print("createBoxPainter : ${style.depth}");
     if (style.depth != null && style.depth! >= 0) {
-      return NeumorphicDecorationTextPainter(
+      return NeumorphicEmbossDecorationTextPainter(
         style: style,
         textStyle: textStyle,
         textAlign: textAlign,
@@ -40,20 +41,19 @@ class NeumorphicTextDecoration extends Decoration {
         onChanged: onChanged ?? () {},
         text: text,
       );
+    } else if (style.depth != null && style.depth! < 0) {
+      return NeumorphicDebossTextPainter(
+        style: style,
+        textStyle: textStyle,
+        textAlign: textAlign,
+        drawBackground: isForeground,
+        drawShadow: isForeground,
+        onChanged: onChanged ?? () {},
+        text: text,
+      );
     } else {
       return NeumorphicEmptyTextPainter(onChanged: onChanged ?? () {});
     }
-    /* else {
-      return NeumorphicEmbossDecorationPainter(
-        drawBackground: !isForeground,
-        style: style,
-        drawShadow: (isForeground && splitBackgroundForeground) ||
-            (!isForeground && !splitBackgroundForeground),
-        onChanged: onChanged,
-        shape: shape,
-      );
-    }
-    */
   }
 
   @override

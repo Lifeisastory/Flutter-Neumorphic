@@ -3,8 +3,8 @@ import 'dart:ui';
 import 'package:flutter/widgets.dart';
 
 import '../neumorphic_box_shape.dart';
-import 'neumorphic_decoration_painter.dart';
 import 'neumorphic_emboss_decoration_painter.dart';
+import 'neumorphic_deboss_decoration_painter.dart';
 
 @immutable
 class NeumorphicDecoration extends Decoration {
@@ -26,10 +26,9 @@ class NeumorphicDecoration extends Decoration {
   BoxPainter createBoxPainter([VoidCallback? onChanged]) {
     //print("createBoxPainter : ${style.depth}");
     if (style.depth != null && style.depth! >= 0) {
-      return NeumorphicDecorationPainter(
+      return NeumorphicEmbossDecorationPainter(
         style: style,
-        drawGradient: (isForeground && splitBackgroundForeground) ||
-            (!isForeground && !splitBackgroundForeground),
+        drawGradient: (isForeground && splitBackgroundForeground) || (!isForeground && !splitBackgroundForeground),
         drawBackground: !isForeground,
         //only box draw background
         drawShadow: !isForeground,
@@ -39,11 +38,10 @@ class NeumorphicDecoration extends Decoration {
         shape: shape,
       );
     } else {
-      return NeumorphicEmbossDecorationPainter(
+      return NeumorphicDebossDecorationPainter(
         drawBackground: !isForeground,
         style: style,
-        drawShadow: (isForeground && splitBackgroundForeground) ||
-            (!isForeground && !splitBackgroundForeground),
+        drawShadow: (isForeground && splitBackgroundForeground) || (!isForeground && !splitBackgroundForeground),
         onChanged: onChanged ?? () {},
         shape: shape,
       );
@@ -53,16 +51,14 @@ class NeumorphicDecoration extends Decoration {
   @override
   NeumorphicDecoration lerpFrom(Decoration? a, double t) {
     if (a == null) return scale(t);
-    if (a is NeumorphicDecoration)
-      return NeumorphicDecoration.lerp(a, this, t)!;
+    if (a is NeumorphicDecoration) return NeumorphicDecoration.lerp(a, this, t)!;
     return super.lerpFrom(a, t) as NeumorphicDecoration;
   }
 
   @override
   NeumorphicDecoration lerpTo(Decoration? b, double t) {
     if (b == null) return scale(1.0 - t);
-    if (b is NeumorphicDecoration)
-      return NeumorphicDecoration.lerp(this, b, t)!;
+    if (b is NeumorphicDecoration) return NeumorphicDecoration.lerp(this, b, t)!;
     return super.lerpTo(b, t) as NeumorphicDecoration;
   }
 
@@ -76,8 +72,7 @@ class NeumorphicDecoration extends Decoration {
         style: style.copyWith());
   }
 
-  static NeumorphicDecoration? lerp(
-      NeumorphicDecoration? a, NeumorphicDecoration? b, double t) {
+  static NeumorphicDecoration? lerp(NeumorphicDecoration? a, NeumorphicDecoration? b, double t) {
     //print("lerp $t ${a.style.depth}, ${b.style.depth}");
 
     if (a == null && b == null) return null;
@@ -103,12 +98,10 @@ class NeumorphicDecoration extends Decoration {
         style: a.style.copyWith(
           border: NeumorphicBorder.lerp(aStyle.border, bStyle.border, t),
           intensity: lerpDouble(aStyle.intensity, bStyle.intensity, t),
-          surfaceIntensity:
-              lerpDouble(aStyle.surfaceIntensity, bStyle.surfaceIntensity, t),
+          surfaceIntensity: lerpDouble(aStyle.surfaceIntensity, bStyle.surfaceIntensity, t),
           depth: lerpDouble(aStyle.depth, bStyle.depth, t),
           color: Color.lerp(aStyle.color, bStyle.color, t),
-          lightSource:
-              LightSource.lerp(aStyle.lightSource, bStyle.lightSource, t),
+          lightSource: LightSource.lerp(aStyle.lightSource, bStyle.lightSource, t),
         ));
   }
 

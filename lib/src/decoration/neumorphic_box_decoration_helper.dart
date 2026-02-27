@@ -2,10 +2,7 @@ import 'package:flutter/widgets.dart';
 
 import '../theme/theme.dart';
 
-Shader getGradientShader(
-    {required Rect gradientRect,
-    required LightSource source,
-    double intensity = 0.25}) {
+Shader getGradientShader({required Rect gradientRect, required LightSource source, double intensity = 0.25}) {
   var sourceInvert = source.invert();
 
   final currentIntensity = intensity * (3 / 5);
@@ -15,8 +12,7 @@ Shader getGradientShader(
     end: Alignment(sourceInvert.dx, sourceInvert.dy),
     colors: <Color>[
       NeumorphicColors.gradientShaderDarkColor(intensity: currentIntensity),
-      NeumorphicColors.gradientShaderWhiteColor(
-          intensity: currentIntensity * (2 / 5)),
+      NeumorphicColors.gradientShaderWhiteColor(intensity: currentIntensity * (2 / 5)),
     ],
     stops: [
       0,

@@ -15,11 +15,7 @@ class _WidgetPageState extends State<IconWidgetPage> {
     return NeumorphicTheme(
       themeMode: ThemeMode.light,
       theme: const NeumorphicThemeData(
-        lightSource: LightSource.topLeft,
-        accentColor: NeumorphicColors.accent,
-        depth: 4,
-        intensity: 1.0,
-      ),
+          lightSource: LightSource.topLeft, accentColor: NeumorphicColors.accent, depth: 3, intensity: 6.0),
       child: _Page(),
     );
   }
@@ -44,8 +40,7 @@ class _PageState extends State<_Page> {
         ),
         backgroundColor: Colors.transparent,
         body: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
           itemCount: icons.length,
           itemBuilder: (context, index) {
             return Padding(

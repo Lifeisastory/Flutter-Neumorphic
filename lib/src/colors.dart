@@ -21,13 +21,10 @@ class NeumorphicColors {
   static const Color defaultBorder = Color(0x33000000);
   static const Color darkDefaultBorder = Color(0x33FFFFFF);
 
-  static const Color decorationMaxWhiteColor =
-      Color(0xFFFFFFFF); //for intensity = 1
-  static const Color decorationMaxDarkColor =
-      Color(0x8A000000); //for intensity = 1
+  static const Color decorationMaxWhiteColor = Color(0xFFFFFFFF); //for intensity = 1
+  static const Color decorationMaxDarkColor = Color(0x8A000000); //for intensity = 1
 
-  static const Color embossMaxWhiteColor =
-      Color(0x99FFFFFF); //for intensity = 1
+  static const Color embossMaxWhiteColor = Color(0x99FFFFFF); //for intensity = 1
   static const Color embossMaxDarkColor = Color(0x73000000); //for intensity = 1
 
   static const Color _gradientShaderDarkColor = Color(0x8A000000);
@@ -71,25 +68,19 @@ class NeumorphicColors {
 
   static Color gradientShaderDarkColor({required double intensity}) {
     // intensity act on opacity;
-    return _applyPercentageOnOpacity(
-        maxColor: NeumorphicColors._gradientShaderDarkColor,
-        percent: intensity);
+    return _applyPercentageOnOpacity(maxColor: NeumorphicColors._gradientShaderDarkColor, percent: intensity);
   }
 
   static Color gradientShaderWhiteColor({required double intensity}) {
     // intensity act on opacity;
-    return _applyPercentageOnOpacity(
-        maxColor: NeumorphicColors._gradientShaderWhiteColor,
-        percent: intensity);
+    return _applyPercentageOnOpacity(maxColor: NeumorphicColors._gradientShaderWhiteColor, percent: intensity);
   }
 
-  static Color _applyPercentageOnOpacity(
-      {required Color maxColor, required double percent}) {
+  static Color _applyPercentageOnOpacity({required Color maxColor, required double percent}) {
     final maxOpacity = maxColor.a;
     final maxIntensity = Neumorphic.MAX_INTENSITY;
     final newOpacity = percent * maxOpacity / maxIntensity;
-    final newColor =
-        maxColor.withValues(alpha: newOpacity); //<-- intensity act on opacity;
+    final newColor = maxColor.withValues(alpha: newOpacity); //<-- intensity act on opacity;
     return newColor;
   }
 }

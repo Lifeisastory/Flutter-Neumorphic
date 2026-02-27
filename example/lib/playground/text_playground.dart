@@ -88,8 +88,7 @@ class __PageState extends State<_Page> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Padding(
-                  padding:
-                      const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
+                  padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
                   child: ElevatedButton(
                     child: const Text(
                       'back',
@@ -144,9 +143,7 @@ class __PageState extends State<_Page> {
                     child: Text(
                       'Style',
                       style: TextStyle(
-                        color: selectedConfiguratorIndex == 0
-                            ? textActiveColor
-                            : textInactiveColor,
+                        color: selectedConfiguratorIndex == 0 ? textActiveColor : textInactiveColor,
                       ),
                     ),
                     onPressed: () {
@@ -165,9 +162,7 @@ class __PageState extends State<_Page> {
                     child: Text(
                       'Element',
                       style: TextStyle(
-                        color: selectedConfiguratorIndex == 1
-                            ? textActiveColor
-                            : textInactiveColor,
+                        color: selectedConfiguratorIndex == 1 ? textActiveColor : textInactiveColor,
                       ),
                     ),
                     onPressed: () {
@@ -237,9 +232,7 @@ class __PageState extends State<_Page> {
                 });
               },
               child: Image.asset('assets/images/concave.png',
-                  color: shape == NeumorphicShape.concave
-                      ? iconActiveColor
-                      : iconInactiveColor),
+                  color: shape == NeumorphicShape.concave ? iconActiveColor : iconInactiveColor),
             ),
           ),
         ),
@@ -253,9 +246,7 @@ class __PageState extends State<_Page> {
                 });
               },
               child: Image.asset('assets/images/convex.png',
-                  color: shape == NeumorphicShape.convex
-                      ? iconActiveColor
-                      : iconInactiveColor),
+                  color: shape == NeumorphicShape.convex ? iconActiveColor : iconInactiveColor),
             ),
           ),
         ),
@@ -269,9 +260,7 @@ class __PageState extends State<_Page> {
                 });
               },
               child: Image.asset('assets/images/flat.png',
-                  color: shape == NeumorphicShape.flat
-                      ? iconActiveColor
-                      : iconInactiveColor),
+                  color: shape == NeumorphicShape.flat ? iconActiveColor : iconInactiveColor),
             ),
           ),
         ),
@@ -292,8 +281,7 @@ class __PageState extends State<_Page> {
         ColorSelector(
           onColorChanged: (color) {
             setState(() {
-              NeumorphicTheme.of(context)!
-                  .updateCurrentTheme(NeumorphicThemeData(baseColor: color));
+              NeumorphicTheme.of(context)!.updateCurrentTheme(NeumorphicThemeData(baseColor: color));
             });
           },
           color: NeumorphicTheme.baseColor(context),
