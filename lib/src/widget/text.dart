@@ -1,7 +1,7 @@
 import 'dart:ui' as ui show FontFeature;
 
 import 'package:flutter/material.dart' as material;
-import 'package:flutter_neumorphic_plus/src/decoration/neumorphic_text_decorations.dart';
+import 'package:my_neumorphic/src/decoration/neumorphic_text_decorations.dart';
 
 import '../../flutter_neumorphic.dart';
 

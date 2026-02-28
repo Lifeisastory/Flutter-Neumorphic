@@ -21,7 +21,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  flutter_neumorphic_plus:
+  my_neumorphic:
     path: ../
 
   flutter_colorpicker: ^1.0.0
