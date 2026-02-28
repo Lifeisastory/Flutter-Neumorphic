@@ -1,12 +1,12 @@
 import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
-import 'package:flutter_neumorphic_plus/src/shape/rrect_path_provider.dart';
-import 'package:flutter_neumorphic_plus/src/shape/stadium_path_provider.dart';
+import 'package:flutter_neumorphic_plus/src/clip_path/rrect_path_provider.dart';
+import 'package:flutter_neumorphic_plus/src/clip_path/stadium_path_provider.dart';
 
-import 'shape/beveled_path_provider.dart';
-import 'shape/circle_path_provider.dart';
-import 'shape/rect_path_provider.dart';
+import 'clip_path/beveled_path_provider.dart';
+import 'clip_path/circle_path_provider.dart';
+import 'clip_path/rect_path_provider.dart';
 
-export 'shape/path/flutter_logo_path_provider.dart';
+export 'clip_path/custom_path/flutter_logo_path_provider.dart';
 
 /// Define a Neumorphic container box shape
 
@@ -17,38 +17,29 @@ class NeumorphicBoxShape {
 
   const NeumorphicBoxShape.circle() : this._(const CirclePathProvider());
 
-  const NeumorphicBoxShape.path(NeumorphicPathProvider pathProvider)
-      : this._(pathProvider);
+  const NeumorphicBoxShape.path(NeumorphicPathProvider pathProvider) : this._(pathProvider);
 
   const NeumorphicBoxShape.rect() : this._(const RectPathProvider());
 
   const NeumorphicBoxShape.stadium() : this._(const StadiumPathProvider());
 
-  NeumorphicBoxShape.roundRect(BorderRadius borderRadius)
-      : this._(RRectPathProvider(borderRadius));
+  NeumorphicBoxShape.roundRect(BorderRadius borderRadius) : this._(RRectPathProvider(borderRadius));
 
-  NeumorphicBoxShape.beveled(BorderRadius borderRadius)
-      : this._(BeveledPathProvider(borderRadius));
+  NeumorphicBoxShape.beveled(BorderRadius borderRadius) : this._(BeveledPathProvider(borderRadius));
 
-  bool get isCustomPath =>
-      !isStadium && !isRect && !isCircle && !isRoundRect && !isBeveled;
+  bool get isCustomPath => !isStadium && !isRect && !isCircle && !isRoundRect && !isBeveled;
 
-  bool get isStadium =>
-      customShapePathProvider.runtimeType == StadiumPathProvider;
+  bool get isStadium => customShapePathProvider.runtimeType == StadiumPathProvider;
 
-  bool get isCircle =>
-      customShapePathProvider.runtimeType == CirclePathProvider;
+  bool get isCircle => customShapePathProvider.runtimeType == CirclePathProvider;
 
   bool get isRect => customShapePathProvider.runtimeType == RectPathProvider;
 
-  bool get isRoundRect =>
-      customShapePathProvider.runtimeType == RRectPathProvider;
+  bool get isRoundRect => customShapePathProvider.runtimeType == RRectPathProvider;
 
-  bool get isBeveled =>
-      customShapePathProvider.runtimeType == BeveledPathProvider;
+  bool get isBeveled => customShapePathProvider.runtimeType == BeveledPathProvider;
 
-  static NeumorphicBoxShape? lerp(
-      NeumorphicBoxShape? a, NeumorphicBoxShape? b, double t) {
+  static NeumorphicBoxShape? lerp(NeumorphicBoxShape? a, NeumorphicBoxShape? b, double t) {
     if (a == null && b == null) return null;
 
     if (t == 0.0) return a;

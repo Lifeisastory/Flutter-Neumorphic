@@ -87,13 +87,8 @@ class _NeumorphicButtonState extends State<NeumorphicButton> {
     final appBarPresent = NeumorphicAppBarTheme.of(context) != null;
 
     final theme = NeumorphicTheme.currentTheme(context);
-    this.initialStyle = widget.style ??
-        (appBarPresent
-            ? theme.appBarTheme.buttonStyle
-            : (theme.buttonStyle ?? const NeumorphicStyle()));
-    depth = widget.style?.depth ??
-        (appBarPresent ? theme.appBarTheme.buttonStyle.depth : theme.depth) ??
-        0.0;
+    this.initialStyle = widget.style ?? (appBarPresent ? theme.appBarTheme.buttonStyle : (theme.buttonStyle ?? const NeumorphicStyle()));
+    depth = widget.style?.depth ?? (appBarPresent ? theme.appBarTheme.buttonStyle.depth : theme.depth) ?? 0.0;
 
     setState(() {});
   }
@@ -198,9 +193,7 @@ class _NeumorphicButtonState extends State<NeumorphicButton> {
           drawSurfaceAboveChild: widget.drawSurfaceAboveChild,
           duration: widget.duration,
           curve: widget.curve,
-          padding: widget.padding ??
-              (appBarPresent ? appBarTheme.buttonPadding : null) ??
-              const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+          padding: widget.padding ?? (appBarPresent ? appBarTheme.buttonPadding : null) ?? const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
           style: initialStyle.copyWith(
             depth: _getDepth(),
           ),
@@ -221,13 +214,9 @@ class _NeumorphicButtonState extends State<NeumorphicButton> {
   double _getScale() {
     if (widget.pressed != null) {
       //defined by the widget that use it
-      return widget.pressed!
-          ? NeumorphicButton.PRESSED_SCALE
-          : NeumorphicButton.UNPRESSED_SCALE;
+      return widget.pressed! ? NeumorphicButton.PRESSED_SCALE : NeumorphicButton.UNPRESSED_SCALE;
     } else {
-      return this.pressed
-          ? NeumorphicButton.PRESSED_SCALE
-          : NeumorphicButton.UNPRESSED_SCALE;
+      return this.pressed ? NeumorphicButton.PRESSED_SCALE : NeumorphicButton.UNPRESSED_SCALE;
     }
   }
 }

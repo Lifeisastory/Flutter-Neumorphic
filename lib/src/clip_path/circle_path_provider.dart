@@ -15,9 +15,7 @@ class CirclePathProvider extends NeumorphicPathProvider {
     final middleHeight = size.height / 2;
     final middleWidth = size.width / 2;
     return Path()
-      ..addOval(Rect.fromCircle(
-          center: Offset(middleWidth, middleHeight),
-          radius: min(middleHeight, middleWidth)))
+      ..addOval(Rect.fromCircle(center: Offset(middleWidth, middleHeight), radius: min(middleHeight, middleWidth)))
       ..close();
   }
 

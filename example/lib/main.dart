@@ -43,10 +43,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: NeumorphicFloatingActionButton(
-        child: const Icon(Icons.add, size: 30),
-        onPressed: () {},
-      ),
+      floatingActionButton: NeumorphicFloatingActionButton(child: const Icon(Icons.add, size: 30), onPressed: () {}),
       backgroundColor: NeumorphicTheme.baseColor(context),
       body: Center(
         child: Column(
@@ -56,53 +53,38 @@ class MyHomePage extends StatelessWidget {
               onPressed: () {
                 print('onClick');
               },
-              style: const NeumorphicStyle(
-                shape: NeumorphicShape.flat,
-                boxShape: NeumorphicBoxShape.circle(),
-              ),
+              style: const NeumorphicStyle(shape: NeumorphicSurfaceType.flat, boxShape: NeumorphicBoxShape.circle()),
               padding: const EdgeInsets.all(12.0),
-              child: Icon(
-                Icons.favorite_border,
-                color: _iconsColor(context),
-              ),
+              child: Icon(Icons.favorite_border, color: _iconsColor(context)),
             ),
             NeumorphicButton(
-                margin: const EdgeInsets.only(top: 12),
-                onPressed: () {
-                  NeumorphicTheme.of(context)!.themeMode =
-                      NeumorphicTheme.isUsingDark(context)
-                          ? ThemeMode.light
-                          : ThemeMode.dark;
-                },
-                style: NeumorphicStyle(
-                  shape: NeumorphicShape.flat,
-                  boxShape:
-                      NeumorphicBoxShape.roundRect(BorderRadius.circular(8)),
-                ),
-                padding: const EdgeInsets.all(12.0),
-                child: Text(
-                  'Toggle Theme',
-                  style: TextStyle(color: _textColor(context)),
-                )),
+              margin: const EdgeInsets.only(top: 12),
+              onPressed: () {
+                NeumorphicTheme.of(context)!.themeMode = NeumorphicTheme.isUsingDark(context) ? ThemeMode.light : ThemeMode.dark;
+              },
+              style: NeumorphicStyle(shape: NeumorphicSurfaceType.flat, boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(8))),
+              padding: const EdgeInsets.all(12.0),
+              child: Text('Toggle Theme', style: TextStyle(color: _textColor(context))),
+            ),
             NeumorphicButton(
-                margin: const EdgeInsets.only(top: 12),
-                onPressed: () {
-                  Navigator.of(context)
-                      .pushReplacement(MaterialPageRoute(builder: (context) {
-                    return const FullSampleHomePage();
-                  }));
-                },
-                style: NeumorphicStyle(
-                  shape: NeumorphicShape.flat,
-                  boxShape:
-                      NeumorphicBoxShape.roundRect(BorderRadius.circular(8)),
-                  //border: NeumorphicBorder()
-                ),
-                padding: const EdgeInsets.all(12.0),
-                child: Text(
-                  'Go to full sample',
-                  style: TextStyle(color: _textColor(context)),
-                )),
+              margin: const EdgeInsets.only(top: 12),
+              onPressed: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const FullSampleHomePage();
+                    },
+                  ),
+                );
+              },
+              style: NeumorphicStyle(
+                shape: NeumorphicSurfaceType.flat,
+                boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(8)),
+                //border: NeumorphicBorder()
+              ),
+              padding: const EdgeInsets.all(12.0),
+              child: Text('Go to full sample', style: TextStyle(color: _textColor(context))),
+            ),
           ],
         ),
       ),

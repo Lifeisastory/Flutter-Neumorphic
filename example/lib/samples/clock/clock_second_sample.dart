@@ -8,19 +8,16 @@ class ClockAlarmPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return NeumorphicTheme(
       theme: const NeumorphicThemeData(
-          defaultTextColor: Color(0xFF303E57),
-          accentColor: Color(0xFF7B79FC),
-          variantColor: Colors.black38,
-          baseColor: Color(0xFFF8F9FC),
-          depth: 8,
-          intensity: 0.5,
-          lightSource: LightSource.topLeft),
-      themeMode: ThemeMode.light,
-      child: Material(
-        child: NeumorphicBackground(
-          child: _Page(),
-        ),
+        defaultTextColor: Color(0xFF303E57),
+        accentColor: Color(0xFF7B79FC),
+        variantColor: Colors.black38,
+        baseColor: Color(0xFFF8F9FC),
+        depth: 8,
+        intensity: 0.5,
+        lightSource: LightSource.topLeft,
       ),
+      themeMode: ThemeMode.light,
+      child: Material(child: NeumorphicBackground(child: _Page())),
     );
   }
 }
@@ -32,26 +29,10 @@ class _Page extends StatefulWidget {
 
 class _ClockPageState extends State<_Page> {
   final List<Alarm> items = [
-    const Alarm(
-      enabled: true,
-      time: '8:30 AM',
-      label: 'Awake !',
-    ),
-    const Alarm(
-      enabled: false,
-      time: '8:45 AM',
-      label: 'Wake up !',
-    ),
-    const Alarm(
-      enabled: false,
-      time: '9:00 AM',
-      label: 'Hurry up !',
-    ),
-    const Alarm(
-      enabled: false,
-      time: '2:00 AM',
-      label: 'Lunchtime',
-    )
+    const Alarm(enabled: true, time: '8:30 AM', label: 'Awake !'),
+    const Alarm(enabled: false, time: '8:45 AM', label: 'Wake up !'),
+    const Alarm(enabled: false, time: '9:00 AM', label: 'Hurry up !'),
+    const Alarm(enabled: false, time: '2:00 AM', label: 'Lunchtime'),
   ];
 
   @override
@@ -60,10 +41,7 @@ class _ClockPageState extends State<_Page> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          const Padding(
-            padding: EdgeInsets.only(left: 8.0, right: 8.0, top: 9.0),
-            child: TopBar(),
-          ),
+          const Padding(padding: EdgeInsets.only(left: 8.0, right: 8.0, top: 9.0), child: TopBar()),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Stack(
@@ -75,12 +53,7 @@ class _ClockPageState extends State<_Page> {
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 28,
-                      shadows: const [
-                        Shadow(
-                            color: Colors.black38,
-                            offset: Offset(1.0, 1.0),
-                            blurRadius: 2)
-                      ],
+                      shadows: const [Shadow(color: Colors.black38, offset: Offset(1.0, 1.0), blurRadius: 2)],
                       color: NeumorphicTheme.defaultTextColor(context),
                     ),
                   ),
@@ -88,32 +61,18 @@ class _ClockPageState extends State<_Page> {
                 Align(
                   alignment: Alignment.topRight,
                   child: Neumorphic(
-                    style: NeumorphicStyle(
-                      depth: 20,
-                      intensity: 0.4,
-                      boxShape: NeumorphicBoxShape.roundRect(
-                          BorderRadius.circular(8)),
-                    ),
+                    style: NeumorphicStyle(depth: 20, intensity: 0.4, boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(8))),
                     child: NeumorphicButton(
                       padding: const EdgeInsets.all(12.0),
-                      style: NeumorphicStyle(
-                        depth: -1,
-                        boxShape: NeumorphicBoxShape.roundRect(
-                            BorderRadius.circular(8)),
-                      ),
-                      child: const Icon(
-                        Icons.add,
-                        color: Color(0xFFC1CDE5),
-                      ),
+                      style: NeumorphicStyle(depth: -1, boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(8))),
+                      child: const Icon(Icons.add, color: Color(0xFFC1CDE5)),
                     ),
                   ),
                 ),
               ],
             ),
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          const SizedBox(height: 20),
           _Divider(),
           Expanded(
             child: ListView.builder(
@@ -122,7 +81,7 @@ class _ClockPageState extends State<_Page> {
               },
               itemCount: items.length,
             ),
-          )
+          ),
         ],
       ),
     );
@@ -152,23 +111,14 @@ class AlarmCell extends StatelessWidget {
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 36,
-                        shadows: const [
-                          Shadow(
-                              color: Colors.black38,
-                              offset: Offset(1.0, 1.0),
-                              blurRadius: 2)
-                        ],
+                        shadows: const [Shadow(color: Colors.black38, offset: Offset(1.0, 1.0), blurRadius: 2)],
                         color: NeumorphicTheme.defaultTextColor(context),
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       alarm.label,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w300,
-                        fontSize: 14,
-                        color: NeumorphicTheme.variantColor(context),
-                      ),
+                      style: TextStyle(fontWeight: FontWeight.w300, fontSize: 14, color: NeumorphicTheme.variantColor(context)),
                     ),
                   ],
                 ),
@@ -181,14 +131,9 @@ class AlarmCell extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(right: 20),
                       child: Neumorphic(
-                        style: const NeumorphicStyle(
-                          depth: 8,
-                          intensity: 0.5,
-                          boxShape: NeumorphicBoxShape.stadium(),
-                        ),
+                        style: const NeumorphicStyle(depth: 8, intensity: 0.5, boxShape: NeumorphicBoxShape.stadium()),
                         child: NeumorphicSwitch(
-                          style: const NeumorphicSwitchStyle(
-                              inactiveTrackColor: Color(0xffC1CDE5)),
+                          style: const NeumorphicSwitchStyle(inactiveTrackColor: Color(0xffC1CDE5)),
                           height: 30,
                           value: alarm.enabled,
                         ),
@@ -213,13 +158,8 @@ class _Divider extends StatelessWidget {
       widthFactor: 1,
       child: Neumorphic(
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        style: const NeumorphicStyle(
-          depth: -4,
-          boxShape: NeumorphicBoxShape.stadium(),
-        ),
-        child: const SizedBox(
-          height: 6,
-        ),
+        style: const NeumorphicStyle(depth: -4, boxShape: NeumorphicBoxShape.stadium()),
+        child: const SizedBox(height: 6),
       ),
     );
   }
@@ -230,9 +170,5 @@ class Alarm {
   final String time;
   final String label;
 
-  const Alarm({
-    required this.enabled,
-    required this.time,
-    required this.label,
-  });
+  const Alarm({required this.enabled, required this.time, required this.label});
 }

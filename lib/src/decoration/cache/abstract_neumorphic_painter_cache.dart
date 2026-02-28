@@ -2,7 +2,7 @@ import 'dart:math';
 
 import '../../../flutter_neumorphic.dart';
 
-abstract class AbstractNeumorphicEmbossPainterCache {
+abstract class AbstractNeumorphicPainterCache {
   Offset? _cacheOffset;
 
   Offset get originOffset => _cacheOffset ?? Offset.zero;
@@ -10,9 +10,11 @@ abstract class AbstractNeumorphicEmbossPainterCache {
   double? _cacheWidth;
 
   double get width => _cacheWidth ?? 0;
+
   double? _cacheHeight;
 
   double get height => _cacheHeight ?? 0;
+
   double? _cacheRadius;
 
   double get cacheRadius => _cacheRadius ?? 0;
@@ -21,7 +23,7 @@ abstract class AbstractNeumorphicEmbossPainterCache {
 
   Rect? get layerRect => _layerRect;
 
-  AbstractNeumorphicEmbossPainterCache();
+  AbstractNeumorphicPainterCache();
 
   bool updateSize({required Offset newOffset, required Size newSize}) {
     if (this._cacheOffset != newOffset || this._cacheWidth != newSize.width || this._cacheHeight != newSize.height) {
@@ -38,7 +40,6 @@ abstract class AbstractNeumorphicEmbossPainterCache {
 
       return true;
     }
-
     return false;
   }
 
@@ -47,6 +48,7 @@ abstract class AbstractNeumorphicEmbossPainterCache {
   double? _cacheStyleDepth; //old style depth
   double? _depth; //depth used to draw
   double get depth => _depth ?? 0; //depth used to draw
+
   bool updateStyleDepth(double newStyleDepth, double radiusFactor) {
     if (_cacheStyleDepth != newStyleDepth) {
       _cacheStyleDepth = newStyleDepth;
@@ -84,11 +86,12 @@ abstract class AbstractNeumorphicEmbossPainterCache {
     return false;
   }
 
-  bool? _cacheOppositeShadowLightSource; //store the old style lightsource property
-  LightSource? _cacheLightSource; //store the old style lightsource
+  bool? _cacheOppositeShadowLightSource; //store the old style light source property
+  LightSource? _cacheLightSource; //store the old style light source
 
   LightSource? _lightSource; //used to draw
   LightSource get lightSource => _lightSource ?? LightSource.bottom; //used to draw
+
   bool updateLightSource(LightSource newLightSource, bool newOppositeShadowLightSource) {
     bool invalidateLightSource = false;
     if (newLightSource != _cacheLightSource) {
@@ -104,9 +107,7 @@ abstract class AbstractNeumorphicEmbossPainterCache {
 
     final cacheLightSource = this._cacheLightSource;
     final cacheOppositeShadowLightSource = this._cacheOppositeShadowLightSource;
-    if (cacheOppositeShadowLightSource != null &&
-        cacheLightSource != null &&
-        (invalidateLightSource || invalidateOppositeLightSource)) {
+    if (cacheOppositeShadowLightSource != null && cacheLightSource != null && (invalidateLightSource || invalidateOppositeLightSource)) {
       if (cacheOppositeShadowLightSource) {
         _lightSource = cacheLightSource.invert();
       } else {
@@ -141,8 +142,7 @@ abstract class AbstractNeumorphicEmbossPainterCache {
 
   Color generateShadowDarkColor({required Color color, required double intensity});
 
-  bool updateShadowColor(
-      {required Color newShadowLightColor, required Color newShadowDarkColor, required double newIntensity}) {
+  bool updateShadowColor({required Color newShadowLightColor, required Color newShadowDarkColor, required double newIntensity}) {
     bool invalidateIntensity = false;
     bool invalidate = false;
     if (_styleIntensity != newIntensity) {

@@ -16,12 +16,7 @@ class _WidgetPageState extends State<CheckboxWidgetPage> {
   Widget build(BuildContext context) {
     return NeumorphicTheme(
       themeMode: ThemeMode.light,
-      theme: const NeumorphicThemeData(
-        lightSource: LightSource.topLeft,
-        accentColor: NeumorphicColors.accent,
-        depth: 4,
-        intensity: 0.5,
-      ),
+      theme: const NeumorphicThemeData(lightSource: LightSource.topLeft, accentColor: NeumorphicColors.accent, depth: 4, intensity: 0.5),
       child: _Page(),
     );
   }
@@ -38,24 +33,14 @@ class _PageState extends State<_Page> {
     return NeumorphicBackground(
       padding: const EdgeInsets.all(8),
       child: Scaffold(
-        appBar: const TopBar(
-          title: 'Checkbox',
-          actions: <Widget>[
-            ThemeConfigurator(),
-          ],
-        ),
+        appBar: const TopBar(title: 'Checkbox', actions: <Widget>[ThemeConfigurator()]),
         backgroundColor: Colors.transparent,
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
-            children: [
-              _DefaultWidget(),
-              _ColorWidget(),
-              _EnabledDisabledWidget(),
-              const SizedBox(height: 30),
-            ],
+            children: [_DefaultWidget(), _ColorWidget(), _EnabledDisabledWidget(), const SizedBox(height: 30)],
           ),
         ),
       ),
@@ -94,10 +79,7 @@ NeumorphicCheckbox(
       padding: const EdgeInsets.all(12),
       child: Row(
         children: <Widget>[
-          Text(
-            'Default',
-            style: TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
-          ),
+          Text('Default', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
           const SizedBox(width: 12),
           NeumorphicCheckbox(
             value: check1,
@@ -132,13 +114,7 @@ NeumorphicCheckbox(
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        _buildWidget(context),
-        _buildCode(context),
-      ],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[_buildWidget(context), _buildCode(context)]);
   }
 }
 
@@ -159,10 +135,7 @@ class _ColorWidgetState extends State<_ColorWidget> {
       padding: const EdgeInsets.all(12),
       child: Row(
         children: <Widget>[
-          Text(
-            'Colorizable',
-            style: TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
-          ),
+          Text('Colorizable', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
           const SizedBox(width: 12),
           ColorSelector(
             color: customColor,
@@ -228,13 +201,7 @@ NeumorphicCheckbox(
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        _buildWidget(context),
-        _buildCode(context),
-      ],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[_buildWidget(context), _buildCode(context)]);
   }
 }
 
@@ -252,10 +219,7 @@ class _EnabledDisabledWidgetState extends State<_EnabledDisabledWidget> {
       padding: const EdgeInsets.all(12),
       child: Row(
         children: <Widget>[
-          Text(
-            'Enabled',
-            style: TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
-          ),
+          Text('Enabled', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
           const SizedBox(width: 12),
           NeumorphicCheckbox(
             value: check1,
@@ -266,10 +230,7 @@ class _EnabledDisabledWidgetState extends State<_EnabledDisabledWidget> {
             },
           ),
           const SizedBox(width: 24),
-          Text(
-            'Disabled',
-            style: TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
-          ),
+          Text('Disabled', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
           const SizedBox(width: 12),
           NeumorphicCheckbox(
             isEnabled: false,
@@ -304,12 +265,6 @@ NeumorphicCheckbox(
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        _buildWidget(context),
-        _buildCode(context),
-      ],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[_buildWidget(context), _buildCode(context)]);
   }
 }

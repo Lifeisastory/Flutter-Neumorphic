@@ -15,7 +15,7 @@ export '../theme/neumorphic_theme.dart';
 ///
 /// it's clipped using a [NeumorphicBoxShape] (circle, roundrect, stadium)
 ///
-/// It can be, depending on its [NeumorphicStyle.shape] : [NeumorphicShape.concave],  [NeumorphicShape.convex],  [NeumorphicShape.flat]
+/// It can be, depending on its [NeumorphicStyle.shape] : [NeumorphicSurfaceType.concave],  [NeumorphicSurfaceType.convex],  [NeumorphicSurfaceType.flat]
 ///
 /// if [NeumorphicStyle.depth] < 0 ----> use the emboss shape
 ///
@@ -56,8 +56,7 @@ class Neumorphic extends StatelessWidget {
   final EdgeInsets margin;
   final Curve curve;
   final Duration duration;
-  final bool
-      drawSurfaceAboveChild; //if true => boxDecoration & foreground decoration, else => boxDecoration does all the work
+  final bool drawSurfaceAboveChild; //if true => boxDecoration & foreground decoration, else => boxDecoration does all the work
 
   Neumorphic({
     Key? key,
@@ -74,9 +73,7 @@ class Neumorphic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = NeumorphicTheme.currentTheme(context);
-    final NeumorphicStyle style = (this.style ?? NeumorphicStyle())
-        .copyWithThemeIfNull(theme)
-        .applyDisableDepth();
+    final NeumorphicStyle style = (this.style ?? NeumorphicStyle()).copyWithThemeIfNull(theme).applyDisableDepth();
 
     return _NeumorphicContainer(
       padding: this.padding,

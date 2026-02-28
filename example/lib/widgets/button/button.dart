@@ -11,20 +11,11 @@ class _ButtonSampleState extends State<ButtonSample> {
   @override
   Widget build(BuildContext context) {
     return NeumorphicTheme(
-        themeMode: ThemeMode.light,
-        theme: const NeumorphicThemeData(
-          baseColor: Color(0xFFFFFFFF),
-          intensity: 0.5,
-          lightSource: LightSource.topLeft,
-          depth: 10,
-        ),
-        darkTheme: const NeumorphicThemeData(
-          baseColor: Color(0xFF000000),
-          intensity: 0.5,
-          lightSource: LightSource.topLeft,
-          depth: 10,
-        ),
-        child: _Page());
+      themeMode: ThemeMode.light,
+      theme: const NeumorphicThemeData(baseColor: Color(0xFFFFFFFF), intensity: 0.5, lightSource: LightSource.topLeft, depth: 10),
+      darkTheme: const NeumorphicThemeData(baseColor: Color(0xFF000000), intensity: 0.5, lightSource: LightSource.topLeft, depth: 10),
+      child: _Page(),
+    );
   }
 }
 
@@ -53,8 +44,7 @@ class __PageState extends State<_Page> {
               onPressed: () {
                 setState(() {
                   _useDark = !_useDark;
-                  NeumorphicTheme.of(context)!.themeMode =
-                      _useDark ? ThemeMode.dark : ThemeMode.light;
+                  NeumorphicTheme.of(context)!.themeMode = _useDark ? ThemeMode.dark : ThemeMode.light;
                 });
               },
               child: const Text('toggle theme'),
@@ -73,16 +63,10 @@ class __PageState extends State<_Page> {
         onPressed: () {
           print('click');
         },
-        style: const NeumorphicStyle(
-          shape: NeumorphicShape.flat,
-          boxShape: NeumorphicBoxShape.circle(),
-        ),
+        style: const NeumorphicStyle(shape: NeumorphicSurfaceType.flat, boxShape: NeumorphicBoxShape.circle()),
         child: Padding(
           padding: const EdgeInsets.all(12.0),
-          child: Icon(
-            Icons.favorite_border,
-            color: _iconsColor(),
-          ),
+          child: Icon(Icons.favorite_border, color: _iconsColor()),
         ),
       ),
     );

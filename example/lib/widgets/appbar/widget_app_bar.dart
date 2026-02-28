@@ -5,15 +5,7 @@ class AppBarWidgetPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        _FirstThemeWidgetPage(),
-        _SecondThemeWidgetPage(),
-        _ThirdThemeWidgetPage(),
-        _CustomIcon(),
-      ],
-    );
+    return Column(mainAxisSize: MainAxisSize.max, children: [_FirstThemeWidgetPage(), _SecondThemeWidgetPage(), _ThirdThemeWidgetPage(), _CustomIcon()]);
   }
 }
 
@@ -47,8 +39,7 @@ class _SecondThemeWidgetPage extends StatelessWidget {
         lightSource: LightSource.topLeft,
         accentColor: NeumorphicColors.accent,
         appBarTheme: NeumorphicAppBarThemeData(
-          buttonStyle: NeumorphicStyle(
-              boxShape: NeumorphicBoxShape.beveled(BorderRadius.circular(12))),
+          buttonStyle: NeumorphicStyle(boxShape: NeumorphicBoxShape.beveled(BorderRadius.circular(12))),
           textStyle: const TextStyle(color: Colors.black54),
           iconTheme: const IconThemeData(color: Colors.black54, size: 30),
         ),
@@ -69,10 +60,7 @@ class _ThirdThemeWidgetPage extends StatelessWidget {
         lightSource: LightSource.topLeft,
         accentColor: NeumorphicColors.accent,
         appBarTheme: NeumorphicAppBarThemeData(
-          buttonStyle: NeumorphicStyle(
-              color: Colors.black54,
-              boxShape:
-                  NeumorphicBoxShape.roundRect(BorderRadius.circular(12))),
+          buttonStyle: NeumorphicStyle(color: Colors.black54, boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12))),
           textStyle: const TextStyle(color: Colors.black54, fontSize: 20),
           iconTheme: const IconThemeData(color: Colors.white, size: 20),
         ),
@@ -92,16 +80,12 @@ class AppBarPageUsingTheme extends StatelessWidget {
     return SizedBox(
       height: 100,
       child: Scaffold(
-          appBar: NeumorphicAppBar(
-            title: const Text('App bar'),
-            actions: <Widget>[
-              NeumorphicButton(
-                child: const Icon(Icons.add),
-                onPressed: () {},
-              ),
-            ],
-          ),
-          body: Container()),
+        appBar: NeumorphicAppBar(
+          title: const Text('App bar'),
+          actions: <Widget>[NeumorphicButton(child: const Icon(Icons.add), onPressed: () {})],
+        ),
+        body: Container(),
+      ),
     );
   }
 }
@@ -114,19 +98,15 @@ class SizedAppBarPageUsingTheme extends StatelessWidget {
     return SizedBox(
       height: 100,
       child: Scaffold(
-          appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(60.0),
-            child: NeumorphicAppBar(
-              title: const Text('App bar custom size'),
-              actions: <Widget>[
-                NeumorphicButton(
-                  child: const Icon(Icons.add),
-                  onPressed: () {},
-                ),
-              ],
-            ),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(60.0),
+          child: NeumorphicAppBar(
+            title: const Text('App bar custom size'),
+            actions: <Widget>[NeumorphicButton(child: const Icon(Icons.add), onPressed: () {})],
           ),
-          body: Container()),
+        ),
+        body: Container(),
+      ),
     );
   }
 }
@@ -139,16 +119,12 @@ class FirstThemeContent extends StatelessWidget {
     return SizedBox(
       height: 100,
       child: Scaffold(
-          appBar: NeumorphicAppBar(
-            title: const Text('App bar'),
-            actions: <Widget>[
-              NeumorphicButton(
-                child: const Icon(Icons.add),
-                onPressed: () {},
-              ),
-            ],
-          ),
-          body: Container()),
+        appBar: NeumorphicAppBar(
+          title: const Text('App bar'),
+          actions: <Widget>[NeumorphicButton(child: const Icon(Icons.add), onPressed: () {})],
+        ),
+        body: Container(),
+      ),
     );
   }
 }
@@ -166,21 +142,13 @@ class _MyDrawer extends StatelessWidget {
         child: Column(
           children: [
             ConstrainedBox(
-              constraints: const BoxConstraints.tightFor(
-                  height: NeumorphicAppBar.toolbarHeight),
+              constraints: const BoxConstraints.tightFor(height: NeumorphicAppBar.toolbarHeight),
               child: NeumorphicAppBar(
                 title: const Text('Menu'),
-                leading: isLead
-                    ? const NeumorphicBackButton()
-                    : const NeumorphicCloseButton(),
+                leading: isLead ? const NeumorphicBackButton() : const NeumorphicCloseButton(),
                 actions: <Widget>[
-                  NeumorphicButton(
-                    child: const Icon(Icons.style),
-                    onPressed: () {},
-                  ),
-                  isLead
-                      ? const NeumorphicCloseButton()
-                      : const NeumorphicBackButton(forward: true),
+                  NeumorphicButton(child: const Icon(Icons.style), onPressed: () {}),
+                  isLead ? const NeumorphicCloseButton() : const NeumorphicBackButton(forward: true),
                 ],
               ),
             ),
@@ -203,25 +171,20 @@ class _CustomIcon extends StatelessWidget {
           lightSource: LightSource.topLeft,
           accentColor: NeumorphicColors.accent,
           appBarTheme: NeumorphicAppBarThemeData(
-              buttonStyle: NeumorphicStyle(
-                boxShape: NeumorphicBoxShape.circle(),
-                shape: NeumorphicShape.concave,
-                depth: 10,
-                intensity: 1,
-              ),
-              textStyle: TextStyle(color: Colors.black, fontSize: 20),
-              iconTheme: IconThemeData(color: Colors.green, size: 25),
-              icons: NeumorphicAppBarIcons(
-                  menuIcon: Icon(Icons.list, color: Colors.pink),
-                  closeIcon: Icon(Icons.delete),
-                  backIcon: Icon(Icons.reply))),
+            buttonStyle: NeumorphicStyle(boxShape: NeumorphicBoxShape.circle(), shape: NeumorphicSurfaceType.concave, depth: 10, intensity: 1),
+            textStyle: TextStyle(color: Colors.black, fontSize: 20),
+            iconTheme: IconThemeData(color: Colors.green, size: 25),
+            icons: NeumorphicAppBarIcons(
+              menuIcon: Icon(Icons.list, color: Colors.pink),
+              closeIcon: Icon(Icons.delete),
+              backIcon: Icon(Icons.reply),
+            ),
+          ),
           depth: 2,
           intensity: 0.5,
         ),
         child: Scaffold(
-          appBar: NeumorphicAppBar(
-            title: const Text('Custom icons + drawer'),
-          ),
+          appBar: NeumorphicAppBar(title: const Text('Custom icons + drawer')),
           endDrawer: const _MyDrawer(isLead: false),
           body: Container(),
         ),

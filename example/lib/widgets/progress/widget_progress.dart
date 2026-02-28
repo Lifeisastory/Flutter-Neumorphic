@@ -17,12 +17,7 @@ class _WidgetPageState extends State<ProgressWidgetPage> {
   Widget build(BuildContext context) {
     return NeumorphicTheme(
       themeMode: ThemeMode.light,
-      theme: const NeumorphicThemeData(
-        lightSource: LightSource.topLeft,
-        accentColor: NeumorphicColors.accent,
-        depth: 4,
-        intensity: 0.5,
-      ),
+      theme: const NeumorphicThemeData(lightSource: LightSource.topLeft, accentColor: NeumorphicColors.accent, depth: 4, intensity: 0.5),
       child: _Page(),
     );
   }
@@ -39,23 +34,14 @@ class _PageState extends State<_Page> {
     return NeumorphicBackground(
       padding: const EdgeInsets.all(8),
       child: Scaffold(
-        appBar: const TopBar(
-          title: 'Progress',
-        ),
+        appBar: const TopBar(title: 'Progress'),
         backgroundColor: Colors.transparent,
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
-            children: [
-              _DefaultWidget(),
-              _ColorWidget(),
-              _SizedWidget(),
-              _DurationWidget(),
-              _CurveWidget(),
-              const SizedBox(height: 30),
-            ],
+            children: [_DefaultWidget(), _ColorWidget(), _SizedWidget(), _DurationWidget(), _CurveWidget(), const SizedBox(height: 30)],
           ),
         ),
       ),
@@ -88,16 +74,9 @@ Expanded(
       padding: const EdgeInsets.all(12),
       child: Row(
         children: <Widget>[
-          Text(
-            'Default',
-            style: TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
-          ),
+          Text('Default', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
           const SizedBox(width: 12),
-          Expanded(
-            child: NeumorphicProgress(
-              percent: percent,
-            ),
-          ),
+          Expanded(child: NeumorphicProgress(percent: percent)),
           const SizedBox(width: 12),
         ],
       ),
@@ -111,12 +90,13 @@ Expanded(
       children: <Widget>[
         _buildWidget(context),
         TextButton(
-            child: const Text('Update'),
-            onPressed: () {
-              setState(() {
-                percent = Random().nextDouble();
-              });
-            }),
+          child: const Text('Update'),
+          onPressed: () {
+            setState(() {
+              percent = Random().nextDouble();
+            });
+          },
+        ),
         _buildCode(context),
       ],
     );
@@ -181,18 +161,11 @@ Expanded(
           const SizedBox(height: 12),
           Row(
             children: <Widget>[
-              Text(
-                'Default',
-                style:
-                    TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
-              ),
+              Text('Default', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
               const SizedBox(width: 12),
               Expanded(
                 child: NeumorphicProgress(
-                  style: ProgressStyle(
-                    accent: accent,
-                    variant: variant,
-                  ),
+                  style: ProgressStyle(accent: accent, variant: variant),
                   percent: percent,
                 ),
               ),
@@ -206,13 +179,7 @@ Expanded(
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        _buildWidget(context),
-        _buildCode(context),
-      ],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[_buildWidget(context), _buildCode(context)]);
   }
 }
 
@@ -245,18 +212,9 @@ Expanded(
           const SizedBox(height: 12),
           Row(
             children: <Widget>[
-              Text(
-                'Sized',
-                style:
-                    TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
-              ),
+              Text('Sized', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
               const SizedBox(width: 12),
-              Expanded(
-                child: NeumorphicProgress(
-                  height: 30,
-                  percent: percent,
-                ),
-              ),
+              Expanded(child: NeumorphicProgress(height: 30, percent: percent)),
               const SizedBox(width: 12),
             ],
           ),
@@ -267,13 +225,7 @@ Expanded(
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        _buildWidget(context),
-        _buildCode(context),
-      ],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[_buildWidget(context), _buildCode(context)]);
   }
 }
 
@@ -303,16 +255,10 @@ Expanded(
       padding: const EdgeInsets.all(12),
       child: Row(
         children: <Widget>[
-          Text(
-            'Duration',
-            style: TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
-          ),
+          Text('Duration', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
           const SizedBox(width: 12),
           Expanded(
-            child: NeumorphicProgress(
-              percent: percent,
-              duration: const Duration(seconds: 1),
-            ),
+            child: NeumorphicProgress(percent: percent, duration: const Duration(seconds: 1)),
           ),
           const SizedBox(width: 12),
         ],
@@ -327,12 +273,13 @@ Expanded(
       children: <Widget>[
         _buildWidget(context),
         TextButton(
-            child: const Text('Update'),
-            onPressed: () {
-              setState(() {
-                percent = Random().nextDouble();
-              });
-            }),
+          child: const Text('Update'),
+          onPressed: () {
+            setState(() {
+              percent = Random().nextDouble();
+            });
+          },
+        ),
         _buildCode(context),
       ],
     );
@@ -365,16 +312,10 @@ Expanded(
       padding: const EdgeInsets.all(12),
       child: Row(
         children: <Widget>[
-          Text(
-            'Curve',
-            style: TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
-          ),
+          Text('Curve', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
           const SizedBox(width: 12),
           Expanded(
-            child: NeumorphicProgress(
-              percent: percent,
-              curve: Curves.bounceOut,
-            ),
+            child: NeumorphicProgress(percent: percent, curve: Curves.bounceOut),
           ),
           const SizedBox(width: 12),
         ],
@@ -389,12 +330,13 @@ Expanded(
       children: <Widget>[
         _buildWidget(context),
         TextButton(
-            child: const Text('Update'),
-            onPressed: () {
-              setState(() {
-                percent = Random().nextDouble();
-              });
-            }),
+          child: const Text('Update'),
+          onPressed: () {
+            setState(() {
+              percent = Random().nextDouble();
+            });
+          },
+        ),
         _buildCode(context),
       ],
     );

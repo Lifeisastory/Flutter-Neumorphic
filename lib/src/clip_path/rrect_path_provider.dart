@@ -14,10 +14,7 @@ class RRectPathProvider extends NeumorphicPathProvider {
   Path getPath(Size size) {
     return Path()
       ..addRRect(RRect.fromLTRBAndCorners(0, 0, size.width, size.height,
-          topLeft: borderRadius.topLeft,
-          topRight: borderRadius.topRight,
-          bottomLeft: borderRadius.bottomLeft,
-          bottomRight: borderRadius.bottomRight))
+          topLeft: borderRadius.topLeft, topRight: borderRadius.topRight, bottomLeft: borderRadius.bottomLeft, bottomRight: borderRadius.bottomRight))
       ..close();
   }
 

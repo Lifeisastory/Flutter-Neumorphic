@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
 import '../theme/theme.dart';
-import 'cache/neumorphic_painter_cache.dart';
+import 'cache/neumorphic_emboss_painter_cache.dart';
 import 'neumorphic_box_decoration_helper.dart';
 import 'neumorphic_deboss_decoration_painter.dart';
 
@@ -16,6 +16,7 @@ class NeumorphicEmptyTextPainter extends BoxPainter {
     //does nothing
   }
 }
+
 /// 凸出
 /// 通过叠加一段文本的多层[Paragraph]达到阴影效果
 /// [Paragraph]本质上是“同一段文本的多份可绘制缓存”，每份绑定不同[Paint]，用于分层渲染
@@ -31,7 +32,7 @@ class NeumorphicEmbossDecorationTextPainter extends BoxPainter {
   final TextStyle textStyle;
   final TextAlign textAlign;
 
-  NeumorphicPainterCache _cache;
+  NeumorphicEmbossPainterCache _cache;
 
   late Paint _borderPaint;
   late Paint _backgroundPaint;
@@ -80,7 +81,7 @@ class NeumorphicEmbossDecorationTextPainter extends BoxPainter {
       required VoidCallback onChanged,
       required this.textAlign,
       this.renderingByPath = true})
-      : _cache = NeumorphicPainterCache(),
+      : _cache = NeumorphicEmbossPainterCache(),
         super(onChanged) {
     generatePainters();
   }
@@ -100,8 +101,7 @@ class NeumorphicEmbossDecorationTextPainter extends BoxPainter {
       invalidateSize = this._cache.updateSize(newOffset: offset, newSize: configuration.size!);
     }
 
-    final bool invalidateLightSource =
-        this._cache.updateLightSource(style.lightSource, style.oppositeShadowLightSource);
+    final bool invalidateLightSource = this._cache.updateLightSource(style.lightSource, style.oppositeShadowLightSource);
 
     bool invalidateColor = false;
     if (style.color != null) {
@@ -179,7 +179,7 @@ class NeumorphicEmbossDecorationTextPainter extends BoxPainter {
           ..shader = getGradientShader(
             gradientRect: Rect.fromLTRB(0, 0, _cache.width, _cache.height),
             intensity: style.surfaceIntensity,
-            source: style.shape == NeumorphicShape.concave ? this.style.lightSource : this.style.lightSource.invert(),
+            source: style.shape == NeumorphicSurfaceType.concave ? this.style.lightSource : this.style.lightSource.invert(),
           ),
       ))
       ..addText(text);
@@ -237,7 +237,7 @@ class NeumorphicEmbossDecorationTextPainter extends BoxPainter {
   }
 
   void _drawGradient({required Canvas canvas, required Offset offset, required Path path}) {
-    if (style.shape == NeumorphicShape.concave || style.shape == NeumorphicShape.convex) {
+    if (style.shape == NeumorphicSurfaceType.concave || style.shape == NeumorphicSurfaceType.convex) {
       canvas
         ..saveLayer(_cache.layerRect, _gradientPaint)
         ..translate(offset.dx, offset.dy)

@@ -9,16 +9,8 @@ class ThemeConfigurator extends StatelessWidget {
   Widget build(BuildContext context) {
     return NeumorphicButton(
       padding: const EdgeInsets.all(18),
-      style: const NeumorphicStyle(
-        shape: NeumorphicShape.flat,
-        boxShape: NeumorphicBoxShape.circle(),
-      ),
-      child: Icon(
-        Icons.settings,
-        color: NeumorphicTheme.isUsingDark(context)
-            ? Colors.white70
-            : Colors.black87,
-      ),
+      style: const NeumorphicStyle(shape: NeumorphicSurfaceType.flat, boxShape: NeumorphicBoxShape.circle()),
+      child: Icon(Icons.settings, color: NeumorphicTheme.isUsingDark(context) ? Colors.white70 : Colors.black87),
       onPressed: () {
         _changeColor(context);
       },
@@ -27,24 +19,23 @@ class ThemeConfigurator extends StatelessWidget {
 
   void _changeColor(BuildContext context) {
     showDialog(
-        useRootNavigator: false,
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: const Text('Update Theme'),
-            content: SingleChildScrollView(
-              child: _ThemeConfiguratorDialog(contextContainingTheme: context),
+      useRootNavigator: false,
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Update Theme'),
+          content: SingleChildScrollView(child: _ThemeConfiguratorDialog(contextContainingTheme: context)),
+          actions: <Widget>[
+            NeumorphicButton(
+              child: const Text('Close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
             ),
-            actions: <Widget>[
-              NeumorphicButton(
-                child: const Text('Close'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        });
+          ],
+        );
+      },
+    );
   }
 }
 
@@ -62,9 +53,7 @@ class _ThemeConfiguratorState extends State<_ThemeConfiguratorDialog> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        ThemeColorSelector(
-          customContext: widget.contextContainingTheme,
-        ),
+        ThemeColorSelector(customContext: widget.contextContainingTheme),
         intensitySelector(),
         depthSelector(),
       ],
@@ -75,10 +64,7 @@ class _ThemeConfiguratorState extends State<_ThemeConfiguratorDialog> {
     final intensity = NeumorphicTheme.intensity(widget.contextContainingTheme);
     return Row(
       children: <Widget>[
-        const Padding(
-          padding: EdgeInsets.only(left: 12),
-          child: Text('Intensity'),
-        ),
+        const Padding(padding: EdgeInsets.only(left: 12), child: Text('Intensity')),
         Expanded(
           child: Slider(
             min: Neumorphic.MIN_INTENSITY, //in case of != 0
@@ -86,36 +72,25 @@ class _ThemeConfiguratorState extends State<_ThemeConfiguratorDialog> {
             value: intensity!,
             onChanged: (value) {
               setState(() {
-                NeumorphicTheme.update(
-                  widget.contextContainingTheme,
-                  (current) => current!.copyWith(
-                    intensity: value,
-                  ),
-                );
+                NeumorphicTheme.update(widget.contextContainingTheme, (current) => current!.copyWith(intensity: value));
               });
             },
           ),
         ),
         Padding(
           padding: const EdgeInsets.only(right: 12),
-          child: SizedBox(
-            width: 40,
-            child: Text(((intensity * 100).floor() / 100).toString()),
-          ),
+          child: SizedBox(width: 40, child: Text(((intensity * 100).floor() / 100).toString())),
         ),
       ],
     );
   }
 
   Widget depthSelector() {
-    final depth = NeumorphicTheme.depth(widget.contextContainingTheme);
+    final depth = NeumorphicTheme.embossDepth(widget.contextContainingTheme);
 
     return Row(
       children: <Widget>[
-        const Padding(
-          padding: EdgeInsets.only(left: 12),
-          child: Text('Depth'),
-        ),
+        const Padding(padding: EdgeInsets.only(left: 12), child: Text('Depth')),
         Expanded(
           child: Slider(
             min: Neumorphic.MIN_DEPTH,
@@ -123,20 +98,14 @@ class _ThemeConfiguratorState extends State<_ThemeConfiguratorDialog> {
             value: depth!,
             onChanged: (value) {
               setState(() {
-                NeumorphicTheme.update(
-                  widget.contextContainingTheme,
-                  (current) => current!.copyWith(depth: value),
-                );
+                NeumorphicTheme.update(widget.contextContainingTheme, (current) => current!.copyWith(depth: value));
               });
             },
           ),
         ),
         Padding(
           padding: const EdgeInsets.only(right: 12),
-          child: SizedBox(
-            width: 40,
-            child: Text(depth.floor().toString()),
-          ),
+          child: SizedBox(width: 40, child: Text(depth.floor().toString())),
         ),
       ],
     );

@@ -8,25 +8,15 @@ class GalaxySample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NeumorphicTheme(
-      theme: const NeumorphicThemeData(
-        baseColor: Color(0xFFE5E5E5),
-        depth: 20,
-        intensity: 1,
-        lightSource: LightSource.top,
-      ),
+      theme: const NeumorphicThemeData(baseColor: Color(0xFFE5E5E5), depth: 20, intensity: 1, lightSource: LightSource.top),
       themeMode: ThemeMode.light,
       child: Material(
         child: Container(
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(
-              colors: [
-                Color(0xFFF1F1F1),
-                Color(0xFFCFCFCF),
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            )),
-            child: _Page()),
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(colors: [Color(0xFFF1F1F1), Color(0xFFCFCFCF)], begin: Alignment.topLeft, end: Alignment.bottomRight),
+          ),
+          child: _Page(),
+        ),
       ),
     );
   }
@@ -39,30 +29,20 @@ class _Page extends StatefulWidget {
 
 class _PageState extends State<_Page> {
   Widget _letter(String letter) {
-    return Text(letter,
-        style: const TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.w700,
-            fontFamily: 'Samsung',
-            fontSize: 80));
+    return Text(
+      letter,
+      style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontFamily: 'Samsung', fontSize: 80),
+    );
   }
 
   Widget _firstBox() {
     return Neumorphic(
       margin: const EdgeInsets.symmetric(horizontal: 4),
-      style: NeumorphicStyle(
-        boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(8)),
-      ),
+      style: NeumorphicStyle(boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(8))),
       child: Neumorphic(
-        style: const NeumorphicStyle(
-          depth: -1,
-          oppositeShadowLightSource: true,
-        ),
+        style: const NeumorphicStyle(depth: -1, oppositeShadowLightSource: true),
         padding: const EdgeInsets.all(2),
-        child: const SizedBox(
-          width: 40,
-          height: 60,
-        ),
+        child: const SizedBox(width: 40, height: 60),
       ),
     );
   }
@@ -73,20 +53,10 @@ class _PageState extends State<_Page> {
       child: Transform.rotate(
         angle: 0.79,
         child: Neumorphic(
-          style: NeumorphicStyle(
-            lightSource: LightSource.topLeft,
-            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(8)),
-          ),
+          style: NeumorphicStyle(lightSource: LightSource.topLeft, boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(8))),
           child: Neumorphic(
-            style: const NeumorphicStyle(
-              depth: -1,
-              oppositeShadowLightSource: true,
-              lightSource: LightSource.topLeft,
-            ),
-            child: const SizedBox(
-              width: 50,
-              height: 50,
-            ),
+            style: const NeumorphicStyle(depth: -1, oppositeShadowLightSource: true, lightSource: LightSource.topLeft),
+            child: const SizedBox(width: 50, height: 50),
           ),
         ),
       ),
@@ -105,11 +75,7 @@ class _PageState extends State<_Page> {
             right: 0,
             child: Container(
               margin: const EdgeInsets.only(left: 12, right: 12, top: 10),
-              child: const TopBar(
-                actions: <Widget>[
-                  ThemeConfigurator(),
-                ],
-              ),
+              child: const TopBar(actions: <Widget>[ThemeConfigurator()]),
             ),
           ),
           Center(
@@ -117,14 +83,7 @@ class _PageState extends State<_Page> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                _letter('G'),
-                _firstBox(),
-                _letter('l'),
-                _secondBox(),
-                _letter('x'),
-                _letter('y'),
-              ],
+              children: <Widget>[_letter('G'), _firstBox(), _letter('l'), _secondBox(), _letter('x'), _letter('y')],
             ),
           ),
         ],

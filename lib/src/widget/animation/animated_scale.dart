@@ -37,8 +37,7 @@ class AnimatedScale extends StatefulWidget {
   _AnimatedScaleState createState() => _AnimatedScaleState();
 }
 
-class _AnimatedScaleState extends State<AnimatedScale>
-    with TickerProviderStateMixin {
+class _AnimatedScaleState extends State<AnimatedScale> with TickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
   double oldScale = 1;
@@ -46,8 +45,7 @@ class _AnimatedScaleState extends State<AnimatedScale>
   @override
   void initState() {
     _controller = AnimationController(duration: widget.duration, vsync: this);
-    _animation = Tween<double>(begin: widget.scale, end: widget.scale)
-        .animate(_controller);
+    _animation = Tween<double>(begin: widget.scale, end: widget.scale).animate(_controller);
     super.initState();
   }
 
@@ -56,8 +54,7 @@ class _AnimatedScaleState extends State<AnimatedScale>
     if (oldWidget.scale != widget.scale) {
       _controller.reset();
       oldScale = oldWidget.scale;
-      _animation = Tween<double>(begin: oldScale, end: widget.scale)
-          .animate(_controller);
+      _animation = Tween<double>(begin: oldScale, end: widget.scale).animate(_controller);
       _controller.forward();
     }
     super.didUpdateWidget(oldWidget);

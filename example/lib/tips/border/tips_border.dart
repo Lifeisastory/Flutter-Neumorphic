@@ -15,12 +15,7 @@ class _WidgetPageState extends State<TipsBorderPage> {
   Widget build(BuildContext context) {
     return NeumorphicTheme(
       themeMode: ThemeMode.light,
-      theme: const NeumorphicThemeData(
-        lightSource: LightSource.topLeft,
-        accentColor: NeumorphicColors.accent,
-        depth: 4,
-        intensity: 0.6,
-      ),
+      theme: const NeumorphicThemeData(lightSource: LightSource.topLeft, accentColor: NeumorphicColors.accent, depth: 4, intensity: 0.6),
       child: _Page(),
     );
   }
@@ -37,12 +32,7 @@ class _PageState extends State<_Page> {
     return const NeumorphicBackground(
       padding: EdgeInsets.all(8),
       child: Scaffold(
-        appBar: TopBar(
-          title: 'Border',
-          actions: <Widget>[
-            ThemeConfigurator(),
-          ],
-        ),
+        appBar: TopBar(title: 'Border', actions: <Widget>[ThemeConfigurator()]),
         backgroundColor: Colors.transparent,
         body: SingleChildScrollView(
           child: Column(
@@ -52,85 +42,43 @@ class _PageState extends State<_Page> {
             children: [
               _CustomWidget(
                 title: 'Emboss Inside Flat',
-                firstStyle: NeumorphicStyle(
-                  shape: NeumorphicShape.flat,
-                  depth: 8,
-                ),
-                secondStyle: NeumorphicStyle(
-                  depth: -8,
-                ),
+                firstStyle: NeumorphicStyle(shape: NeumorphicSurfaceType.flat, depth: 8),
+                secondStyle: NeumorphicStyle(depth: -8),
               ),
               _CustomWidget(
                 title: 'Emboss Inside Convex',
-                firstStyle: NeumorphicStyle(
-                  shape: NeumorphicShape.convex,
-                  depth: 8,
-                ),
-                secondStyle: NeumorphicStyle(
-                  depth: -8,
-                ),
+                firstStyle: NeumorphicStyle(shape: NeumorphicSurfaceType.convex, depth: 8),
+                secondStyle: NeumorphicStyle(depth: -8),
               ),
               _CustomWidget(
                 title: 'Emboss Inside Concave',
-                firstStyle: NeumorphicStyle(
-                  shape: NeumorphicShape.concave,
-                  depth: 8,
-                ),
-                secondStyle: NeumorphicStyle(
-                  depth: -8,
-                ),
+                firstStyle: NeumorphicStyle(shape: NeumorphicSurfaceType.concave, depth: 8),
+                secondStyle: NeumorphicStyle(depth: -8),
               ),
               _CustomWidget(
                 title: 'Flat Inside Emboss',
-                firstStyle: NeumorphicStyle(
-                  depth: -8,
-                ),
-                secondStyle: NeumorphicStyle(
-                  depth: 8,
-                  shape: NeumorphicShape.flat,
-                ),
+                firstStyle: NeumorphicStyle(depth: -8),
+                secondStyle: NeumorphicStyle(depth: 8, shape: NeumorphicSurfaceType.flat),
               ),
               _CustomWidget(
                 title: 'Convex Inside Emboss',
-                firstStyle: NeumorphicStyle(
-                  depth: -8,
-                ),
-                secondStyle: NeumorphicStyle(
-                  depth: 8,
-                  shape: NeumorphicShape.convex,
-                ),
+                firstStyle: NeumorphicStyle(depth: -8),
+                secondStyle: NeumorphicStyle(depth: 8, shape: NeumorphicSurfaceType.convex),
               ),
               _CustomWidget(
                 title: 'Concave Inside Emboss',
-                firstStyle: NeumorphicStyle(
-                  depth: -8,
-                ),
-                secondStyle: NeumorphicStyle(
-                  depth: 8,
-                  shape: NeumorphicShape.concave,
-                ),
+                firstStyle: NeumorphicStyle(depth: -8),
+                secondStyle: NeumorphicStyle(depth: 8, shape: NeumorphicSurfaceType.concave),
               ),
               _CustomWidget(
                 title: 'Concave Inside Convex',
-                firstStyle: NeumorphicStyle(
-                  depth: 8,
-                  shape: NeumorphicShape.convex,
-                ),
-                secondStyle: NeumorphicStyle(
-                  depth: 8,
-                  shape: NeumorphicShape.concave,
-                ),
+                firstStyle: NeumorphicStyle(depth: 8, shape: NeumorphicSurfaceType.convex),
+                secondStyle: NeumorphicStyle(depth: 8, shape: NeumorphicSurfaceType.concave),
               ),
               _CustomWidget(
                 title: 'Convex Inside Concave',
-                firstStyle: NeumorphicStyle(
-                  depth: 8,
-                  shape: NeumorphicShape.concave,
-                ),
-                secondStyle: NeumorphicStyle(
-                  depth: 8,
-                  shape: NeumorphicShape.convex,
-                ),
+                firstStyle: NeumorphicStyle(depth: 8, shape: NeumorphicSurfaceType.concave),
+                secondStyle: NeumorphicStyle(depth: 8, shape: NeumorphicSurfaceType.convex),
               ),
               SizedBox(height: 30),
             ],
@@ -147,10 +95,7 @@ class _CustomWidget extends StatefulWidget {
   final NeumorphicStyle firstStyle;
   final NeumorphicStyle secondStyle;
 
-  const _CustomWidget(
-      {required this.title,
-      required this.firstStyle,
-      required this.secondStyle});
+  const _CustomWidget({required this.title, required this.firstStyle, required this.secondStyle});
 
   @override
   createState() => _CustomWidgetState();
@@ -191,25 +136,14 @@ Neumorphic(
               Container(
                 margin: const EdgeInsets.only(left: 12, right: 12),
                 width: 100,
-                child: Text(
-                  widget.title,
-                  style: TextStyle(
-                      color: NeumorphicTheme.defaultTextColor(context)),
-                ),
+                child: Text(widget.title, style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
               ),
               Neumorphic(
                 padding: const EdgeInsets.all(20),
-                style: widget.firstStyle.copyWith(
-                  boxShape: const NeumorphicBoxShape.circle(),
-                ),
+                style: widget.firstStyle.copyWith(boxShape: const NeumorphicBoxShape.circle()),
                 child: Neumorphic(
-                  style: widget.secondStyle.copyWith(
-                    boxShape: const NeumorphicBoxShape.circle(),
-                  ),
-                  child: const SizedBox(
-                    height: 100,
-                    width: 100,
-                  ),
+                  style: widget.secondStyle.copyWith(boxShape: const NeumorphicBoxShape.circle()),
+                  child: const SizedBox(height: 100, width: 100),
                 ),
               ),
               const SizedBox(width: 12),
@@ -221,26 +155,14 @@ Neumorphic(
               Container(
                 margin: const EdgeInsets.only(left: 12, right: 12),
                 width: 100,
-                child: Text(
-                  'opposite\nchild\nlightsource',
-                  style: TextStyle(
-                      color: NeumorphicTheme.defaultTextColor(context)),
-                ),
+                child: Text('opposite\nchild\nlightsource', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
               ),
               Neumorphic(
                 padding: const EdgeInsets.all(20),
-                style: widget.firstStyle.copyWith(
-                  boxShape: const NeumorphicBoxShape.circle(),
-                ),
+                style: widget.firstStyle.copyWith(boxShape: const NeumorphicBoxShape.circle()),
                 child: Neumorphic(
-                  style: widget.secondStyle.copyWith(
-                    boxShape: const NeumorphicBoxShape.circle(),
-                    oppositeShadowLightSource: true,
-                  ),
-                  child: const SizedBox(
-                    height: 100,
-                    width: 100,
-                  ),
+                  style: widget.secondStyle.copyWith(boxShape: const NeumorphicBoxShape.circle(), oppositeShadowLightSource: true),
+                  child: const SizedBox(height: 100, width: 100),
                 ),
               ),
             ],
@@ -252,12 +174,6 @@ Neumorphic(
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        _buildWidget(context),
-        _buildCode(context),
-      ],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[_buildWidget(context), _buildCode(context)]);
   }
 }

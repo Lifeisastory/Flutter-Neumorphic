@@ -138,9 +138,7 @@ class _NeumorphicSliderState extends State<NeumorphicSlider> {
         onPanUpdate: (DragUpdateDetails details) {
           final tapPos = details.localPosition;
           final newPercent = tapPos.dx / constraints.maxWidth;
-          final newValue =
-              ((widget.min + (widget.max - widget.min) * newPercent))
-                  .clamp(widget.min, widget.max);
+          final newValue = ((widget.min + (widget.max - widget.min) * newPercent)).clamp(widget.min, widget.max);
 
           if (widget.onChanged != null) {
             widget.onChanged!(newValue);
@@ -203,7 +201,7 @@ class _NeumorphicSliderState extends State<NeumorphicSlider> {
     return Neumorphic(
       style: NeumorphicStyle(
         disableDepth: widget.style.disableDepth,
-        shape: NeumorphicShape.concave,
+        shape: NeumorphicSurfaceType.concave,
         border: widget.style.thumbBorder,
         lightSource: widget.style.lightSource ?? theme.lightSource,
         color: widget.style.accent ?? theme.accentColor,

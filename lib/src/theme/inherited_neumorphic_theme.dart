@@ -3,20 +3,14 @@ import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
 export 'theme.dart';
 export 'theme_wrapper.dart';
 
-typedef NeumorphicThemeUpdater = NeumorphicThemeData Function(
-    NeumorphicThemeData? current);
+typedef NeumorphicThemeUpdater = NeumorphicThemeData Function(NeumorphicThemeData? current);
 
 class NeumorphicThemeInherited extends InheritedWidget {
   final Widget child;
   final ThemeWrapper value;
   final ValueChanged<ThemeWrapper> onChanged;
 
-  NeumorphicThemeInherited(
-      {Key? key,
-      required this.child,
-      required this.value,
-      required this.onChanged})
-      : super(key: key, child: child);
+  NeumorphicThemeInherited({Key? key, required this.child, required this.value, required this.onChanged}) : super(key: key, child: child);
 
   @override
   bool updateShouldNotify(NeumorphicThemeInherited old) => value != old.value;

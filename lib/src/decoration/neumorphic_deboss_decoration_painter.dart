@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../neumorphic_box_shape.dart';
 import '../theme/theme.dart';
-import 'cache/neumorphic_emboss_painter_cache.dart';
+import 'cache/neumorphic_deboss_painter_cache.dart';
 
 export '../theme/theme.dart';
 
 class NeumorphicDebossDecorationPainter extends BoxPainter {
-  NeumorphicEmbossPainterCache _cache;
+  NeumorphicDebossPainterCache _cache;
 
   final NeumorphicStyle style;
   final NeumorphicBoxShape shape;
@@ -23,13 +23,9 @@ class NeumorphicDebossDecorationPainter extends BoxPainter {
   final bool drawBackground;
 
   NeumorphicDebossDecorationPainter(
-      {required this.style,
-      required this.drawBackground,
-      required this.drawShadow,
-      required VoidCallback onChanged,
-      NeumorphicBoxShape? shape})
+      {required this.style, required this.drawBackground, required this.drawShadow, required VoidCallback onChanged, NeumorphicBoxShape? shape})
       : this.shape = shape ?? NeumorphicBoxShape.rect(),
-        _cache = NeumorphicEmbossPainterCache(),
+        _cache = NeumorphicDebossPainterCache(),
         super(onChanged) {
     _generatePainters();
   }
@@ -66,8 +62,7 @@ class NeumorphicDebossDecorationPainter extends BoxPainter {
     }
   }
 
-  void _updateCache(
-      {required Offset offset, required ImageConfiguration configuration, required NeumorphicStyle newStyle}) {
+  void _updateCache({required Offset offset, required ImageConfiguration configuration, required NeumorphicStyle newStyle}) {
     bool invalidateSize = false;
     if (configuration.size != null) {
       invalidateSize = this._cache.updateSize(newOffset: offset, newSize: configuration.size!);

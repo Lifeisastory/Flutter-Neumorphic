@@ -25,6 +25,7 @@ class NeumorphicTextStyle {
   final String? fontFamily;
   final List<String>? fontFamilyFallback;
   final String? package;
+
   //final Color color;
   //final Color backgroundColor;
   //final Paint foreground,
@@ -163,9 +164,7 @@ class NeumorphicText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = NeumorphicTheme.currentTheme(context);
-    final NeumorphicStyle style = (this.style ?? NeumorphicStyle())
-        .copyWithThemeIfNull(theme)
-        .applyDisableDepth();
+    final NeumorphicStyle style = (this.style ?? NeumorphicStyle()).copyWithThemeIfNull(theme).applyDisableDepth();
 
     return _NeumorphicText(
       textStyle: (this.textStyle ?? NeumorphicTextStyle()).textStyle,
@@ -205,8 +204,7 @@ class _NeumorphicText extends material.StatefulWidget {
 class __NeumorphicTextState extends material.State<_NeumorphicText> {
   @override
   Widget build(BuildContext context) {
-    final TextPainter _textPainter = TextPainter(
-        textDirection: TextDirection.ltr, textAlign: this.widget.textAlign);
+    final TextPainter _textPainter = TextPainter(textDirection: TextDirection.ltr, textAlign: this.widget.textAlign);
     final textStyle = this.widget.textStyle;
     _textPainter.text = TextSpan(
       text: this.widget.text,

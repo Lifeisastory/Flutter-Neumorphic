@@ -14,8 +14,7 @@ class _WidgetPageState extends State<IconWidgetPage> {
   Widget build(BuildContext context) {
     return NeumorphicTheme(
       themeMode: ThemeMode.light,
-      theme: const NeumorphicThemeData(
-          lightSource: LightSource.topLeft, accentColor: NeumorphicColors.accent, depth: -3, intensity: 6.0),
+      theme: const NeumorphicThemeData(lightSource: LightSource.topLeft, accentColor: NeumorphicColors.accent, depth: -3, intensity: 6.0),
       child: _Page(),
     );
   }
@@ -32,12 +31,7 @@ class _PageState extends State<_Page> {
     return NeumorphicBackground(
       padding: const EdgeInsets.all(8),
       child: Scaffold(
-        appBar: const TopBar(
-          title: 'Icons',
-          actions: <Widget>[
-            ThemeConfigurator(),
-          ],
-        ),
+        appBar: const TopBar(title: 'Icons', actions: <Widget>[ThemeConfigurator()]),
         backgroundColor: Colors.transparent,
         body: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
@@ -47,9 +41,9 @@ class _PageState extends State<_Page> {
               icons[index],
               size: 80,
               style: const NeumorphicStyle(
-                  //shape: NeumorphicShape.convex,
-                  //surfaceIntensity: 1.0
-                  ),
+                //shape: NeumorphicShape.convex,
+                //surfaceIntensity: 1.0
+              ),
             );
           },
         ),

@@ -22,8 +22,8 @@ class NeumorphicFloatingActionButton extends StatelessWidget {
     this.mini = false,
     this.style,
     this.tooltip,
-    @required this.child,
-    @required this.onPressed,
+    required this.child,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
@@ -34,8 +34,7 @@ class NeumorphicFloatingActionButton extends StatelessWidget {
         padding: EdgeInsets.all(0),
         onPressed: this.onPressed,
         tooltip: this.tooltip,
-        style: this.style ??
-            NeumorphicTheme.currentTheme(context).appBarTheme.buttonStyle,
+        style: this.style ?? NeumorphicTheme.currentTheme(context).appBarTheme.buttonStyle,
         child: this.child,
       ),
     );

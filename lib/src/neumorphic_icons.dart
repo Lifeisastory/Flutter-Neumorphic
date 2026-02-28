@@ -25,6 +25,5 @@ class NeumorphicIcons {
   static const _kFontFam = 'NeumorphicIcons';
   static const _kFontPkg = "flutter_neumorphic_plus";
 
-  static const IconData check =
-      IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData check = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

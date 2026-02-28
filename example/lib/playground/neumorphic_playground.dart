@@ -13,12 +13,7 @@ class _NeumorphicPlaygroundState extends State<NeumorphicPlayground> {
   Widget build(BuildContext context) {
     return NeumorphicTheme(
       themeMode: ThemeMode.light,
-      theme: const NeumorphicThemeData(
-        baseColor: Color(0xffDDDDDD),
-        lightSource: LightSource.topLeft,
-        depth: 6,
-        intensity: 0.5,
-      ),
+      theme: const NeumorphicThemeData(baseColor: Color(0xffDDDDDD), lightSource: LightSource.topLeft, depth: 6, intensity: 0.5),
       child: _Page(),
     );
   }
@@ -31,7 +26,7 @@ class _Page extends StatefulWidget {
 
 class __PageState extends State<_Page> {
   LightSource lightSource = LightSource.topLeft;
-  NeumorphicShape shape = NeumorphicShape.flat;
+  NeumorphicSurfaceType shape = NeumorphicSurfaceType.flat;
   late NeumorphicBoxShape boxShape;
   double depth = 5;
   double intensity = 0.5;
@@ -60,42 +55,37 @@ class __PageState extends State<_Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: NeumorphicTheme.baseColor(context),
-        //appBar: NeumorphicAppBar(
-        //  title: Text('Playground'),
-        //),
-        body: Column(
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
-              child: ElevatedButton(
-                child: const Text(
-                  'back',
-                  style: TextStyle(color: Colors.white),
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
+      backgroundColor: NeumorphicTheme.baseColor(context),
+      //appBar: NeumorphicAppBar(
+      //  title: Text('Playground'),
+      //),
+      body: Column(
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
+            child: ElevatedButton(
+              child: const Text('back', style: TextStyle(color: Colors.white)),
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
-            Flexible(
-              flex: 1,
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  lightSourceWidgets(),
-                  Center(child: neumorphic()),
-                ],
-              ),
+          ),
+          Flexible(
+            flex: 1,
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                lightSourceWidgets(),
+                Center(child: neumorphic()),
+              ],
             ),
-            Flexible(
-              flex: 1,
-              child: _configurators(),
-            )
-          ],
-        ));
+          ),
+          Flexible(flex: 1, child: _configurators()),
+        ],
+      ),
+    );
   }
 
   int selectedConfiguratorIndex = 0;
@@ -119,14 +109,7 @@ class __PageState extends State<_Page> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
-                    child: Text(
-                      'Style',
-                      style: TextStyle(
-                        color: selectedConfiguratorIndex == 0
-                            ? textActiveColor
-                            : textInactiveColor,
-                      ),
-                    ),
+                    child: Text('Style', style: TextStyle(color: selectedConfiguratorIndex == 0 ? textActiveColor : textInactiveColor)),
                     onPressed: () {
                       setState(() {
                         selectedConfiguratorIndex = 0;
@@ -140,14 +123,7 @@ class __PageState extends State<_Page> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
-                    child: Text(
-                      'Element',
-                      style: TextStyle(
-                        color: selectedConfiguratorIndex == 1
-                            ? textActiveColor
-                            : textInactiveColor,
-                      ),
-                    ),
+                    child: Text('Element', style: TextStyle(color: selectedConfiguratorIndex == 1 ? textActiveColor : textInactiveColor)),
                     onPressed: () {
                       setState(() {
                         selectedConfiguratorIndex = 1;
@@ -161,14 +137,7 @@ class __PageState extends State<_Page> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
-                    child: Text(
-                      'Child',
-                      style: TextStyle(
-                        color: selectedConfiguratorIndex == 2
-                            ? textActiveColor
-                            : textInactiveColor,
-                      ),
-                    ),
+                    child: Text('Child', style: TextStyle(color: selectedConfiguratorIndex == 2 ? textActiveColor : textInactiveColor)),
                     onPressed: () {
                       setState(() {
                         selectedConfiguratorIndex = 2;
@@ -176,7 +145,7 @@ class __PageState extends State<_Page> {
                     },
                   ),
                 ),
-              )
+              ),
             ],
           ),
           _configuratorsChild(),
@@ -198,57 +167,30 @@ class __PageState extends State<_Page> {
   }
 
   Widget styleCustomizer() {
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        depthSelector(),
-        intensitySelector(),
-        surfaceIntensitySelector(),
-        colorPicker(),
-      ],
-    );
+    return Column(mainAxisSize: MainAxisSize.max, children: [depthSelector(), intensitySelector(), surfaceIntensitySelector(), colorPicker()]);
   }
 
   Widget elementCustomizer() {
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      children: <Widget>[
-        boxshapeWidget(),
-        cornerRadiusSelector(),
-        shapeWidget(),
-        sizeSelector(),
-      ],
-    );
+    return Column(mainAxisSize: MainAxisSize.max, children: <Widget>[boxshapeWidget(), cornerRadiusSelector(), shapeWidget(), sizeSelector()]);
   }
 
   Widget childCustomizer() {
     return Column(
       mainAxisSize: MainAxisSize.max,
-      children: <Widget>[
-        hasChildSelector(),
-        drawAboveChildSelector(),
-        childDepthSelector(),
-        childMarginSelector(),
-        childOppositeLightsourceSelector(),
-      ],
+      children: <Widget>[hasChildSelector(), drawAboveChildSelector(), childDepthSelector(), childMarginSelector(), childOppositeLightsourceSelector()],
     );
   }
 
   Widget colorPicker() {
     return Row(
       children: <Widget>[
-        const SizedBox(
-          width: 12,
-        ),
+        const SizedBox(width: 12),
         const Text('Color '),
-        const SizedBox(
-          width: 4,
-        ),
+        const SizedBox(width: 4),
         ColorSelector(
           onColorChanged: (color) {
             setState(() {
-              NeumorphicTheme.of(context)!
-                  .updateCurrentTheme(NeumorphicThemeData(baseColor: color));
+              NeumorphicTheme.of(context)!.updateCurrentTheme(NeumorphicThemeData(baseColor: color));
             });
           },
           color: NeumorphicTheme.baseColor(context),
@@ -300,13 +242,14 @@ class __PageState extends State<_Page> {
       margin: EdgeInsets.all(childMargin),
       drawSurfaceAboveChild: true,
       style: NeumorphicStyle(
-          boxShape: boxShape,
-          //shape: this.shape,
-          intensity: intensity,
-          surfaceIntensity: surfaceIntensity,
-          depth: childDepth,
-          lightSource: lightSource,
-          oppositeShadowLightSource: childOppositeLightsourceChild),
+        boxShape: boxShape,
+        //clip_path: this.clip_path,
+        intensity: intensity,
+        surfaceIntensity: surfaceIntensity,
+        depth: childDepth,
+        lightSource: lightSource,
+        oppositeShadowLightSource: childOppositeLightsourceChild,
+      ),
       child: const SizedBox.expand(),
     );
   }
@@ -314,10 +257,7 @@ class __PageState extends State<_Page> {
   Widget depthSelector() {
     return Row(
       children: <Widget>[
-        const Padding(
-          padding: EdgeInsets.only(left: 12),
-          child: Text('Depth'),
-        ),
+        const Padding(padding: EdgeInsets.only(left: 12), child: Text('Depth')),
         Expanded(
           child: Slider(
             min: Neumorphic.MIN_DEPTH,
@@ -330,10 +270,7 @@ class __PageState extends State<_Page> {
             },
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(right: 12),
-          child: Text(depth.floor().toString()),
-        ),
+        Padding(padding: const EdgeInsets.only(right: 12), child: Text(depth.floor().toString())),
       ],
     );
   }
@@ -341,10 +278,7 @@ class __PageState extends State<_Page> {
   Widget childDepthSelector() {
     return Row(
       children: <Widget>[
-        const Padding(
-          padding: EdgeInsets.only(left: 12),
-          child: Text('Child Depth'),
-        ),
+        const Padding(padding: EdgeInsets.only(left: 12), child: Text('Child Depth')),
         Expanded(
           child: Slider(
             min: Neumorphic.MIN_DEPTH,
@@ -357,10 +291,7 @@ class __PageState extends State<_Page> {
             },
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(right: 12),
-          child: Text(childDepth.floor().toString()),
-        ),
+        Padding(padding: const EdgeInsets.only(right: 12), child: Text(childDepth.floor().toString())),
       ],
     );
   }
@@ -368,10 +299,7 @@ class __PageState extends State<_Page> {
   Widget childMarginSelector() {
     return Row(
       children: <Widget>[
-        const Padding(
-          padding: EdgeInsets.only(left: 12),
-          child: Text('Child Margin'),
-        ),
+        const Padding(padding: EdgeInsets.only(left: 12), child: Text('Child Margin')),
         Expanded(
           child: Slider(
             min: 0,
@@ -384,10 +312,7 @@ class __PageState extends State<_Page> {
             },
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(right: 12),
-          child: Text(childMargin.floor().toString()),
-        ),
+        Padding(padding: const EdgeInsets.only(right: 12), child: Text(childMargin.floor().toString())),
       ],
     );
   }
@@ -398,10 +323,7 @@ class __PageState extends State<_Page> {
       children: <Widget>[
         const Align(
           alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: EdgeInsets.only(left: 12),
-            child: Text('Has Child'),
-          ),
+          child: Padding(padding: EdgeInsets.only(left: 12), child: Text('Has Child')),
         ),
         Align(
           alignment: Alignment.centerRight,
@@ -424,10 +346,7 @@ class __PageState extends State<_Page> {
       children: <Widget>[
         const Align(
           alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: EdgeInsets.only(left: 12),
-            child: Text('Draw above child'),
-          ),
+          child: Padding(padding: EdgeInsets.only(left: 12), child: Text('Draw above child')),
         ),
         Align(
           alignment: Alignment.centerRight,
@@ -450,10 +369,7 @@ class __PageState extends State<_Page> {
       children: <Widget>[
         const Align(
           alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: EdgeInsets.only(left: 12),
-            child: Text('OppositeLight'),
-          ),
+          child: Padding(padding: EdgeInsets.only(left: 12), child: Text('OppositeLight')),
         ),
         Align(
           alignment: Alignment.centerRight,
@@ -473,9 +389,7 @@ class __PageState extends State<_Page> {
   Widget sizeSelector() {
     return Row(
       children: <Widget>[
-        const SizedBox(
-          width: 12,
-        ),
+        const SizedBox(width: 12),
         const Text('W: '),
         Expanded(
           child: Slider(
@@ -510,10 +424,7 @@ class __PageState extends State<_Page> {
     if (boxShape.isRoundRect || boxShape.isBeveled) {
       return Row(
         children: <Widget>[
-          const Padding(
-            padding: EdgeInsets.only(left: 12),
-            child: Text('Corner'),
-          ),
+          const Padding(padding: EdgeInsets.only(left: 12), child: Text('Corner')),
           Expanded(
             child: Slider(
               min: 0,
@@ -523,21 +434,16 @@ class __PageState extends State<_Page> {
                 setState(() {
                   cornerRadius = value;
                   if (boxShape.isRoundRect) {
-                    boxShape = NeumorphicBoxShape.roundRect(
-                        BorderRadius.circular(cornerRadius));
+                    boxShape = NeumorphicBoxShape.roundRect(BorderRadius.circular(cornerRadius));
                   }
                   if (boxShape.isBeveled) {
-                    boxShape = NeumorphicBoxShape.beveled(
-                        BorderRadius.circular(cornerRadius));
+                    boxShape = NeumorphicBoxShape.beveled(BorderRadius.circular(cornerRadius));
                   }
                 });
               },
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(right: 12),
-            child: Text(cornerRadius.floor().toString()),
-          ),
+          Padding(padding: const EdgeInsets.only(right: 12), child: Text(cornerRadius.floor().toString())),
         ],
       );
     } else {
@@ -548,10 +454,7 @@ class __PageState extends State<_Page> {
   Widget intensitySelector() {
     return Row(
       children: <Widget>[
-        const Padding(
-          padding: EdgeInsets.only(left: 12),
-          child: Text('Intensity'),
-        ),
+        const Padding(padding: EdgeInsets.only(left: 12), child: Text('Intensity')),
         Expanded(
           child: Slider(
             min: Neumorphic.MIN_INTENSITY, //in case of != 0
@@ -564,10 +467,7 @@ class __PageState extends State<_Page> {
             },
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(right: 12),
-          child: Text(((intensity * 100).floor() / 100).toString()),
-        ),
+        Padding(padding: const EdgeInsets.only(right: 12), child: Text(((intensity * 100).floor() / 100).toString())),
       ],
     );
   }
@@ -575,10 +475,7 @@ class __PageState extends State<_Page> {
   Widget surfaceIntensitySelector() {
     return Row(
       children: <Widget>[
-        const Padding(
-          padding: EdgeInsets.only(left: 12),
-          child: Text('SurfaceIntensity'),
-        ),
+        const Padding(padding: EdgeInsets.only(left: 12), child: Text('SurfaceIntensity')),
         Expanded(
           child: Slider(
             min: Neumorphic.MIN_INTENSITY, //in case of != 0
@@ -591,10 +488,7 @@ class __PageState extends State<_Page> {
             },
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(right: 12),
-          child: Text(((surfaceIntensity * 100).floor() / 100).toString()),
-        ),
+        Padding(padding: const EdgeInsets.only(right: 12), child: Text(((surfaceIntensity * 100).floor() / 100).toString())),
       ],
     );
   }
@@ -612,17 +506,10 @@ class __PageState extends State<_Page> {
             child: ElevatedButton(
               onPressed: () {
                 setState(() {
-                  boxShape = NeumorphicBoxShape.roundRect(
-                      BorderRadius.circular(cornerRadius));
+                  boxShape = NeumorphicBoxShape.roundRect(BorderRadius.circular(cornerRadius));
                 });
               },
-              child: Text(
-                'Rect',
-                style: TextStyle(
-                    color: boxShape.isRoundRect
-                        ? textActiveColor
-                        : textInactiveColor),
-              ),
+              child: Text('Rect', style: TextStyle(color: boxShape.isRoundRect ? textActiveColor : textInactiveColor)),
             ),
           ),
         ),
@@ -632,17 +519,10 @@ class __PageState extends State<_Page> {
             child: ElevatedButton(
               onPressed: () {
                 setState(() {
-                  boxShape = NeumorphicBoxShape.beveled(
-                      BorderRadius.circular(cornerRadius));
+                  boxShape = NeumorphicBoxShape.beveled(BorderRadius.circular(cornerRadius));
                 });
               },
-              child: Text(
-                'Beveled',
-                style: TextStyle(
-                    color: boxShape.isBeveled
-                        ? textActiveColor
-                        : textInactiveColor),
-              ),
+              child: Text('Beveled', style: TextStyle(color: boxShape.isBeveled ? textActiveColor : textInactiveColor)),
             ),
           ),
         ),
@@ -655,13 +535,7 @@ class __PageState extends State<_Page> {
                   boxShape = const NeumorphicBoxShape.circle();
                 });
               },
-              child: Text(
-                'Circle',
-                style: TextStyle(
-                    color: boxShape.isCircle
-                        ? textActiveColor
-                        : textInactiveColor),
-              ),
+              child: Text('Circle', style: TextStyle(color: boxShape.isCircle ? textActiveColor : textInactiveColor)),
             ),
           ),
         ),
@@ -674,13 +548,7 @@ class __PageState extends State<_Page> {
                   boxShape = const NeumorphicBoxShape.stadium();
                 });
               },
-              child: Text(
-                'Stadium',
-                style: TextStyle(
-                    color: boxShape.isStadium
-                        ? textActiveColor
-                        : textInactiveColor),
-              ),
+              child: Text('Stadium', style: TextStyle(color: boxShape.isStadium ? textActiveColor : textInactiveColor)),
             ),
           ),
         ),
@@ -690,17 +558,10 @@ class __PageState extends State<_Page> {
             child: ElevatedButton(
               onPressed: () {
                 setState(() {
-                  boxShape = NeumorphicBoxShape.path(
-                      NeumorphicFlutterLogoPathProvider());
+                  boxShape = NeumorphicBoxShape.path(NeumorphicFlutterLogoPathProvider());
                 });
               },
-              child: Text(
-                'Custom',
-                style: TextStyle(
-                    color: boxShape.isCustomPath
-                        ? textActiveColor
-                        : textInactiveColor),
-              ),
+              child: Text('Custom', style: TextStyle(color: boxShape.isCustomPath ? textActiveColor : textInactiveColor)),
             ),
           ),
         ),
@@ -721,13 +582,10 @@ class __PageState extends State<_Page> {
             child: ElevatedButton(
               onPressed: () {
                 setState(() {
-                  shape = NeumorphicShape.concave;
+                  shape = NeumorphicSurfaceType.concave;
                 });
               },
-              child: Image.asset('assets/images/concave.png',
-                  color: shape == NeumorphicShape.concave
-                      ? iconActiveColor
-                      : iconInactiveColor),
+              child: Image.asset('assets/images/concave.png', color: shape == NeumorphicSurfaceType.concave ? iconActiveColor : iconInactiveColor),
             ),
           ),
         ),
@@ -737,13 +595,10 @@ class __PageState extends State<_Page> {
             child: ElevatedButton(
               onPressed: () {
                 setState(() {
-                  shape = NeumorphicShape.convex;
+                  shape = NeumorphicSurfaceType.convex;
                 });
               },
-              child: Image.asset('assets/images/convex.png',
-                  color: shape == NeumorphicShape.convex
-                      ? iconActiveColor
-                      : iconInactiveColor),
+              child: Image.asset('assets/images/convex.png', color: shape == NeumorphicSurfaceType.convex ? iconActiveColor : iconInactiveColor),
             ),
           ),
         ),
@@ -753,13 +608,10 @@ class __PageState extends State<_Page> {
             child: ElevatedButton(
               onPressed: () {
                 setState(() {
-                  shape = NeumorphicShape.flat;
+                  shape = NeumorphicSurfaceType.flat;
                 });
               },
-              child: Image.asset('assets/images/flat.png',
-                  color: shape == NeumorphicShape.flat
-                      ? iconActiveColor
-                      : iconInactiveColor),
+              child: Image.asset('assets/images/flat.png', color: shape == NeumorphicSurfaceType.flat ? iconActiveColor : iconInactiveColor),
             ),
           ),
         ),

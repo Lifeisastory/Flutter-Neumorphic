@@ -21,21 +21,13 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
           Center(
             child: Text(
               title,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w800,
-                color: NeumorphicTheme.isUsingDark(context)
-                    ? Colors.white70
-                    : Colors.black87,
-              ),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: NeumorphicTheme.isUsingDark(context) ? Colors.white70 : Colors.black87),
             ),
           ),
           Align(
-              alignment: Alignment.centerRight,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: actions ?? [],
-              )),
+            alignment: Alignment.centerRight,
+            child: Row(mainAxisSize: MainAxisSize.min, children: actions ?? []),
+          ),
         ],
       ),
     );

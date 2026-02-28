@@ -10,10 +10,7 @@ class Code extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(8),
       color: Colors.grey.withValues(alpha: 0.2),
-      child: Text(
-        text,
-        style: TextStyle(color: Colors.black.withValues(alpha: 0.8)),
-      ),
+      child: Text(text, style: TextStyle(color: Colors.black.withValues(alpha: 0.8))),
     );
   }
 }
@@ -27,8 +24,7 @@ class MyIntWidget extends StatefulWidget {
   _MyIntWidgetState createState() => _MyIntWidgetState();
 }
 
-class _MyIntWidgetState extends State<MyIntWidget>
-    with TickerProviderStateMixin {
+class _MyIntWidgetState extends State<MyIntWidget> with TickerProviderStateMixin {
   late int _value;
   late AnimationController _controller;
   late Animation<int> _valueAnimation;
@@ -36,8 +32,7 @@ class _MyIntWidgetState extends State<MyIntWidget>
   @override
   void initState() {
     _value = widget.value;
-    _controller = AnimationController(
-        duration: const Duration(milliseconds: 300), vsync: this);
+    _controller = AnimationController(duration: const Duration(milliseconds: 300), vsync: this);
     super.initState();
   }
 
@@ -45,11 +40,10 @@ class _MyIntWidgetState extends State<MyIntWidget>
   void didUpdateWidget(MyIntWidget oldWidget) {
     if (oldWidget.value != widget.value) {
       _controller.reset();
-      _valueAnimation =
-          Tween(begin: _value, end: widget.value).animate(_controller)
-            ..addListener(() {
-              _value = _valueAnimation.value;
-            });
+      _valueAnimation = Tween(begin: _value, end: widget.value).animate(_controller)
+        ..addListener(() {
+          _value = _valueAnimation.value;
+        });
       _controller.forward();
     }
     super.didUpdateWidget(oldWidget);

@@ -14,10 +14,7 @@ class BeveledPathProvider extends NeumorphicPathProvider {
   @override
   Path getPath(Size size) {
     final rrect = RRect.fromLTRBAndCorners(0, 0, size.width, size.height,
-        topLeft: borderRadius.topLeft,
-        topRight: borderRadius.topRight,
-        bottomLeft: borderRadius.bottomLeft,
-        bottomRight: borderRadius.bottomRight);
+        topLeft: borderRadius.topLeft, topRight: borderRadius.topRight, bottomLeft: borderRadius.bottomLeft, bottomRight: borderRadius.bottomRight);
     return _getPath(rrect);
   }
 

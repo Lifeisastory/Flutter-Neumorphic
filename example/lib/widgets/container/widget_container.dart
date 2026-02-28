@@ -16,12 +16,7 @@ class _WidgetPageState extends State<ContainerWidgetPage> {
   Widget build(BuildContext context) {
     return NeumorphicTheme(
       themeMode: ThemeMode.light,
-      theme: const NeumorphicThemeData(
-        lightSource: LightSource.topLeft,
-        accentColor: NeumorphicColors.accent,
-        depth: 8,
-        intensity: 0.5,
-      ),
+      theme: const NeumorphicThemeData(lightSource: LightSource.topLeft, accentColor: NeumorphicColors.accent, depth: 8, intensity: 0.5),
       child: _Page(),
     );
   }
@@ -87,7 +82,13 @@ Neumorphic(
           Text('Default', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
           const SizedBox(width: 12),
           Neumorphic(
-            style: NeumorphicStyle(depth: -5, intensity: 1, boxShape: .roundRect(const .all(.circular(20)))),
+            style: NeumorphicStyle(
+              depth: -1.5,
+              intensity: 1,
+              boxShape: .roundRect(const .all(.circular(20))),
+              color: const Color(0xffd1d8da),
+              shadowLightColorDeboss: Colors.white,
+            ),
             child: const SizedBox(height: 40, width: 200),
           ),
           const SizedBox(width: 12),
@@ -98,10 +99,7 @@ Neumorphic(
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[_buildWidget(context), _buildCode(context)],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[_buildWidget(context), _buildCode(context)]);
   }
 }
 
@@ -141,10 +139,7 @@ Neumorphic(
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[_buildWidget(context), _buildCode(context)],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[_buildWidget(context), _buildCode(context)]);
   }
 }
 
@@ -186,10 +181,7 @@ Neumorphic(
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[_buildWidget(context), _buildCode(context)],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[_buildWidget(context), _buildCode(context)]);
   }
 }
 
@@ -243,10 +235,7 @@ Neumorphic(
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[_buildWidget(context), _buildCode(context)],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[_buildWidget(context), _buildCode(context)]);
   }
 }
 
@@ -285,7 +274,7 @@ Neumorphic(
               ),
               const SizedBox(width: 12),
               Neumorphic(
-                style: const NeumorphicStyle(shape: NeumorphicShape.flat, boxShape: NeumorphicBoxShape.circle()),
+                style: const NeumorphicStyle(shape: NeumorphicSurfaceType.flat, boxShape: NeumorphicBoxShape.circle()),
                 padding: const EdgeInsets.all(18.0),
                 child: const Icon(Icons.play_arrow),
               ),
@@ -300,7 +289,7 @@ Neumorphic(
               ),
               const SizedBox(width: 12),
               Neumorphic(
-                style: const NeumorphicStyle(shape: NeumorphicShape.concave, boxShape: NeumorphicBoxShape.circle()),
+                style: const NeumorphicStyle(shape: NeumorphicSurfaceType.concave, boxShape: NeumorphicBoxShape.circle()),
                 padding: const EdgeInsets.all(18.0),
                 child: const Icon(Icons.play_arrow),
               ),
@@ -315,7 +304,7 @@ Neumorphic(
               ),
               const SizedBox(width: 12),
               NeumorphicButton(
-                style: const NeumorphicStyle(shape: NeumorphicShape.convex, boxShape: NeumorphicBoxShape.circle()),
+                style: const NeumorphicStyle(shape: NeumorphicSurfaceType.convex, boxShape: NeumorphicBoxShape.circle()),
                 padding: const EdgeInsets.all(18.0),
                 child: const Icon(Icons.play_arrow),
               ),
@@ -328,10 +317,7 @@ Neumorphic(
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[_buildWidget(context), _buildCode(context)],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[_buildWidget(context), _buildCode(context)]);
   }
 }
 
@@ -362,11 +348,7 @@ Neumorphic(
             children: <Widget>[
               Text('Emboss', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
               const SizedBox(width: 12),
-              Neumorphic(
-                padding: const EdgeInsets.all(18),
-                style: const NeumorphicStyle(depth: -10.0),
-                child: const Icon(Icons.play_arrow),
-              ),
+              Neumorphic(padding: const EdgeInsets.all(18), style: const NeumorphicStyle(depth: -10.0), child: const Icon(Icons.play_arrow)),
               const SizedBox(width: 12),
               Neumorphic(
                 padding: const EdgeInsets.all(18),
@@ -382,10 +364,7 @@ Neumorphic(
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[_buildWidget(context), _buildCode(context)],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[_buildWidget(context), _buildCode(context)]);
   }
 }
 
@@ -442,21 +421,21 @@ Neumorphic(
               Neumorphic(
                 drawSurfaceAboveChild: false,
                 margin: const EdgeInsets.all(8),
-                style: const NeumorphicStyle(surfaceIntensity: 1, shape: NeumorphicShape.concave),
+                style: const NeumorphicStyle(surfaceIntensity: 1, shape: NeumorphicSurfaceType.concave),
                 child: Image.asset('assets/images/weeknd.jpg', height: 100, width: 100, fit: BoxFit.cover),
               ),
               const SizedBox(width: 12),
               Neumorphic(
                 drawSurfaceAboveChild: true,
                 margin: const EdgeInsets.all(8),
-                style: const NeumorphicStyle(surfaceIntensity: 1, shape: NeumorphicShape.concave),
+                style: const NeumorphicStyle(surfaceIntensity: 1, shape: NeumorphicSurfaceType.concave),
                 child: Image.asset('assets/images/weeknd.jpg', height: 100, width: 100, fit: BoxFit.cover),
               ),
               const SizedBox(width: 12),
               Neumorphic(
                 drawSurfaceAboveChild: true,
                 margin: const EdgeInsets.all(8),
-                style: const NeumorphicStyle(intensity: 1, shape: NeumorphicShape.convex),
+                style: const NeumorphicStyle(intensity: 1, shape: NeumorphicSurfaceType.convex),
                 child: Image.asset('assets/images/weeknd.jpg', height: 100, width: 100, fit: BoxFit.cover),
               ),
             ],
@@ -466,33 +445,21 @@ Neumorphic(
               Neumorphic(
                 drawSurfaceAboveChild: false,
                 margin: const EdgeInsets.all(8),
-                style: const NeumorphicStyle(
-                  boxShape: NeumorphicBoxShape.circle(),
-                  surfaceIntensity: 1,
-                  shape: NeumorphicShape.concave,
-                ),
+                style: const NeumorphicStyle(boxShape: NeumorphicBoxShape.circle(), surfaceIntensity: 1, shape: NeumorphicSurfaceType.concave),
                 child: Image.asset('assets/images/weeknd.jpg', height: 100, width: 100, fit: BoxFit.cover),
               ),
               const SizedBox(width: 12),
               Neumorphic(
                 drawSurfaceAboveChild: true,
                 margin: const EdgeInsets.all(8),
-                style: const NeumorphicStyle(
-                  surfaceIntensity: 1,
-                  boxShape: NeumorphicBoxShape.circle(),
-                  shape: NeumorphicShape.concave,
-                ),
+                style: const NeumorphicStyle(surfaceIntensity: 1, boxShape: NeumorphicBoxShape.circle(), shape: NeumorphicSurfaceType.concave),
                 child: Image.asset('assets/images/weeknd.jpg', height: 100, width: 100, fit: BoxFit.cover),
               ),
               const SizedBox(width: 12),
               Neumorphic(
                 drawSurfaceAboveChild: true,
                 margin: const EdgeInsets.all(8),
-                style: const NeumorphicStyle(
-                  surfaceIntensity: 1,
-                  boxShape: NeumorphicBoxShape.circle(),
-                  shape: NeumorphicShape.convex,
-                ),
+                style: const NeumorphicStyle(surfaceIntensity: 1, boxShape: NeumorphicBoxShape.circle(), shape: NeumorphicSurfaceType.convex),
                 child: Image.asset('assets/images/weeknd.jpg', height: 100, width: 100, fit: BoxFit.cover),
               ),
             ],
@@ -504,9 +471,6 @@ Neumorphic(
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[_buildWidget(context), _buildCode(context)],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[_buildWidget(context), _buildCode(context)]);
   }
 }

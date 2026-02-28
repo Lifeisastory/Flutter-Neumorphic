@@ -4,7 +4,7 @@ import '../../flutter_neumorphic.dart';
 
 export '../colors.dart';
 export '../light_source.dart';
-export '../shape.dart';
+export '../surface_type.dart';
 
 //region theme
 const double _defaultDepth = 4;
@@ -228,9 +228,7 @@ class NeumorphicThemeData {
 
   /// Create a copy of this theme
   /// With possibly new values given from the given second theme
-  NeumorphicThemeData copyFrom({
-    required NeumorphicThemeData other,
-  }) {
+  NeumorphicThemeData copyFrom({required NeumorphicThemeData other}) {
     return new NeumorphicThemeData(
       baseColor: other.baseColor,
       accentColor: other.accentColor,
@@ -258,7 +256,7 @@ class NeumorphicThemeData {
 //endregion
 
 //region style
-const NeumorphicShape _defaultShape = NeumorphicShape.flat;
+const NeumorphicSurfaceType _defaultShape = NeumorphicSurfaceType.flat;
 //const double _defaultBorderRadius = 5;
 
 const neumorphicDefaultTheme = NeumorphicThemeData();
@@ -279,11 +277,7 @@ class NeumorphicBorder {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is NeumorphicBorder &&
-          runtimeType == other.runtimeType &&
-          isEnabled == other.isEnabled &&
-          color == other.color &&
-          width == other.width;
+      other is NeumorphicBorder && runtimeType == other.runtimeType && isEnabled == other.isEnabled && color == other.color && width == other.width;
 
   @override
   int get hashCode => isEnabled.hashCode ^ color.hashCode ^ width.hashCode;
@@ -299,8 +293,7 @@ class NeumorphicBorder {
     if (t == 0.0) return a;
     if (t == 1.0) return b;
 
-    return NeumorphicBorder(
-        color: Color.lerp(a!.color, b!.color, t), isEnabled: a.isEnabled, width: lerpDouble(a.width, b.width, t));
+    return NeumorphicBorder(color: Color.lerp(a!.color, b!.color, t), isEnabled: a.isEnabled, width: lerpDouble(a.width, b.width, t));
   }
 
   NeumorphicBorder copyWithThemeIfNull({Color? color, double? width}) {
@@ -320,7 +313,7 @@ class NeumorphicStyle {
 
   final bool oppositeShadowLightSource;
 
-  final NeumorphicShape shape;
+  final NeumorphicSurfaceType shape;
   final NeumorphicBoxShape? boxShape;
   final NeumorphicThemeData? theme;
 
@@ -456,7 +449,7 @@ class NeumorphicStyle {
     bool? disableDepth,
     double? borderRadius,
     bool? oppositeShadowLightSource,
-    NeumorphicShape? shape,
+    NeumorphicSurfaceType? shape,
   }) {
     return NeumorphicStyle._withTheme(
       color: color ?? this.color,
@@ -479,7 +472,7 @@ class NeumorphicStyle {
 
   @override
   String toString() {
-    return 'NeumorphicStyle{color: $color, boxShape: $boxShape, _depth: $_depth, intensity: $intensity, disableDepth: $disableDepth, lightSource: $lightSource, shape: $shape, theme: $theme, oppositeShadowLightSource: $oppositeShadowLightSource}';
+    return 'NeumorphicStyle{color: $color, boxShape: $boxShape, _depth: $_depth, intensity: $intensity, disableDepth: $disableDepth, lightSource: $lightSource, clip_path: $shape, theme: $theme, oppositeShadowLightSource: $oppositeShadowLightSource}';
   }
 
   NeumorphicStyle applyDisableDepth() {

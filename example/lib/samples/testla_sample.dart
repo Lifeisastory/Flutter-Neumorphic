@@ -19,9 +19,7 @@ class _TeslaSampleState extends State<TeslaSample> {
         depth: 2,
       ),
       child: Scaffold(
-        body: SafeArea(
-          child: NeumorphicBackground(child: _PageContent()),
-        ),
+        body: SafeArea(child: NeumorphicBackground(child: _PageContent())),
       ),
     );
   }
@@ -37,10 +35,8 @@ class __PageContentState extends State<_PageContent> {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-          gradient: LinearGradient(colors: [
-        Color(0xFF373C43),
-        Color(0xFF17181C),
-      ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+        gradient: LinearGradient(colors: [Color(0xFF373C43), Color(0xFF17181C)], begin: Alignment.topCenter, end: Alignment.bottomCenter),
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
@@ -60,26 +56,16 @@ class __PageContentState extends State<_PageContent> {
           alignment: Alignment.centerLeft,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-            child: _bumpButton(
-              const Icon(
-                Icons.arrow_back,
-                color: Colors.grey,
-              ),
-            ),
+            child: _bumpButton(const Icon(Icons.arrow_back, color: Colors.grey)),
           ),
         ),
         Align(
           alignment: Alignment.centerRight,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-            child: _bumpButton(
-              const Icon(
-                Icons.settings,
-                color: Colors.grey,
-              ),
-            ),
+            child: _bumpButton(const Icon(Icons.settings, color: Colors.grey)),
           ),
-        )
+        ),
       ],
     );
   }
@@ -92,38 +78,25 @@ class __PageContentState extends State<_PageContent> {
         depth: 8,
         boxShape: NeumorphicBoxShape.circle(),
         intensity: 0.3,
-        shape: NeumorphicShape.concave,
+        shape: NeumorphicSurfaceType.concave,
       ),
       child: NeumorphicButton(
-          onPressed: () {},
-          margin: const EdgeInsets.all(3),
-          padding: const EdgeInsets.all(14.0),
-          style: const NeumorphicStyle(
-            boxShape: NeumorphicBoxShape.circle(),
-            color: Color(0xFF212528),
-            depth: 0,
-            shape: NeumorphicShape.convex,
-          ),
-          child: child),
+        onPressed: () {},
+        margin: const EdgeInsets.all(3),
+        padding: const EdgeInsets.all(14.0),
+        style: const NeumorphicStyle(boxShape: NeumorphicBoxShape.circle(), color: Color(0xFF212528), depth: 0, shape: NeumorphicSurfaceType.convex),
+        child: child,
+      ),
     );
   }
 
   Widget _buildTitle(BuildContext context) {
     return const Column(
       children: <Widget>[
-        Text(
-          'Tesla',
-          style: TextStyle(
-            color: Colors.white30,
-          ),
-        ),
+        Text('Tesla', style: TextStyle(color: Colors.white30)),
         Text(
           'CyberTruck',
-          style: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.w800,
-            color: Colors.white,
-          ),
+          style: TextStyle(fontSize: 30, fontWeight: FontWeight.w800, color: Colors.white),
         ),
       ],
     );
@@ -139,15 +112,9 @@ class __PageContentState extends State<_PageContent> {
           children: <Widget>[
             Text(
               '297',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 120,
-                  fontWeight: FontWeight.w200),
+              style: TextStyle(color: Colors.white, fontSize: 120, fontWeight: FontWeight.w200),
             ),
-            Text(
-              'km',
-              style: TextStyle(color: Colors.white, fontSize: 10),
-            ),
+            Text('km', style: TextStyle(color: Colors.white, fontSize: 10)),
           ],
         ),
         Positioned(
@@ -156,10 +123,7 @@ class __PageContentState extends State<_PageContent> {
             height: 280,
             child: Padding(
               padding: const EdgeInsets.only(top: 35),
-              child: Image.asset(
-                'assets/images/tesla_cropped.png',
-                fit: BoxFit.contain,
-              ),
+              child: Image.asset('assets/images/tesla_cropped.png', fit: BoxFit.contain),
             ),
           ),
         ),
@@ -172,15 +136,8 @@ class __PageContentState extends State<_PageContent> {
       padding: const EdgeInsets.only(bottom: 18),
       child: Column(
         children: <Widget>[
-          const Text(
-            'A/C is turned on',
-            style: TextStyle(
-              color: Colors.white30,
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
+          const Text('A/C is turned on', style: TextStyle(color: Colors.white30)),
+          const SizedBox(height: 20),
           NeumorphicButton(
             drawSurfaceAboveChild: false,
             onPressed: () {},
@@ -189,36 +146,21 @@ class __PageContentState extends State<_PageContent> {
               depth: 10,
               boxShape: const NeumorphicBoxShape.circle(),
               color: NeumorphicTheme.accentColor(context),
-              shape: NeumorphicShape.flat,
+              shape: NeumorphicSurfaceType.flat,
             ),
             child: Neumorphic(
               style: NeumorphicStyle(
                 surfaceIntensity: 0.7,
                 depth: 0,
                 boxShape: const NeumorphicBoxShape.circle(),
-                shape: NeumorphicShape.concave,
+                shape: NeumorphicSurfaceType.concave,
                 color: NeumorphicTheme.accentColor(context),
               ),
-              child: const SizedBox(
-                height: 80,
-                width: 80,
-                child: Icon(
-                  Icons.lock,
-                  size: 30,
-                  color: Colors.white,
-                ),
-              ),
+              child: const SizedBox(height: 80, width: 80, child: Icon(Icons.lock, size: 30, color: Colors.white)),
             ),
           ),
-          const SizedBox(
-            height: 20,
-          ),
-          const Text(
-            'Tap to open the car',
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          ),
+          const SizedBox(height: 20),
+          const Text('Tap to open the car', style: TextStyle(color: Colors.white)),
         ],
       ),
     );

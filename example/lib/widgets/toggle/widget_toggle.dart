@@ -15,12 +15,7 @@ class _WidgetPageState extends State<ToggleWidgetPage> {
   Widget build(BuildContext context) {
     return NeumorphicTheme(
       themeMode: ThemeMode.light,
-      theme: const NeumorphicThemeData(
-        lightSource: LightSource.topLeft,
-        accentColor: NeumorphicColors.accent,
-        depth: 4,
-        intensity: 0.5,
-      ),
+      theme: const NeumorphicThemeData(lightSource: LightSource.topLeft, accentColor: NeumorphicColors.accent, depth: 4, intensity: 0.5),
       child: _Page(),
     );
   }
@@ -37,23 +32,14 @@ class _PageState extends State<_Page> {
     return NeumorphicBackground(
       padding: const EdgeInsets.all(8),
       child: Scaffold(
-        appBar: const TopBar(
-          title: 'Toggle',
-          actions: <Widget>[
-            ThemeConfigurator(),
-          ],
-        ),
+        appBar: const TopBar(title: 'Toggle', actions: <Widget>[ThemeConfigurator()]),
         backgroundColor: Colors.transparent,
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
-            children: [
-              _DefaultWidget(),
-              _SmallWidget(),
-              const SizedBox(height: 30),
-            ],
+            children: [_DefaultWidget(), _SmallWidget(), const SizedBox(height: 30)],
           ),
         ),
       ),
@@ -110,63 +96,43 @@ Expanded(
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
-          Text(
-            'Default',
-            style: TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
-          ),
+          Text('Default', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
           const SizedBox(width: 12),
           Expanded(
             child: NeumorphicToggle(
               height: 50,
               style: const NeumorphicToggleStyle(
-                  //backgroundColor: Colors.red,
-                  ),
+                //backgroundColor: Colors.red,
+              ),
               selectedIndex: _selectedIndex,
               displayForegroundOnlyIfSelected: true,
               children: [
                 ToggleElement(
                   background: const Center(
-                      child: Text(
-                    'This week',
-                    style: TextStyle(fontWeight: FontWeight.w500),
-                  )),
+                    child: Text('This week', style: TextStyle(fontWeight: FontWeight.w500)),
+                  ),
                   foreground: const Center(
-                      child: Text(
-                    'This week',
-                    style: TextStyle(fontWeight: FontWeight.w700),
-                  )),
+                    child: Text('This week', style: TextStyle(fontWeight: FontWeight.w700)),
+                  ),
                 ),
                 ToggleElement(
                   background: const Center(
-                      child: Text(
-                    'This month',
-                    style: TextStyle(fontWeight: FontWeight.w500),
-                  )),
+                    child: Text('This month', style: TextStyle(fontWeight: FontWeight.w500)),
+                  ),
                   foreground: const Center(
-                      child: Text(
-                    'This month',
-                    style: TextStyle(fontWeight: FontWeight.w700),
-                  )),
+                    child: Text('This month', style: TextStyle(fontWeight: FontWeight.w700)),
+                  ),
                 ),
                 ToggleElement(
                   background: const Center(
-                      child: Text(
-                    'This year',
-                    style: TextStyle(fontWeight: FontWeight.w500),
-                  )),
+                    child: Text('This year', style: TextStyle(fontWeight: FontWeight.w500)),
+                  ),
                   foreground: const Center(
-                      child: Text(
-                    'This year',
-                    style: TextStyle(fontWeight: FontWeight.w700),
-                  )),
-                )
+                    child: Text('This year', style: TextStyle(fontWeight: FontWeight.w700)),
+                  ),
+                ),
               ],
-              thumb: Neumorphic(
-                style: NeumorphicStyle(
-                  boxShape: NeumorphicBoxShape.roundRect(
-                      const BorderRadius.all(Radius.circular(12))),
-                ),
-              ),
+              thumb: Neumorphic(style: NeumorphicStyle(boxShape: NeumorphicBoxShape.roundRect(const BorderRadius.all(Radius.circular(12))))),
               onChanged: (value) {
                 setState(() {
                   _selectedIndex = value;
@@ -182,13 +148,7 @@ Expanded(
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        _buildWidget(context),
-        _buildCode(context),
-      ],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[_buildWidget(context), _buildCode(context)]);
   }
 }
 
@@ -240,10 +200,7 @@ NeumorphicToggle(
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
-          Text(
-            'Small',
-            style: TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
-          ),
+          Text('Small', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
           const SizedBox(width: 12),
           NeumorphicToggle(
             height: 45,
@@ -251,24 +208,13 @@ NeumorphicToggle(
             selectedIndex: _selectedIndex,
             children: [
               ToggleElement(
-                background: Center(
-                    child: Icon(
-                  Icons.arrow_back,
-                  color: Colors.grey[800],
-                )),
+                background: Center(child: Icon(Icons.arrow_back, color: Colors.grey[800])),
               ),
               ToggleElement(),
             ],
             thumb: Neumorphic(
-              style: NeumorphicStyle(
-                boxShape: NeumorphicBoxShape.roundRect(
-                  const BorderRadius.all(Radius.circular(12)),
-                ),
-              ),
-              child: const Icon(
-                Icons.blur_on,
-                color: Colors.grey,
-              ),
+              style: NeumorphicStyle(boxShape: NeumorphicBoxShape.roundRect(const BorderRadius.all(Radius.circular(12)))),
+              child: const Icon(Icons.blur_on, color: Colors.grey),
             ),
             onAnimationChangedFinished: (value) {
               if (value == 0) {
@@ -291,12 +237,6 @@ NeumorphicToggle(
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        _buildWidget(context),
-        _buildCode(context),
-      ],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[_buildWidget(context), _buildCode(context)]);
   }
 }

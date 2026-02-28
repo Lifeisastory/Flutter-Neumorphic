@@ -148,18 +148,10 @@ class NeumorphicCheckbox extends StatelessWidget {
     final NeumorphicThemeData theme = NeumorphicTheme.currentTheme(context);
     final selectedColor = this.style.selectedColor ?? theme.accentColor;
 
-    final double selectedDepth =
-        -1 * (this.style.selectedDepth ?? theme.depth).abs();
-    final double unselectedDepth =
-        (this.style.unselectedDepth ?? theme.depth).abs();
-    final double selectedIntensity =
-        (this.style.selectedIntensity ?? theme.intensity)
-            .abs()
-            .clamp(Neumorphic.MIN_INTENSITY, Neumorphic.MAX_INTENSITY);
-    final double unselectedIntensity = this
-        .style
-        .unselectedIntensity
-        .clamp(Neumorphic.MIN_INTENSITY, Neumorphic.MAX_INTENSITY);
+    final double selectedDepth = -1 * (this.style.selectedDepth ?? theme.depth).abs();
+    final double unselectedDepth = (this.style.unselectedDepth ?? theme.depth).abs();
+    final double selectedIntensity = (this.style.selectedIntensity ?? theme.intensity).abs().clamp(Neumorphic.MIN_INTENSITY, Neumorphic.MAX_INTENSITY);
+    final double unselectedIntensity = this.style.unselectedIntensity.clamp(Neumorphic.MIN_INTENSITY, Neumorphic.MAX_INTENSITY);
 
     double depth = isSelected ? selectedDepth : unselectedDepth;
     if (!this.isEnabled) {
@@ -202,7 +194,7 @@ class NeumorphicCheckbox extends StatelessWidget {
         lightSource: this.style.lightSource ?? theme.lightSource,
         disableDepth: this.style.disableDepth,
         intensity: isSelected ? selectedIntensity : unselectedIntensity,
-        shape: NeumorphicShape.flat,
+        shape: NeumorphicSurfaceType.flat,
       ),
     );
   }

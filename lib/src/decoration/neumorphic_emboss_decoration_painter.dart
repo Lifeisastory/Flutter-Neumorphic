@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 
 import '../neumorphic_box_shape.dart';
 import '../theme/theme.dart';
-import 'cache/neumorphic_painter_cache.dart';
+import 'cache/neumorphic_emboss_painter_cache.dart';
 import 'neumorphic_box_decoration_helper.dart';
 import 'neumorphic_deboss_decoration_painter.dart';
 
@@ -11,7 +10,7 @@ class NeumorphicEmbossDecorationPainter extends BoxPainter {
   final NeumorphicStyle style;
   final NeumorphicBoxShape shape;
 
-  NeumorphicPainterCache _cache = NeumorphicPainterCache();
+  NeumorphicEmbossPainterCache _cache = NeumorphicEmbossPainterCache();
 
   late Paint _backgroundPaint;
   late Paint _whiteShadowPaint;
@@ -169,14 +168,14 @@ class NeumorphicEmbossDecorationPainter extends BoxPainter {
   }
 
   void _drawGradient({required Canvas canvas, required Offset offset, required Path path}) {
-    if (style.shape == NeumorphicShape.concave || style.shape == NeumorphicShape.convex) {
+    if (style.shape == NeumorphicSurfaceType.concave || style.shape == NeumorphicSurfaceType.convex) {
       final pathRect = path.getBounds();
 
       _gradientPaint
         ..shader = getGradientShader(
           gradientRect: pathRect,
           intensity: style.surfaceIntensity,
-          source: style.shape == NeumorphicShape.concave ? this.style.lightSource : this.style.lightSource.invert(),
+          source: style.shape == NeumorphicSurfaceType.concave ? this.style.lightSource : this.style.lightSource.invert(),
         );
 
       canvas

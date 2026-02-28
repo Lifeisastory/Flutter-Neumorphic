@@ -15,12 +15,7 @@ class _WidgetPageState extends State<TipsRecursiveeEmbossPage> {
   Widget build(BuildContext context) {
     return NeumorphicTheme(
       themeMode: ThemeMode.light,
-      theme: const NeumorphicThemeData(
-        lightSource: LightSource.topLeft,
-        accentColor: NeumorphicColors.accent,
-        depth: 4,
-        intensity: 0.6,
-      ),
+      theme: const NeumorphicThemeData(lightSource: LightSource.topLeft, accentColor: NeumorphicColors.accent, depth: 4, intensity: 0.6),
       child: _Page(),
     );
   }
@@ -37,22 +32,14 @@ class _PageState extends State<_Page> {
     return NeumorphicBackground(
       padding: const EdgeInsets.all(8),
       child: Scaffold(
-        appBar: const TopBar(
-          title: 'Emboss Recursive',
-          actions: <Widget>[
-            ThemeConfigurator(),
-          ],
-        ),
+        appBar: const TopBar(title: 'Emboss Recursive', actions: <Widget>[ThemeConfigurator()]),
         backgroundColor: Colors.transparent,
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
-            children: [
-              _EmbossmbossWidget(),
-              const SizedBox(height: 30),
-            ],
+            children: [_EmbossmbossWidget(), const SizedBox(height: 30)],
           ),
         ),
       ),
@@ -86,17 +73,14 @@ class _EmbossmbossWidgetState extends State<_EmbossmbossWidget> {
 ''');
   }
 
-  Widget _generateEmbosss(
-      {required int number,
-      required Widget child,
-      bool reverseEachPair = false}) {
+  Widget _generateEmbosss({required int number, required Widget child, bool reverseEachPair = false}) {
     Widget element = child;
     for (int i = 0; i < number; ++i) {
       element = Neumorphic(
         padding: const EdgeInsets.all(20),
         style: NeumorphicStyle(
           boxShape: const NeumorphicBoxShape.circle(),
-          depth: -(NeumorphicTheme.depth(context)!.abs()), //force negative
+          depth: -(NeumorphicTheme.embossDepth(context)!.abs()), //force negative
           oppositeShadowLightSource: (reverseEachPair && i % 2 == 0),
         ),
         child: element,
@@ -117,19 +101,9 @@ class _EmbossmbossWidgetState extends State<_EmbossmbossWidget> {
                   Container(
                     width: 100,
                     margin: const EdgeInsets.only(left: 12, right: 12),
-                    child: Text(
-                      'Recursive Emboss',
-                      style: TextStyle(
-                          color: NeumorphicTheme.defaultTextColor(context)),
-                    ),
+                    child: Text('Recursive Emboss', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
                   ),
-                  _generateEmbosss(
-                    number: 5,
-                    child: const SizedBox(
-                      height: 10,
-                      width: 10,
-                    ),
-                  ),
+                  _generateEmbosss(number: 5, child: const SizedBox(height: 10, width: 10)),
                 ],
               ),
               const SizedBox(height: 20),
@@ -138,20 +112,9 @@ class _EmbossmbossWidgetState extends State<_EmbossmbossWidget> {
                   Container(
                     width: 100,
                     margin: const EdgeInsets.only(left: 12, right: 12),
-                    child: Text(
-                      'Each pair number\nLightsource is reversed',
-                      style: TextStyle(
-                          color: NeumorphicTheme.defaultTextColor(context)),
-                    ),
+                    child: Text('Each pair number\nLightsource is reversed', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
                   ),
-                  _generateEmbosss(
-                    number: 5,
-                    reverseEachPair: true,
-                    child: const SizedBox(
-                      height: 10,
-                      width: 10,
-                    ),
-                  ),
+                  _generateEmbosss(number: 5, reverseEachPair: true, child: const SizedBox(height: 10, width: 10)),
                 ],
               ),
             ],
@@ -164,19 +127,9 @@ class _EmbossmbossWidgetState extends State<_EmbossmbossWidget> {
                   Container(
                     width: 100,
                     margin: const EdgeInsets.only(left: 12, right: 12),
-                    child: Text(
-                      'Recursive Emboss',
-                      style: TextStyle(
-                          color: NeumorphicTheme.defaultTextColor(context)),
-                    ),
+                    child: Text('Recursive Emboss', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
                   ),
-                  _generateEmbosss(
-                    number: 4,
-                    child: const SizedBox(
-                      height: 10,
-                      width: 10,
-                    ),
-                  ),
+                  _generateEmbosss(number: 4, child: const SizedBox(height: 10, width: 10)),
                 ],
               ),
               const SizedBox(height: 20),
@@ -185,20 +138,9 @@ class _EmbossmbossWidgetState extends State<_EmbossmbossWidget> {
                   Container(
                     width: 100,
                     margin: const EdgeInsets.only(left: 12, right: 12),
-                    child: Text(
-                      'Each pair number\nLightsource is reversed',
-                      style: TextStyle(
-                          color: NeumorphicTheme.defaultTextColor(context)),
-                    ),
+                    child: Text('Each pair number\nLightsource is reversed', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
                   ),
-                  _generateEmbosss(
-                    number: 4,
-                    reverseEachPair: true,
-                    child: const SizedBox(
-                      height: 10,
-                      width: 10,
-                    ),
-                  ),
+                  _generateEmbosss(number: 4, reverseEachPair: true, child: const SizedBox(height: 10, width: 10)),
                 ],
               ),
             ],
@@ -210,12 +152,6 @@ class _EmbossmbossWidgetState extends State<_EmbossmbossWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        _buildWidget(context),
-        _buildCode(context),
-      ],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[_buildWidget(context), _buildCode(context)]);
   }
 }

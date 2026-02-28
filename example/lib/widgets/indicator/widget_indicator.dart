@@ -18,12 +18,7 @@ class _WidgetPageState extends State<IndicatorWidgetPage> {
   Widget build(BuildContext context) {
     return NeumorphicTheme(
       themeMode: ThemeMode.light,
-      theme: const NeumorphicThemeData(
-        lightSource: LightSource.topLeft,
-        accentColor: NeumorphicColors.accent,
-        depth: 4,
-        intensity: 0.5,
-      ),
+      theme: const NeumorphicThemeData(lightSource: LightSource.topLeft, accentColor: NeumorphicColors.accent, depth: 4, intensity: 0.5),
       child: _Page(),
     );
   }
@@ -40,26 +35,14 @@ class _PageState extends State<_Page> {
     return NeumorphicBackground(
       padding: const EdgeInsets.all(8),
       child: Scaffold(
-        appBar: const TopBar(
-          title: 'Indicator',
-          actions: <Widget>[
-            ThemeConfigurator(),
-          ],
-        ),
+        appBar: const TopBar(title: 'Indicator', actions: <Widget>[ThemeConfigurator()]),
         backgroundColor: Colors.transparent,
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
-            children: [
-              _DefaultWidget(),
-              _DefaultOrientationWidget(),
-              _DurationWidget(),
-              _ColorWidget(),
-              _CurveWidget(),
-              const SizedBox(height: 30),
-            ],
+            children: [_DefaultWidget(), _DefaultOrientationWidget(), _DurationWidget(), _ColorWidget(), _CurveWidget(), const SizedBox(height: 30)],
           ),
         ),
       ),
@@ -90,24 +73,18 @@ NeumorphicIndicator(
       padding: const EdgeInsets.all(12),
       child: Row(
         children: <Widget>[
-          Text(
-            'Default',
-            style: TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
-          ),
+          Text('Default', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
           const SizedBox(width: 12),
-          NeumorphicIndicator(
-            height: 100,
-            width: 20,
-            percent: percent,
-          ),
+          NeumorphicIndicator(height: 100, width: 20, percent: percent),
           const SizedBox(width: 12),
           TextButton(
-              child: const Text('Update'),
-              onPressed: () {
-                setState(() {
-                  percent = Random().nextDouble();
-                });
-              }),
+            child: const Text('Update'),
+            onPressed: () {
+              setState(() {
+                percent = Random().nextDouble();
+              });
+            },
+          ),
         ],
       ),
     );
@@ -115,13 +92,7 @@ NeumorphicIndicator(
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        _buildWidget(context),
-        _buildCode(context),
-      ],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[_buildWidget(context), _buildCode(context)]);
   }
 }
 
@@ -147,17 +118,9 @@ NeumorphicIndicator(
       padding: const EdgeInsets.all(12),
       child: Row(
         children: <Widget>[
-          Text(
-            'Orientation\nHorizontal',
-            style: TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
-          ),
+          Text('Orientation\nHorizontal', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
           const SizedBox(width: 12),
-          const NeumorphicIndicator(
-            width: 150,
-            height: 15,
-            orientation: NeumorphicIndicatorOrientation.horizontal,
-            percent: 0.7,
-          ),
+          const NeumorphicIndicator(width: 150, height: 15, orientation: NeumorphicIndicatorOrientation.horizontal, percent: 0.7),
           const SizedBox(width: 12),
         ],
       ),
@@ -166,13 +129,7 @@ NeumorphicIndicator(
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        _buildWidget(context),
-        _buildCode(context),
-      ],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[_buildWidget(context), _buildCode(context)]);
   }
 }
 
@@ -231,11 +188,7 @@ NeumorphicIndicator(
           const SizedBox(height: 12),
           Row(
             children: <Widget>[
-              Text(
-                'Colorized',
-                style:
-                    TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
-              ),
+              Text('Colorized', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
               const SizedBox(width: 12),
               NeumorphicIndicator(
                 width: 150,
@@ -254,13 +207,7 @@ NeumorphicIndicator(
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        _buildWidget(context),
-        _buildCode(context),
-      ],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[_buildWidget(context), _buildCode(context)]);
   }
 }
 
@@ -288,25 +235,18 @@ NeumorphicIndicator(
       padding: const EdgeInsets.all(12),
       child: Row(
         children: <Widget>[
-          Text(
-            'Duration',
-            style: TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
-          ),
+          Text('Duration', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
           const SizedBox(width: 12),
-          NeumorphicIndicator(
-            height: 100,
-            width: 20,
-            percent: percent,
-            duration: const Duration(seconds: 1),
-          ),
+          NeumorphicIndicator(height: 100, width: 20, percent: percent, duration: const Duration(seconds: 1)),
           const SizedBox(width: 12),
           TextButton(
-              child: const Text('Update'),
-              onPressed: () {
-                setState(() {
-                  percent = Random().nextDouble();
-                });
-              }),
+            child: const Text('Update'),
+            onPressed: () {
+              setState(() {
+                percent = Random().nextDouble();
+              });
+            },
+          ),
         ],
       ),
     );
@@ -314,13 +254,7 @@ NeumorphicIndicator(
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        _buildWidget(context),
-        _buildCode(context),
-      ],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[_buildWidget(context), _buildCode(context)]);
   }
 }
 
@@ -348,24 +282,18 @@ NeumorphicIndicator(
       padding: const EdgeInsets.all(12),
       child: Row(
         children: <Widget>[
-          Text(
-            'Curve',
-            style: TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
-          ),
+          Text('Curve', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
           const SizedBox(width: 12),
-          NeumorphicIndicator(
-              height: 100,
-              width: 20,
-              percent: percent,
-              curve: Curves.bounceOut),
+          NeumorphicIndicator(height: 100, width: 20, percent: percent, curve: Curves.bounceOut),
           const SizedBox(width: 12),
           TextButton(
-              child: const Text('Update'),
-              onPressed: () {
-                setState(() {
-                  percent = Random().nextDouble();
-                });
-              }),
+            child: const Text('Update'),
+            onPressed: () {
+              setState(() {
+                percent = Random().nextDouble();
+              });
+            },
+          ),
         ],
       ),
     );
@@ -373,12 +301,6 @@ NeumorphicIndicator(
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        _buildWidget(context),
-        _buildCode(context),
-      ],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[_buildWidget(context), _buildCode(context)]);
   }
 }

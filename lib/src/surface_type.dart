@@ -2,7 +2,7 @@
 ///
 /// @see https://github.com/gsmlg-app/Flutter-Neumorphic/#-shapes
 ///
-enum NeumorphicShape {
+enum NeumorphicSurfaceType {
   concave,
   convex,
   flat,

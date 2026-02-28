@@ -138,8 +138,7 @@ class NeumorphicRangeSlider extends StatefulWidget {
 
   double get percentLow => (((valueLow.clamp(min, max)) - min) / ((max - min)));
 
-  double get percentHigh =>
-      (((valueHigh.clamp(min, max)) - min) / ((max - min)));
+  double get percentHigh => (((valueHigh.clamp(min, max)) - min) / ((max - min)));
 
   @override
   createState() => _NeumorphicRangeSliderState();
@@ -165,16 +164,15 @@ class _NeumorphicRangeSliderState extends State<NeumorphicRangeSlider> {
     void handleLowThumbDrag(DragUpdateDetails details) {
       final RenderBox renderBox = context.findRenderObject() as RenderBox;
       final localPosition = renderBox.globalToLocal(details.globalPosition);
-      
+
       // Account for thumb center: calculate from left edge of slider
       final sliderStart = thumbSize / 2;
       final sliderEnd = constraints.maxWidth - (thumbSize / 2);
       final availableWidth = sliderEnd - sliderStart;
-      
+
       final adjustedPos = localPosition.dx - sliderStart;
       final newPercent = (adjustedPos / availableWidth).clamp(0.0, 1.0);
-      final newValue = ((widget.min + (widget.max - widget.min) * newPercent))
-          .clamp(widget.min, widget.max);
+      final newValue = ((widget.min + (widget.max - widget.min) * newPercent)).clamp(widget.min, widget.max);
 
       if (newValue <= widget.valueHigh) {
         if (widget.onChangedLow != null) {
@@ -186,16 +184,15 @@ class _NeumorphicRangeSliderState extends State<NeumorphicRangeSlider> {
     void handleHighThumbDrag(DragUpdateDetails details) {
       final RenderBox renderBox = context.findRenderObject() as RenderBox;
       final localPosition = renderBox.globalToLocal(details.globalPosition);
-      
+
       // Account for thumb center: calculate from left edge of slider
       final sliderStart = thumbSize / 2;
       final sliderEnd = constraints.maxWidth - (thumbSize / 2);
       final availableWidth = sliderEnd - sliderStart;
-      
+
       final adjustedPos = localPosition.dx - sliderStart;
       final newPercent = (adjustedPos / availableWidth).clamp(0.0, 1.0);
-      final newValue = ((widget.min + (widget.max - widget.min) * newPercent))
-          .clamp(widget.min, widget.max);
+      final newValue = ((widget.min + (widget.max - widget.min) * newPercent)).clamp(widget.min, widget.max);
 
       if (newValue >= widget.valueLow) {
         if (widget.onChangeHigh != null) {
@@ -229,8 +226,7 @@ class _NeumorphicRangeSliderState extends State<NeumorphicRangeSlider> {
                   widget.onPanEnded!(ActiveThumb.low);
                 }
               },
-              child: widget.thumb ??
-                  _generateThumb(context, thumbSize, widget.style.variant),
+              child: widget.thumb ?? _generateThumb(context, thumbSize, widget.style.variant),
             ),
           ),
         ),
@@ -252,8 +248,7 @@ class _NeumorphicRangeSliderState extends State<NeumorphicRangeSlider> {
                   widget.onPanEnded!(ActiveThumb.high);
                 }
               },
-              child: widget.thumb ??
-                  _generateThumb(context, thumbSize, widget.style.accent),
+              child: widget.thumb ?? _generateThumb(context, thumbSize, widget.style.accent),
             ),
           ),
         ),
@@ -280,19 +275,14 @@ class _NeumorphicRangeSliderState extends State<NeumorphicRangeSlider> {
         child: new LayoutBuilder(
           builder: (context, constraints) {
             return new Padding(
-              padding: new EdgeInsets.only(
-                  left: constraints.biggest.width * widget.percentLow,
-                  right: constraints.biggest.width * (1 - widget.percentHigh)),
+              padding: new EdgeInsets.only(left: constraints.biggest.width * widget.percentLow, right: constraints.biggest.width * (1 - widget.percentHigh)),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: widget.style.borderRadius,
-                  gradient: LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: [
-                        widget.style.variant ?? theme.variantColor,
-                        widget.style.accent ?? theme.accentColor,
-                      ]),
+                  gradient: LinearGradient(begin: Alignment.centerLeft, end: Alignment.centerRight, colors: [
+                    widget.style.variant ?? theme.variantColor,
+                    widget.style.accent ?? theme.accentColor,
+                  ]),
                 ),
               ),
             );
@@ -307,7 +297,7 @@ class _NeumorphicRangeSliderState extends State<NeumorphicRangeSlider> {
     return Neumorphic(
       style: NeumorphicStyle(
         disableDepth: widget.style.disableDepth,
-        shape: NeumorphicShape.concave,
+        shape: NeumorphicSurfaceType.concave,
         color: color ?? theme.accentColor,
         border: widget.style.thumbBorder,
         boxShape: NeumorphicBoxShape.circle(),

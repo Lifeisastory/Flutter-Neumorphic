@@ -1,5 +1,4 @@
-import 'package:flutter_neumorphic_plus/src/widget/animation/animated_scale.dart'
-    as animationScale;
+import 'package:flutter_neumorphic_plus/src/widget/animation/animated_scale.dart' as animationScale;
 
 import '../../flutter_neumorphic.dart';
 
@@ -8,7 +7,7 @@ import '../../flutter_neumorphic.dart';
 /// you can define the track : [activeTrackColor], [inactiveTrackColor], [trackDepth]
 ///
 /// you can define the thumb : [activeTrackColor], [inactiveTrackColor], [thumbDepth]
-/// and [thumbShape] @see [NeumorphicShape]
+/// and [thumbShape] @see [NeumorphicSurfaceType]
 ///
 class NeumorphicSwitchStyle {
   final double? trackDepth;
@@ -16,7 +15,7 @@ class NeumorphicSwitchStyle {
   final Color? inactiveTrackColor;
   final Color? activeThumbColor;
   final Color? inactiveThumbColor;
-  final NeumorphicShape? thumbShape;
+  final NeumorphicSurfaceType? thumbShape;
   final double? thumbDepth;
   final LightSource? lightSource;
   final bool disableDepth;
@@ -26,7 +25,7 @@ class NeumorphicSwitchStyle {
 
   const NeumorphicSwitchStyle({
     this.trackDepth,
-    this.thumbShape = NeumorphicShape.concave,
+    this.thumbShape = NeumorphicSurfaceType.concave,
     this.activeTrackColor,
     this.inactiveTrackColor,
     this.activeThumbColor,
@@ -158,7 +157,7 @@ class NeumorphicSwitch extends StatelessWidget {
               border: this.style.trackBorder,
               disableDepth: this.style.disableDepth,
               depth: _getTrackDepth(theme.depth),
-              shape: NeumorphicShape.flat,
+              shape: NeumorphicSurfaceType.flat,
               color: _getTrackColor(theme, this.isEnabled),
             ),
             child: animationScale.AnimatedScale(
@@ -197,8 +196,8 @@ class NeumorphicSwitch extends StatelessWidget {
       return this.style.thumbDepth ?? neumorphicDefaultTheme.depth;
   }
 
-  NeumorphicShape get _getThumbShape {
-    return this.style.thumbShape ?? NeumorphicShape.flat;
+  NeumorphicSurfaceType get _getThumbShape {
+    return this.style.thumbShape ?? NeumorphicSurfaceType.flat;
   }
 
   double? _getTrackDepth(double? themeDepth) {
@@ -213,15 +212,11 @@ class NeumorphicSwitch extends StatelessWidget {
       return this.style.inactiveTrackColor ?? theme.baseColor;
     }
 
-    return this.value == true
-        ? this.style.activeTrackColor ?? theme.accentColor
-        : this.style.inactiveTrackColor ?? theme.baseColor;
+    return this.value == true ? this.style.activeTrackColor ?? theme.accentColor : this.style.inactiveTrackColor ?? theme.baseColor;
   }
 
   Color _getThumbColor(NeumorphicThemeData theme) {
-    Color? color = this.value == true
-        ? this.style.activeThumbColor
-        : this.style.inactiveThumbColor;
+    Color? color = this.value == true ? this.style.activeThumbColor : this.style.inactiveThumbColor;
     return color ?? theme.baseColor;
   }
 }
@@ -230,7 +225,7 @@ class AnimatedThumb extends StatelessWidget {
   final Color? thumbColor;
   final Alignment alignment;
   final Duration duration;
-  final NeumorphicShape shape;
+  final NeumorphicSurfaceType shape;
   final double? depth;
   final Curve curve;
   final bool disableDepth;

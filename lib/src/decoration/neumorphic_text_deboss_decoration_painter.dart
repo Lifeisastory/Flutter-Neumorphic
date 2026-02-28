@@ -3,7 +3,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
 import '../theme/theme.dart';
-import 'cache/neumorphic_emboss_painter_cache.dart';
+import 'cache/neumorphic_deboss_painter_cache.dart';
 
 /// 凹入
 
@@ -16,7 +16,7 @@ class NeumorphicDebossDecorationTextPainter extends BoxPainter {
   final bool drawShadow;
   final bool drawBackground;
 
-  final NeumorphicEmbossPainterCache _cache = NeumorphicEmbossPainterCache();
+  final NeumorphicDebossPainterCache _cache = NeumorphicDebossPainterCache();
 
   late Paint _borderPaint;
   late Paint _backgroundPaint;

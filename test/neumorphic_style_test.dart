@@ -12,7 +12,7 @@ void main() {
       expect(style.shadowLightColorDeboss, isNull);
       expect(style.shadowDarkColorEmboss, isNull);
       expect(style.shadowDarkColorDeboss, isNull);
-      expect(style.shape, NeumorphicShape.flat);
+      expect(style.shape, NeumorphicSurfaceType.flat);
       expect(style.boxShape, isNull);
       expect(style.border, isNotNull);
       expect(style.lightSource, LightSource.topLeft);
@@ -30,7 +30,7 @@ void main() {
         color: color,
         shadowLightColorEmboss: lightColor,
         shadowDarkColorEmboss: darkColor,
-        shape: NeumorphicShape.convex,
+        shape: NeumorphicSurfaceType.convex,
         lightSource: LightSource.topRight,
         intensity: 0.8,
         surfaceIntensity: 0.5,
@@ -40,7 +40,7 @@ void main() {
       expect(style.color, color);
       expect(style.shadowLightColorEmboss, lightColor);
       expect(style.shadowDarkColorEmboss, darkColor);
-      expect(style.shape, NeumorphicShape.convex);
+      expect(style.shape, NeumorphicSurfaceType.convex);
       expect(style.lightSource, LightSource.topRight);
       expect(style.intensity, 0.8);
       expect(style.surfaceIntensity, 0.5);
@@ -50,36 +50,36 @@ void main() {
       const original = NeumorphicStyle(
         depth: 5.0,
         color: Color(0xFF000000),
-        shape: NeumorphicShape.flat,
+        shape: NeumorphicSurfaceType.flat,
       );
       
       final copied = original.copyWith(
         depth: 10.0,
-        shape: NeumorphicShape.concave,
+        shape: NeumorphicSurfaceType.concave,
       );
       
       expect(copied.depth, 10.0);
       expect(copied.color, const Color(0xFF000000));
-      expect(copied.shape, NeumorphicShape.concave);
+      expect(copied.shape, NeumorphicSurfaceType.concave);
     });
 
     test('equality works correctly', () {
       const style1 = NeumorphicStyle(
         depth: 5.0,
         color: Color(0xFF000000),
-        shape: NeumorphicShape.convex,
+        shape: NeumorphicSurfaceType.convex,
       );
       
       const style2 = NeumorphicStyle(
         depth: 5.0,
         color: Color(0xFF000000),
-        shape: NeumorphicShape.convex,
+        shape: NeumorphicSurfaceType.convex,
       );
       
       const style3 = NeumorphicStyle(
         depth: 10.0,
         color: Color(0xFF000000),
-        shape: NeumorphicShape.convex,
+        shape: NeumorphicSurfaceType.convex,
       );
       
       expect(style1, style2);

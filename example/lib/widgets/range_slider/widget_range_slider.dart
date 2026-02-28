@@ -16,12 +16,7 @@ class _RangeWidgetPageState extends State<RangeSliderWidgetPage> {
   Widget build(BuildContext context) {
     return NeumorphicTheme(
       themeMode: ThemeMode.light,
-      theme: const NeumorphicThemeData(
-        lightSource: LightSource.topLeft,
-        accentColor: NeumorphicColors.accent,
-        depth: 4,
-        intensity: 0.5,
-      ),
+      theme: const NeumorphicThemeData(lightSource: LightSource.topLeft, accentColor: NeumorphicColors.accent, depth: 4, intensity: 0.5),
       child: _Page(),
     );
   }
@@ -38,23 +33,14 @@ class _PageState extends State<_Page> {
     return NeumorphicBackground(
       padding: const EdgeInsets.all(8),
       child: Scaffold(
-        appBar: const TopBar(
-          title: 'Range Slider',
-          actions: <Widget>[
-            ThemeConfigurator(),
-          ],
-        ),
+        appBar: const TopBar(title: 'Range Slider', actions: <Widget>[ThemeConfigurator()]),
         backgroundColor: Colors.transparent,
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
-            children: [
-              _DefaultWidget(),
-              _ColorWidget(),
-              const SizedBox(height: 30),
-            ],
+            children: [_DefaultWidget(), _ColorWidget(), const SizedBox(height: 30)],
           ),
         ),
       ),
@@ -102,10 +88,7 @@ class _DefaultWidgetState extends State<_DefaultWidget> {
       padding: const EdgeInsets.all(12),
       child: Row(
         children: <Widget>[
-          Text(
-            'Default',
-            style: TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
-          ),
+          Text('Default', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
           const SizedBox(width: 12),
           Expanded(
             child: NeumorphicRangeSlider(
@@ -126,10 +109,7 @@ class _DefaultWidgetState extends State<_DefaultWidget> {
             ),
           ),
           const SizedBox(width: 12),
-          Text(
-            '${lowVal.round()} - ${highVal.round()}',
-            style: TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
-          ),
+          Text('${lowVal.round()} - ${highVal.round()}', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
         ],
       ),
     );
@@ -137,13 +117,7 @@ class _DefaultWidgetState extends State<_DefaultWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        _buildWidget(context),
-        _buildCode(context),
-      ],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[_buildWidget(context), _buildCode(context)]);
   }
 }
 
@@ -221,18 +195,11 @@ double highVal = 80;
           const SizedBox(height: 12),
           Row(
             children: <Widget>[
-              Text(
-                'Default',
-                style:
-                    TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
-              ),
+              Text('Default', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
               const SizedBox(width: 12),
               Expanded(
                 child: NeumorphicRangeSlider(
-                  style: RangeSliderStyle(
-                    accent: accent,
-                    variant: variant,
-                  ),
+                  style: RangeSliderStyle(accent: accent, variant: variant),
                   valueLow: lowVal,
                   valueHigh: highVal,
                   min: 18,
@@ -250,11 +217,7 @@ double highVal = 80;
                 ),
               ),
               const SizedBox(width: 12),
-              Text(
-                '${lowVal.round()} - ${highVal.round()}',
-                style:
-                    TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
-              ),
+              Text('${lowVal.round()} - ${highVal.round()}', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
             ],
           ),
         ],
@@ -264,12 +227,6 @@ double highVal = 80;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        _buildWidget(context),
-        _buildCode(context),
-      ],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[_buildWidget(context), _buildCode(context)]);
   }
 }

@@ -13,17 +13,9 @@ class _CalculatorSampleState extends State<CalculatorSample> {
   @override
   Widget build(BuildContext context) {
     return NeumorphicTheme(
-      theme: const NeumorphicThemeData(
-        baseColor: Color(0xFFF4F5F5),
-        intensity: 0.3,
-        lightSource: LightSource.topLeft,
-        variantColor: Colors.red,
-        depth: 4,
-      ),
+      theme: const NeumorphicThemeData(baseColor: Color(0xFFF4F5F5), intensity: 0.3, lightSource: LightSource.topLeft, variantColor: Colors.red, depth: 4),
       child: Scaffold(
-        body: SafeArea(
-          child: NeumorphicBackground(child: _PageContent()),
-        ),
+        body: SafeArea(child: NeumorphicBackground(child: _PageContent())),
       ),
     );
   }
@@ -40,12 +32,7 @@ class CalcButton {
   final bool textVariant;
   final bool backgroundAccent;
 
-  CalcButton(
-    this.label, {
-    this.textAccent = false,
-    this.backgroundAccent = false,
-    this.textVariant = false,
-  });
+  CalcButton(this.label, {this.textAccent = false, this.backgroundAccent = false, this.textVariant = false});
 }
 
 class WidgetCalcButton extends StatelessWidget {
@@ -66,9 +53,7 @@ class WidgetCalcButton extends StatelessWidget {
   }
 
   Color? _backgroundColor(BuildContext context) {
-    return button.backgroundAccent
-        ? NeumorphicTheme.accentColor(context)
-        : null;
+    return button.backgroundAccent ? NeumorphicTheme.accentColor(context) : null;
   }
 
   @override
@@ -80,14 +65,11 @@ class WidgetCalcButton extends StatelessWidget {
         style: NeumorphicStyle(
           surfaceIntensity: 0.15,
           boxShape: const NeumorphicBoxShape.circle(),
-          shape: NeumorphicShape.concave,
+          shape: NeumorphicSurfaceType.concave,
           color: _backgroundColor(context),
         ),
         child: Center(
-          child: Text(
-            button.label,
-            style: TextStyle(fontSize: 24, color: _textColor(context)),
-          ),
+          child: Text(button.label, style: TextStyle(fontSize: 24, color: _textColor(context))),
         ),
       ),
     );
@@ -98,10 +80,7 @@ class _TopScreenWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Neumorphic(
-      style: NeumorphicStyle(
-        boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
-        depth: -1 * NeumorphicTheme.of(context)!.current!.depth,
-      ),
+      style: NeumorphicStyle(boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)), depth: -1 * NeumorphicTheme.of(context)!.current!.depth),
       child: const FractionallySizedBox(
         widthFactor: 1,
         child: Padding(
@@ -111,10 +90,7 @@ class _TopScreenWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              Text(
-                '3 x 7 =',
-                style: TextStyle(fontSize: 30, color: _calcTextColor),
-              ),
+              Text('3 x 7 =', style: TextStyle(fontSize: 30, color: _calcTextColor)),
               Text('21', style: TextStyle(fontSize: 56, color: _calcTextColor)),
             ],
           ),
@@ -166,23 +142,14 @@ class __PageContentState extends State<_PageContent> {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                style: const NeumorphicStyle(
-                  shape: NeumorphicShape.flat,
-                  boxShape: NeumorphicBoxShape.circle(),
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.all(12.0),
-                  child: Icon(Icons.navigate_before),
-                ),
+                style: const NeumorphicStyle(shape: NeumorphicSurfaceType.flat, boxShape: NeumorphicBoxShape.circle()),
+                child: const Padding(padding: EdgeInsets.all(12.0), child: Icon(Icons.navigate_before)),
               ),
             ),
           ),
           Expanded(
             flex: 1,
-            child: Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: _TopScreenWidget(),
-            ),
+            child: Padding(padding: const EdgeInsets.all(18.0), child: _TopScreenWidget()),
           ),
           Expanded(
             flex: 2,
@@ -202,35 +169,21 @@ class __PageContentState extends State<_PageContent> {
               ElevatedButton(
                 onPressed: () {
                   setState(() {
-                    NeumorphicTheme.of(context)!
-                        .updateCurrentTheme(const NeumorphicThemeData(
-                      depth: 1,
-                      intensity: 0.5,
-                      accentColor: Colors.cyan,
-                    ));
+                    NeumorphicTheme.of(context)!.updateCurrentTheme(const NeumorphicThemeData(depth: 1, intensity: 0.5, accentColor: Colors.cyan));
                   });
                 },
-                child: const Text(
-                  'style 1',
-                ),
+                child: const Text('style 1'),
               ),
               ElevatedButton(
                 onPressed: () {
                   setState(() {
-                    NeumorphicTheme.of(context)!
-                        .updateCurrentTheme(const NeumorphicThemeData(
-                      depth: 8,
-                      intensity: 0.3,
-                      accentColor: Colors.greenAccent,
-                    ));
+                    NeumorphicTheme.of(context)!.updateCurrentTheme(const NeumorphicThemeData(depth: 8, intensity: 0.3, accentColor: Colors.greenAccent));
                   });
                 },
-                child: const Text(
-                  'style 2',
-                ),
+                child: const Text('style 2'),
               ),
             ],
-          )
+          ),
         ],
       ),
     );

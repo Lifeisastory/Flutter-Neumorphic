@@ -15,12 +15,7 @@ class _WidgetPageState extends State<RadioButtonWidgetPage> {
   Widget build(BuildContext context) {
     return NeumorphicTheme(
       themeMode: ThemeMode.light,
-      theme: const NeumorphicThemeData(
-        lightSource: LightSource.topLeft,
-        accentColor: NeumorphicColors.accent,
-        depth: 4,
-        intensity: 0.5,
-      ),
+      theme: const NeumorphicThemeData(lightSource: LightSource.topLeft, accentColor: NeumorphicColors.accent, depth: 4, intensity: 0.5),
       child: _Page(),
     );
   }
@@ -37,24 +32,14 @@ class _PageState extends State<_Page> {
     return NeumorphicBackground(
       padding: const EdgeInsets.all(8),
       child: Scaffold(
-        appBar: const TopBar(
-          title: 'Radios',
-          actions: <Widget>[
-            ThemeConfigurator(),
-          ],
-        ),
+        appBar: const TopBar(title: 'Radios', actions: <Widget>[ThemeConfigurator()]),
         backgroundColor: Colors.transparent,
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
-            children: [
-              _DefaultWidget(),
-              const CircleRadios(),
-              _EnabledDisabledWidget(),
-              const SizedBox(height: 30),
-            ],
+            children: [_DefaultWidget(), const CircleRadios(), _EnabledDisabledWidget(), const SizedBox(height: 30)],
           ),
         ),
       ),
@@ -92,10 +77,7 @@ NeumorphicRadio(
       padding: const EdgeInsets.all(12),
       child: Row(
         children: <Widget>[
-          Text(
-            'Default',
-            style: TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
-          ),
+          Text('Default', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
           const SizedBox(width: 12),
           NeumorphicRadio(
             //uncomment to test colors
@@ -144,13 +126,7 @@ NeumorphicRadio(
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        _buildWidget(context),
-        _buildCode(context),
-      ],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[_buildWidget(context), _buildCode(context)]);
   }
 }
 
@@ -187,15 +163,10 @@ NeumorphicRadio(
       padding: const EdgeInsets.all(12),
       child: Row(
         children: <Widget>[
-          Text(
-            'Circle',
-            style: TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
-          ),
+          Text('Circle', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
           const SizedBox(width: 12),
           NeumorphicRadio(
-            style: const NeumorphicRadioStyle(
-              boxShape: NeumorphicBoxShape.circle(),
-            ),
+            style: const NeumorphicRadioStyle(boxShape: NeumorphicBoxShape.circle()),
             groupValue: groupValue,
             value: 'A',
             onChanged: (value) {
@@ -209,9 +180,7 @@ NeumorphicRadio(
           const SizedBox(width: 12),
           NeumorphicRadio(
             value: 'B',
-            style: const NeumorphicRadioStyle(
-              boxShape: NeumorphicBoxShape.circle(),
-            ),
+            style: const NeumorphicRadioStyle(boxShape: NeumorphicBoxShape.circle()),
             groupValue: groupValue,
             onChanged: (value) {
               setState(() {
@@ -223,9 +192,7 @@ NeumorphicRadio(
           ),
           const SizedBox(width: 12),
           NeumorphicRadio(
-            style: const NeumorphicRadioStyle(
-              boxShape: NeumorphicBoxShape.circle(),
-            ),
+            style: const NeumorphicRadioStyle(boxShape: NeumorphicBoxShape.circle()),
             groupValue: groupValue,
             value: 'C',
             onChanged: (value) {
@@ -243,13 +210,7 @@ NeumorphicRadio(
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        _buildWidget(context),
-        _buildCode(context),
-      ],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[_buildWidget(context), _buildCode(context)]);
   }
 }
 
@@ -266,10 +227,7 @@ class _EnabledDisabledWidgetState extends State<_EnabledDisabledWidget> {
       padding: const EdgeInsets.all(12),
       child: Row(
         children: <Widget>[
-          Text(
-            'Enabled :',
-            style: TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
-          ),
+          Text('Enabled :', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
           const SizedBox(width: 12),
           NeumorphicRadio(
             groupValue: groupValue,
@@ -283,10 +241,7 @@ class _EnabledDisabledWidgetState extends State<_EnabledDisabledWidget> {
             },
           ),
           const SizedBox(width: 24),
-          Text(
-            'Disabled :',
-            style: TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
-          ),
+          Text('Disabled :', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
           const SizedBox(width: 12),
           NeumorphicRadio(
             isEnabled: false,
@@ -325,12 +280,6 @@ NeumorphicRadio(
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        _buildWidget(context),
-        _buildCode(context),
-      ],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[_buildWidget(context), _buildCode(context)]);
   }
 }

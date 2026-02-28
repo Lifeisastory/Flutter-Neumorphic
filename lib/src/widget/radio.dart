@@ -16,7 +16,7 @@ typedef void NeumorphicRadioListener<T>(T value);
 ///   @see [NeumorphicBoxShape]
 ///
 /// [shape] : a customizable neumorphic shape for this widget
-///   @see [NeumorphicShape] (concave, convex, flat)
+///   @see [NeumorphicSurfaceType] (concave, convex, flat)
 ///
 class NeumorphicRadioStyle {
   final double? selectedDepth;
@@ -27,7 +27,7 @@ class NeumorphicRadioStyle {
   final Color? unselectedColor; //null for unchanged color
 
   final double? intensity;
-  final NeumorphicShape? shape;
+  final NeumorphicSurfaceType? shape;
 
   final NeumorphicBorder border;
   final NeumorphicBoxShape? boxShape;
@@ -191,10 +191,8 @@ class NeumorphicRadio<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     final NeumorphicThemeData theme = NeumorphicTheme.currentTheme(context);
 
-    final double selectedDepth =
-        -1 * (this.style.selectedDepth ?? theme.depth).abs();
-    final double unselectedDepth =
-        (this.style.unselectedDepth ?? theme.depth).abs();
+    final double selectedDepth = -1 * (this.style.selectedDepth ?? theme.depth).abs();
+    final double unselectedDepth = (this.style.unselectedDepth ?? theme.depth).abs();
 
     double depth = isSelected ? selectedDepth : unselectedDepth;
     if (!this.isEnabled) {
@@ -224,7 +222,7 @@ class NeumorphicRadio<T> extends StatelessWidget {
         disableDepth: this.style.disableDepth,
         intensity: this.style.intensity,
         depth: depth,
-        shape: this.style.shape ?? NeumorphicShape.flat,
+        shape: this.style.shape ?? NeumorphicSurfaceType.flat,
       ),
     );
   }

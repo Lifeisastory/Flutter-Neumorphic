@@ -120,10 +120,5 @@ class NeumorphicDecoration extends Decoration {
           renderingByPath == other.renderingByPath;
 
   @override
-  int get hashCode =>
-      style.hashCode ^
-      shape.hashCode ^
-      splitBackgroundForeground.hashCode ^
-      isForeground.hashCode ^
-      renderingByPath.hashCode;
+  int get hashCode => style.hashCode ^ shape.hashCode ^ splitBackgroundForeground.hashCode ^ isForeground.hashCode ^ renderingByPath.hashCode;
 }

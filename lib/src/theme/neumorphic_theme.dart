@@ -43,21 +43,15 @@ class NeumorphicTheme extends StatefulWidget {
   final Widget child;
   final ThemeMode themeMode;
 
-  NeumorphicTheme({
-    Key? key,
-    required this.child,
-    this.theme = neumorphicDefaultTheme,
-    this.darkTheme = neumorphicDefaultDarkTheme,
-    this.themeMode = ThemeMode.system,
-  });
+  NeumorphicTheme(
+      {Key? key, required this.child, this.theme = neumorphicDefaultTheme, this.darkTheme = neumorphicDefaultDarkTheme, this.themeMode = ThemeMode.system});
 
   @override
   _NeumorphicThemeState createState() => _NeumorphicThemeState();
 
   static NeumorphicThemeInherited? of(BuildContext context) {
     try {
-      return context
-          .dependOnInheritedWidgetOfExactType<NeumorphicThemeInherited>();
+      return context.dependOnInheritedWidgetOfExactType<NeumorphicThemeInherited>();
     } catch (t) {
       return null;
     }
@@ -95,11 +89,11 @@ class NeumorphicTheme extends StatefulWidget {
     return currentTheme(context).intensity;
   }
 
-  static double? depth(BuildContext context) {
+  static double? embossDepth(BuildContext context) {
     return currentTheme(context).depth;
   }
 
-  static double? embossDepth(BuildContext context) {
+  static double? debossDepth(BuildContext context) {
     // if (currentTheme(context).depth == null) return null;
     return -currentTheme(context).depth.abs();
   }
@@ -111,25 +105,16 @@ class NeumorphicTheme extends StatefulWidget {
   static NeumorphicThemeData currentTheme(BuildContext context) {
     final provider = NeumorphicTheme.of(context);
     if (provider == null) return neumorphicDefaultTheme;
-    return provider.current == null
-        ? neumorphicDefaultTheme
-        : provider.current!;
+    return provider.current == null ? neumorphicDefaultTheme : provider.current!;
   }
 }
 
-double applyThemeDepthEnable(
-    {required BuildContext context,
-    required bool styleEnableDepth,
-    required double depth}) {
+double applyThemeDepthEnable({required BuildContext context, required bool styleEnableDepth, required double depth}) {
   final NeumorphicThemeData theme = NeumorphicTheme.currentTheme(context);
-  return wrapDepthWithThemeData(
-      themeData: theme, styleEnableDepth: styleEnableDepth, depth: depth);
+  return wrapDepthWithThemeData(themeData: theme, styleEnableDepth: styleEnableDepth, depth: depth);
 }
 
-double wrapDepthWithThemeData(
-    {required NeumorphicThemeData themeData,
-    required bool styleEnableDepth,
-    required double depth}) {
+double wrapDepthWithThemeData({required NeumorphicThemeData themeData, required bool styleEnableDepth, required double depth}) {
   if (themeData.disableDepth) {
     return 0;
   } else {

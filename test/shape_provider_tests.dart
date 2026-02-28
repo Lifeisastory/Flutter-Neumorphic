@@ -1,11 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
-import 'package:flutter_neumorphic_plus/src/shape/circle_path_provider.dart';
-import 'package:flutter_neumorphic_plus/src/shape/rect_path_provider.dart';
-import 'package:flutter_neumorphic_plus/src/shape/rrect_path_provider.dart';
-import 'package:flutter_neumorphic_plus/src/shape/stadium_path_provider.dart';
-import 'package:flutter_neumorphic_plus/src/shape/beveled_path_provider.dart';
+import 'package:flutter_neumorphic_plus/src/clip_path/circle_path_provider.dart';
+import 'package:flutter_neumorphic_plus/src/clip_path/rect_path_provider.dart';
+import 'package:flutter_neumorphic_plus/src/clip_path/rrect_path_provider.dart';
+import 'package:flutter_neumorphic_plus/src/clip_path/stadium_path_provider.dart';
+import 'package:flutter_neumorphic_plus/src/clip_path/beveled_path_provider.dart';
 
 void main() {
   group('NeumorphicBoxShape', () {
@@ -33,7 +33,7 @@ void main() {
       expect(stadium.isCircle, isFalse);
     });
 
-    test('path creates correctly', () {
+    test('custom_path creates correctly', () {
       const provider = CirclePathProvider();
       final path = NeumorphicBoxShape.path(provider);
       
@@ -52,7 +52,7 @@ void main() {
   });
 
   group('Path Providers', () {
-    test('CirclePathProvider creates correct path', () {
+    test('CirclePathProvider creates correct custom_path', () {
       const provider = CirclePathProvider();
       final size = Size(100, 100);
       
@@ -62,7 +62,7 @@ void main() {
       expect(path.getBounds(), Rect.fromLTWH(0, 0, 100, 100));
     });
 
-    test('RectPathProvider creates correct path', () {
+    test('RectPathProvider creates correct custom_path', () {
       const provider = RectPathProvider();
       final size = Size(100, 100);
       
@@ -72,7 +72,7 @@ void main() {
       expect(path.getBounds(), Rect.fromLTWH(0, 0, 100, 100));
     });
 
-    test('RRectPathProvider creates correct path', () {
+    test('RRectPathProvider creates correct custom_path', () {
       const provider = RRectPathProvider(BorderRadius.zero);
       final rect = Rect.fromLTWH(0, 0, 100, 100);
       
@@ -82,7 +82,7 @@ void main() {
       expect(path.getBounds(), rect);
     });
 
-    test('StadiumPathProvider creates correct path', () {
+    test('StadiumPathProvider creates correct custom_path', () {
       const provider = StadiumPathProvider();
       final size = Size(100, 50);
       
@@ -92,7 +92,7 @@ void main() {
       expect(path.getBounds(), Rect.fromLTWH(0, 0, 100, 50));
     });
 
-    test('BeveledPathProvider creates correct path', () {
+    test('BeveledPathProvider creates correct custom_path', () {
       const provider = BeveledPathProvider(BorderRadius.zero);
       final rect = Rect.fromLTWH(0, 0, 100, 100);
       

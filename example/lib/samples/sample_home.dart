@@ -16,16 +16,8 @@ class SamplesHome extends StatelessWidget {
   Widget _buildButton({String? text, VoidCallback? onClick}) {
     return NeumorphicButton(
       margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.symmetric(
-        vertical: 18,
-        horizontal: 24,
-      ),
-      style: NeumorphicStyle(
-        shape: NeumorphicShape.flat,
-        boxShape: NeumorphicBoxShape.roundRect(
-          BorderRadius.circular(12),
-        ),
-      ),
+      padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 24),
+      style: NeumorphicStyle(shape: NeumorphicSurfaceType.flat, boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12))),
       onPressed: onClick,
       child: Center(child: Text(text ?? '')),
     );
@@ -49,69 +41,101 @@ class SamplesHome extends StatelessWidget {
                 children: [
                   const TopBar(),
                   _buildButton(
-                      text: 'Tesla',
-                      onClick: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return const TeslaSample();
-                        }));
-                      }),
+                    text: 'Tesla',
+                    onClick: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const TeslaSample();
+                          },
+                        ),
+                      );
+                    },
+                  ),
                   _buildButton(
-                      text: 'Audio Player',
-                      onClick: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return const AudioPlayerSample();
-                        }));
-                      }),
+                    text: 'Audio Player',
+                    onClick: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const AudioPlayerSample();
+                          },
+                        ),
+                      );
+                    },
+                  ),
                   _buildButton(
-                      text: 'Clock',
-                      onClick: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return const ClockSample();
-                        }));
-                      }),
+                    text: 'Clock',
+                    onClick: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const ClockSample();
+                          },
+                        ),
+                      );
+                    },
+                  ),
                   _buildButton(
-                      text: 'Galaxy',
-                      onClick: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return const GalaxySample();
-                        }));
-                      }),
+                    text: 'Galaxy',
+                    onClick: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const GalaxySample();
+                          },
+                        ),
+                      );
+                    },
+                  ),
                   _buildButton(
-                      text: 'Calculator',
-                      onClick: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return const CalculatorSample();
-                        }));
-                      }),
+                    text: 'Calculator',
+                    onClick: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const CalculatorSample();
+                          },
+                        ),
+                      );
+                    },
+                  ),
                   _buildButton(
-                      text: 'Form',
-                      onClick: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return const FormSample();
-                        }));
-                      }),
+                    text: 'Form',
+                    onClick: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const FormSample();
+                          },
+                        ),
+                      );
+                    },
+                  ),
                   _buildButton(
-                      text: 'CreditCard',
-                      onClick: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return const CreditCardSample();
-                        }));
-                      }),
+                    text: 'CreditCard',
+                    onClick: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const CreditCardSample();
+                          },
+                        ),
+                      );
+                    },
+                  ),
                   _buildButton(
-                      text: 'Widgets',
-                      onClick: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return const WidgetsSample();
-                        }));
-                      }),
+                    text: 'Widgets',
+                    onClick: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const WidgetsSample();
+                          },
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
