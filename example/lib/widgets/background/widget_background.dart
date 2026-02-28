@@ -1,7 +1,7 @@
 import 'package:example/lib/Code.dart';
 import 'package:example/lib/ThemeConfigurator.dart';
 import 'package:example/lib/top_bar.dart';
-import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
+import 'package:my_neumorphic/flutter_neumorphic.dart';
 
 class BackgroundWidgetPage extends StatefulWidget {
   const BackgroundWidgetPage({Key? key}) : super(key: key);

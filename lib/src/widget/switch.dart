@@ -1,4 +1,4 @@
-import 'package:flutter_neumorphic_plus/src/widget/animation/animated_scale.dart' as animationScale;
+import 'package:my_neumorphic/src/widget/animation/animated_scale.dart' as animationScale;
 
 import '../../flutter_neumorphic.dart';
 

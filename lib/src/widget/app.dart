@@ -1,4 +1,4 @@
-import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
+import 'package:my_neumorphic/flutter_neumorphic.dart';
 
 class NeumorphicApp extends StatelessWidget {
   final String title;

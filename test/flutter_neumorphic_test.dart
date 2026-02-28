@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
+import 'package:my_neumorphic/flutter_neumorphic.dart';
 
 void main() {
   testWidgets('NeumorphicApp builds without error', (WidgetTester tester) async {

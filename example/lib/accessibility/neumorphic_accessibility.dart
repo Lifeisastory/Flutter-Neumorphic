@@ -1,5 +1,5 @@
 import 'package:example/lib/color_selector.dart';
-import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
+import 'package:my_neumorphic/flutter_neumorphic.dart';
 
 class NeumorphicAccessibility extends StatefulWidget {
   const NeumorphicAccessibility({super.key});
