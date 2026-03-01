@@ -6,9 +6,9 @@ import 'theme.dart';
 
 export 'theme.dart';
 
-/// A immutable contained by the NeumorhicTheme
+/// A immutable contained by the NeumorphicTheme
 /// That will save the current definition of the theme
-/// It will be accessible to the childs widgets by an InheritedWidget
+/// It will be accessible to the children widgets by an InheritedWidget
 class ThemeWrapper {
   final NeumorphicThemeData theme;
   final NeumorphicThemeData? darkTheme;

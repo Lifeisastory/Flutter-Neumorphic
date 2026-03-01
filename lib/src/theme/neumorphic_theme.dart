@@ -38,13 +38,37 @@ export 'theme_wrapper.dart';
 ///   )
 ///
 class NeumorphicTheme extends StatefulWidget {
+  // Global fallback for apps that do not mount NeumorphicTheme/NeumorphicApp.
+  static NeumorphicThemeData _globalTheme = neumorphicDefaultTheme;
+  static NeumorphicThemeData _globalDarkTheme = neumorphicDefaultDarkTheme;
+  static bool _syncWithMaterialBrightness = false;
+
+  /// Initialize global fallback theme behavior.
+  ///
+  /// Use this at app startup when you don't want to wrap the app with
+  /// [NeumorphicApp]/[NeumorphicTheme].
+  ///
+  /// If [syncWithMaterialBrightness] is true, Neumorphic widgets will follow
+  /// `Theme.of(context).brightness`, which already reflects MaterialApp's
+  /// `themeMode` resolution.
+  static void initialize({NeumorphicThemeData? theme, NeumorphicThemeData? darkTheme, bool syncWithMaterialBrightness = false}) {
+    _globalTheme = theme ?? _globalTheme;
+    _globalDarkTheme = darkTheme ?? _globalDarkTheme;
+    _syncWithMaterialBrightness = syncWithMaterialBrightness;
+  }
+
   final NeumorphicThemeData theme;
   final NeumorphicThemeData darkTheme;
   final Widget child;
   final ThemeMode themeMode;
 
-  NeumorphicTheme(
-      {Key? key, required this.child, this.theme = neumorphicDefaultTheme, this.darkTheme = neumorphicDefaultDarkTheme, this.themeMode = ThemeMode.system});
+  NeumorphicTheme({
+    Key? key,
+    required this.child,
+    this.theme = neumorphicDefaultTheme,
+    this.darkTheme = neumorphicDefaultDarkTheme,
+    this.themeMode = ThemeMode.system,
+  });
 
   @override
   _NeumorphicThemeState createState() => _NeumorphicThemeState();
@@ -65,7 +89,10 @@ class NeumorphicTheme extends StatefulWidget {
 
   static bool isUsingDark(BuildContext context) {
     final theme = of(context);
-    if (theme == null) return false;
+    if (theme == null) {
+      if (!_syncWithMaterialBrightness) return false;
+      return _tryGetMaterialBrightness(context) == Brightness.dark;
+    }
     return theme.isUsingDark;
   }
 
@@ -104,8 +131,22 @@ class NeumorphicTheme extends StatefulWidget {
 
   static NeumorphicThemeData currentTheme(BuildContext context) {
     final provider = NeumorphicTheme.of(context);
-    if (provider == null) return neumorphicDefaultTheme;
-    return provider.current == null ? neumorphicDefaultTheme : provider.current!;
+    if (provider != null) {
+      return provider.current ?? neumorphicDefaultTheme;
+    }
+
+    if (_syncWithMaterialBrightness && _tryGetMaterialBrightness(context) == Brightness.dark) {
+      return _globalDarkTheme;
+    }
+    return _globalTheme;
+  }
+
+  static Brightness? _tryGetMaterialBrightness(BuildContext context) {
+    try {
+      return Theme.of(context).brightness;
+    } catch (_) {
+      return null;
+    }
   }
 }
 
@@ -128,22 +169,14 @@ class _NeumorphicThemeState extends State<NeumorphicTheme> {
   @override
   void initState() {
     super.initState();
-    _themeHost = ThemeWrapper(
-      theme: widget.theme,
-      themeMode: widget.themeMode,
-      darkTheme: widget.darkTheme,
-    );
+    _themeHost = ThemeWrapper(theme: widget.theme, themeMode: widget.themeMode, darkTheme: widget.darkTheme);
   }
 
   @override
   void didUpdateWidget(NeumorphicTheme oldWidget) {
     super.didUpdateWidget(oldWidget);
     setState(() {
-      _themeHost = ThemeWrapper(
-        theme: widget.theme,
-        themeMode: widget.themeMode,
-        darkTheme: widget.darkTheme,
-      );
+      _themeHost = ThemeWrapper(theme: widget.theme, themeMode: widget.themeMode, darkTheme: widget.darkTheme);
     });
   }
 
