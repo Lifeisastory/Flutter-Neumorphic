@@ -132,7 +132,7 @@ Expanded(
                   ),
                 ),
               ],
-              thumb: Neumorphic(style: NeumorphicStyle(boxShape: NeumorphicBoxShape.roundRect(const BorderRadius.all(Radius.circular(12))))),
+              thumb: NeumorphicContainer(style: NeumorphicStyle(boxShape: NeumorphicBoxShape.roundRect(const BorderRadius.all(Radius.circular(12))))),
               onChanged: (value) {
                 setState(() {
                   _selectedIndex = value;
@@ -212,7 +212,7 @@ NeumorphicToggle(
               ),
               ToggleElement(),
             ],
-            thumb: Neumorphic(
+            thumb: NeumorphicContainer(
               style: NeumorphicStyle(boxShape: NeumorphicBoxShape.roundRect(const BorderRadius.all(Radius.circular(12)))),
               child: const Icon(Icons.blur_on, color: Colors.grey),
             ),

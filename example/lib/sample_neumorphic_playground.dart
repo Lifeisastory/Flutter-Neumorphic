@@ -129,7 +129,7 @@ class __PageState extends State<_Page> {
   }
 
   Widget neumorphicChild() {
-    return Neumorphic(
+    return NeumorphicContainer(
       padding: EdgeInsets.zero,
       duration: const Duration(milliseconds: 300),
       margin: EdgeInsets.all(childMargin),
@@ -153,8 +153,8 @@ class __PageState extends State<_Page> {
         const Padding(padding: EdgeInsets.only(left: 12), child: Text('Depth')),
         Expanded(
           child: Slider(
-            min: Neumorphic.MIN_DEPTH,
-            max: Neumorphic.MAX_DEPTH,
+            min: NeumorphicContainer.MIN_DEPTH,
+            max: NeumorphicContainer.MAX_DEPTH,
             value: depth,
             onChanged: (value) {
               setState(() {
@@ -174,8 +174,8 @@ class __PageState extends State<_Page> {
         const Padding(padding: EdgeInsets.only(left: 12), child: Text('Intensity')),
         Expanded(
           child: Slider(
-            min: Neumorphic.MIN_INTENSITY, //in case of != 0
-            max: Neumorphic.MAX_INTENSITY,
+            min: NeumorphicContainer.MIN_INTENSITY, //in case of != 0
+            max: NeumorphicContainer.MAX_INTENSITY,
             value: intensity,
             onChanged: (value) {
               setState(() {
@@ -195,8 +195,8 @@ class __PageState extends State<_Page> {
         const Padding(padding: EdgeInsets.only(left: 12), child: Text('SurfaceIntensity')),
         Expanded(
           child: Slider(
-            min: Neumorphic.MIN_INTENSITY, //in case of != 0
-            max: Neumorphic.MAX_INTENSITY,
+            min: NeumorphicContainer.MIN_INTENSITY, //in case of != 0
+            max: NeumorphicContainer.MAX_INTENSITY,
             value: surfaceIntensity,
             onChanged: (value) {
               setState(() {

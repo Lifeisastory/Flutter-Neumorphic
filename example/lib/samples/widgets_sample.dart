@@ -292,7 +292,7 @@ class _ContainersListPageState extends State<WidgetsSample> {
                 children: [
                   Stack(
                     children: <Widget>[
-                      Neumorphic(
+                      NeumorphicContainer(
                         style: const NeumorphicStyle(depth: -8),
                         child: AppBar(
                           iconTheme: const IconThemeData.fallback(),

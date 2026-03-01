@@ -96,8 +96,8 @@ class NeumorphicEmbossDecorationPainter extends BoxPainter {
     if (style.depth != null) {
       invalidateDepth = this._cache.updateStyleDepth(style.depth!, 3);
       if (invalidateDepth) {
-        _blackShadowPaint..maskFilter = _cache.maskFilterBlur;
-        _whiteShadowPaint..maskFilter = _cache.maskFilterBlur;
+        _blackShadowPaint..maskFilter = _cache.maskFilter;
+        _whiteShadowPaint..maskFilter = _cache.maskFilter;
       }
     }
 
@@ -130,7 +130,7 @@ class NeumorphicEmbossDecorationPainter extends BoxPainter {
   void _drawShadow({required Canvas canvas, required Offset offset, required Path path}) {
     if (style.depth != null && style.depth!.abs() >= 0.1) {
       canvas
-        ..saveLayer(_cache.layerRect, _whiteShadowPaint)
+        ..saveLayer(_cache.layerRect, Paint())
         ..translate(offset.dx + _cache.depthOffset.dx, offset.dy + _cache.depthOffset.dy)
         ..drawPath(path, _whiteShadowPaint)
         ..translate(-_cache.depthOffset.dx, -_cache.depthOffset.dy)
@@ -138,7 +138,7 @@ class NeumorphicEmbossDecorationPainter extends BoxPainter {
         ..restore();
 
       canvas
-        ..saveLayer(_cache.layerRect, _blackShadowPaint)
+        ..saveLayer(_cache.layerRect, Paint())
         ..translate(offset.dx - _cache.depthOffset.dx, offset.dy - _cache.depthOffset.dy)
         ..drawPath(path, _blackShadowPaint)
         ..translate(_cache.depthOffset.dx, _cache.depthOffset.dy)

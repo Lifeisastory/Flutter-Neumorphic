@@ -32,7 +32,7 @@ class NeumorphicTextDecoration extends Decoration {
         style: style,
         textStyle: textStyle,
         textAlign: textAlign,
-        drawGradient: true,
+        drawGradient: isForeground,
         drawBackground: !isForeground,
         //only box draw background
         drawShadow: !isForeground,

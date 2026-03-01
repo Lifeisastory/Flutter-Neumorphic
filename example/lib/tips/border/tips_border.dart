@@ -138,10 +138,10 @@ Neumorphic(
                 width: 100,
                 child: Text(widget.title, style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
               ),
-              Neumorphic(
+              NeumorphicContainer(
                 padding: const EdgeInsets.all(20),
                 style: widget.firstStyle.copyWith(boxShape: const NeumorphicBoxShape.circle()),
-                child: Neumorphic(
+                child: NeumorphicContainer(
                   style: widget.secondStyle.copyWith(boxShape: const NeumorphicBoxShape.circle()),
                   child: const SizedBox(height: 100, width: 100),
                 ),
@@ -157,10 +157,10 @@ Neumorphic(
                 width: 100,
                 child: Text('opposite\nchild\nlightsource', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
               ),
-              Neumorphic(
+              NeumorphicContainer(
                 padding: const EdgeInsets.all(20),
                 style: widget.firstStyle.copyWith(boxShape: const NeumorphicBoxShape.circle()),
-                child: Neumorphic(
+                child: NeumorphicContainer(
                   style: widget.secondStyle.copyWith(boxShape: const NeumorphicBoxShape.circle(), oppositeShadowLightSource: true),
                   child: const SizedBox(height: 100, width: 100),
                 ),

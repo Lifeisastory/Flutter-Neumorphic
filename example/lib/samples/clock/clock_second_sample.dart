@@ -60,7 +60,7 @@ class _ClockPageState extends State<_Page> {
                 ),
                 Align(
                   alignment: Alignment.topRight,
-                  child: Neumorphic(
+                  child: NeumorphicContainer(
                     style: NeumorphicStyle(depth: 20, intensity: 0.4, boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(8))),
                     child: NeumorphicButton(
                       padding: const EdgeInsets.all(12.0),
@@ -130,7 +130,7 @@ class AlarmCell extends StatelessWidget {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.only(right: 20),
-                      child: Neumorphic(
+                      child: NeumorphicContainer(
                         style: const NeumorphicStyle(depth: 8, intensity: 0.5, boxShape: NeumorphicBoxShape.stadium()),
                         child: NeumorphicSwitch(
                           style: const NeumorphicSwitchStyle(inactiveTrackColor: Color(0xffC1CDE5)),
@@ -156,7 +156,7 @@ class _Divider extends StatelessWidget {
   Widget build(BuildContext context) {
     return FractionallySizedBox(
       widthFactor: 1,
-      child: Neumorphic(
+      child: NeumorphicContainer(
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         style: const NeumorphicStyle(depth: -4, boxShape: NeumorphicBoxShape.stadium()),
         child: const SizedBox(height: 6),

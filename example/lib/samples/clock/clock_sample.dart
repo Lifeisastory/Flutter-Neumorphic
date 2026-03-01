@@ -55,7 +55,7 @@ class _ClockFirstPageState extends State<_ClockFirstPage> {
                 ),
                 Align(
                   alignment: Alignment.topRight,
-                  child: Neumorphic(
+                  child: NeumorphicContainer(
                     style: NeumorphicStyle(depth: 20, intensity: 0.4, boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(8))),
                     child: NeumorphicButton(
                       padding: const EdgeInsets.all(12.0),
@@ -107,13 +107,13 @@ class NeumorphicClock extends StatelessWidget {
   Widget build(BuildContext context) {
     return AspectRatio(
       aspectRatio: 1,
-      child: Neumorphic(
+      child: NeumorphicContainer(
         margin: const EdgeInsets.all(14),
         style: const NeumorphicStyle(boxShape: NeumorphicBoxShape.circle()),
-        child: Neumorphic(
+        child: NeumorphicContainer(
           style: const NeumorphicStyle(depth: 14, boxShape: NeumorphicBoxShape.circle()),
           margin: const EdgeInsets.all(20),
-          child: Neumorphic(
+          child: NeumorphicContainer(
             style: const NeumorphicStyle(depth: -8, boxShape: NeumorphicBoxShape.circle()),
             margin: const EdgeInsets.all(10),
             child: Stack(
@@ -121,7 +121,7 @@ class NeumorphicClock extends StatelessWidget {
               alignment: Alignment.center,
               children: [
                 //the click center
-                Neumorphic(
+                NeumorphicContainer(
                   style: const NeumorphicStyle(depth: -1, boxShape: NeumorphicBoxShape.circle()),
                   margin: const EdgeInsets.all(65),
                 ),
@@ -158,7 +158,7 @@ class NeumorphicClock extends StatelessWidget {
       child: Center(
         child: Padding(
           padding: EdgeInsets.only(left: width),
-          child: Neumorphic(
+          child: NeumorphicContainer(
             style: const NeumorphicStyle(depth: 20),
             child: Container(width: width, height: height, color: color),
           ),
@@ -168,7 +168,7 @@ class NeumorphicClock extends StatelessWidget {
   }
 
   Widget _createDot(BuildContext context) {
-    return Neumorphic(
+    return NeumorphicContainer(
       style: const NeumorphicStyle(depth: -10, boxShape: NeumorphicBoxShape.circle()),
       child: const SizedBox(height: 10, width: 10),
     );
@@ -182,14 +182,14 @@ class NeumorphicSelector extends StatelessWidget {
   const NeumorphicSelector({super.key});
 
   Widget _buildSimpleButton(BuildContext context) {
-    return Neumorphic(
+    return NeumorphicContainer(
       style: const NeumorphicStyle(depth: -4, boxShape: NeumorphicBoxShape.circle()),
       child: SizedBox(height: _elementHeight, width: _elementHeight),
     );
   }
 
   Widget _buildSelectedButton(BuildContext context) {
-    return Neumorphic(
+    return NeumorphicContainer(
       style: const NeumorphicStyle(depth: -4, boxShape: NeumorphicBoxShape.stadium(), color: Color(0xffE1E8F5)),
       child: SizedBox(height: _elementHeight, width: 30),
     );

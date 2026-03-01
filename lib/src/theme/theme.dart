@@ -68,10 +68,10 @@ class NeumorphicThemeData {
   final NeumorphicAppBarThemeData appBarTheme;
 
   /// Get this theme's depth, clamp to min/max neumorphic constants
-  double get depth => _depth.clamp(Neumorphic.MIN_DEPTH, Neumorphic.MAX_DEPTH);
+  double get depth => _depth.clamp(NeumorphicContainer.MIN_DEPTH, NeumorphicContainer.MAX_DEPTH);
 
   /// Get this theme's intensity, clamp to min/max neumorphic constants
-  double get intensity => _intensity.clamp(Neumorphic.MIN_INTENSITY, Neumorphic.MAX_INTENSITY);
+  double get intensity => _intensity.clamp(NeumorphicContainer.MIN_INTENSITY, NeumorphicContainer.MAX_INTENSITY);
 
   const NeumorphicThemeData({
     this.baseColor = _defaultBaseColor,
@@ -370,11 +370,11 @@ class NeumorphicStyle {
         this._intensity = intensity,
         this._surfaceIntensity = surfaceIntensity;
 
-  double? get depth => _depth?.clamp(Neumorphic.MIN_DEPTH, Neumorphic.MAX_DEPTH);
+  double? get depth => _depth?.clamp(NeumorphicContainer.MIN_DEPTH, NeumorphicContainer.MAX_DEPTH);
 
-  double? get intensity => _intensity?.clamp(Neumorphic.MIN_INTENSITY, Neumorphic.MAX_INTENSITY);
+  double? get intensity => _intensity?.clamp(NeumorphicContainer.MIN_INTENSITY, NeumorphicContainer.MAX_INTENSITY);
 
-  double get surfaceIntensity => _surfaceIntensity.clamp(Neumorphic.MIN_INTENSITY, Neumorphic.MAX_INTENSITY);
+  double get surfaceIntensity => _surfaceIntensity.clamp(NeumorphicContainer.MIN_INTENSITY, NeumorphicContainer.MAX_INTENSITY);
 
   NeumorphicStyle copyWithThemeIfNull(NeumorphicThemeData theme) {
     return NeumorphicStyle._withTheme(

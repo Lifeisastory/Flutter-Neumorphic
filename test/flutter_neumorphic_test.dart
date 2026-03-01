@@ -41,7 +41,7 @@ void main() {
       NeumorphicApp(
         home: Scaffold(
           body: Center(
-            child: Neumorphic(
+            child: NeumorphicContainer(
               child: const SizedBox(width: 100, height: 100),
             ),
           ),
@@ -49,7 +49,7 @@ void main() {
       ),
     );
     
-    expect(find.byType(Neumorphic), findsOneWidget);
+    expect(find.byType(NeumorphicContainer), findsOneWidget);
   });
 
   testWidgets('NeumorphicTheme changes theme correctly', (WidgetTester tester) async {

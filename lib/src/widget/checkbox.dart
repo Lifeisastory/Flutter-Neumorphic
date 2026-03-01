@@ -130,8 +130,8 @@ class NeumorphicCheckbox extends StatelessWidget {
     this.style = const NeumorphicCheckboxStyle(),
     required this.value,
     required this.onChanged,
-    this.curve = Neumorphic.DEFAULT_CURVE,
-    this.duration = Neumorphic.DEFAULT_DURATION,
+    this.curve = NeumorphicContainer.DEFAULT_CURVE,
+    this.duration = NeumorphicContainer.DEFAULT_DURATION,
     this.padding = const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
     this.margin = const EdgeInsets.all(0),
     this.isEnabled = true,
@@ -150,8 +150,8 @@ class NeumorphicCheckbox extends StatelessWidget {
 
     final double selectedDepth = -1 * (this.style.selectedDepth ?? theme.depth).abs();
     final double unselectedDepth = (this.style.unselectedDepth ?? theme.depth).abs();
-    final double selectedIntensity = (this.style.selectedIntensity ?? theme.intensity).abs().clamp(Neumorphic.MIN_INTENSITY, Neumorphic.MAX_INTENSITY);
-    final double unselectedIntensity = this.style.unselectedIntensity.clamp(Neumorphic.MIN_INTENSITY, Neumorphic.MAX_INTENSITY);
+    final double selectedIntensity = (this.style.selectedIntensity ?? theme.intensity).abs().clamp(NeumorphicContainer.MIN_INTENSITY, NeumorphicContainer.MAX_INTENSITY);
+    final double unselectedIntensity = this.style.unselectedIntensity.clamp(NeumorphicContainer.MIN_INTENSITY, NeumorphicContainer.MAX_INTENSITY);
 
     double depth = isSelected ? selectedDepth : unselectedDepth;
     if (!this.isEnabled) {

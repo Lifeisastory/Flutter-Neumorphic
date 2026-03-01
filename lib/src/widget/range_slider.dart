@@ -294,7 +294,7 @@ class _NeumorphicRangeSliderState extends State<NeumorphicRangeSlider> {
 
   Widget _generateThumb(BuildContext context, double size, Color? color) {
     final theme = NeumorphicTheme.currentTheme(context);
-    return Neumorphic(
+    return NeumorphicContainer(
       style: NeumorphicStyle(
         disableDepth: widget.style.disableDepth,
         shape: NeumorphicSurfaceType.concave,
