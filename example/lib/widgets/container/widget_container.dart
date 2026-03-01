@@ -81,15 +81,15 @@ Neumorphic(
         children: <Widget>[
           Text('Default', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
           const SizedBox(width: 12),
-          Neumorphic(
+          NeumorphicContainer(
             style: NeumorphicStyle(
-              depth: -1.5,
+              depth: 1,
               intensity: 1,
               boxShape: .roundRect(const .all(.circular(20))),
               color: const Color(0xffd1d8da),
               shadowLightColorDeboss: Colors.white,
             ),
-            child: const SizedBox(height: 40, width: 200),
+            child: const SizedBox(height: 50, width: 200),
           ),
           const SizedBox(width: 12),
         ],
@@ -126,7 +126,7 @@ Neumorphic(
         children: <Widget>[
           Text('Circle', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
           const SizedBox(width: 12),
-          Neumorphic(
+          NeumorphicContainer(
             style: const NeumorphicStyle(depth: -1, intensity: 1, shape: .flat, boxShape: .circle()),
             padding: const EdgeInsets.all(18.0),
             child: const Icon(Icons.map),
@@ -168,7 +168,7 @@ Neumorphic(
         children: <Widget>[
           Text('RoundRect', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
           const SizedBox(width: 12),
-          Neumorphic(
+          NeumorphicContainer(
             style: NeumorphicStyle(boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(8))),
             padding: const EdgeInsets.all(18.0),
             child: const Icon(Icons.map),
@@ -224,7 +224,7 @@ Neumorphic(
             },
           ),
           const SizedBox(width: 12),
-          Neumorphic(
+          NeumorphicContainer(
             style: NeumorphicStyle(color: currentColor, boxShape: const NeumorphicBoxShape.circle()),
             child: const SizedBox(height: 100, width: 100),
           ),
@@ -273,7 +273,7 @@ Neumorphic(
                 child: Text('Flat', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
               ),
               const SizedBox(width: 12),
-              Neumorphic(
+              NeumorphicContainer(
                 style: const NeumorphicStyle(shape: NeumorphicSurfaceType.flat, boxShape: NeumorphicBoxShape.circle()),
                 padding: const EdgeInsets.all(18.0),
                 child: const Icon(Icons.play_arrow),
@@ -288,7 +288,7 @@ Neumorphic(
                 child: Text('Concave', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
               ),
               const SizedBox(width: 12),
-              Neumorphic(
+              NeumorphicContainer(
                 style: const NeumorphicStyle(shape: NeumorphicSurfaceType.concave, boxShape: NeumorphicBoxShape.circle()),
                 padding: const EdgeInsets.all(18.0),
                 child: const Icon(Icons.play_arrow),
@@ -348,9 +348,9 @@ Neumorphic(
             children: <Widget>[
               Text('Emboss', style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
               const SizedBox(width: 12),
-              Neumorphic(padding: const EdgeInsets.all(18), style: const NeumorphicStyle(depth: -10.0), child: const Icon(Icons.play_arrow)),
+              NeumorphicContainer(padding: const EdgeInsets.all(18), style: const NeumorphicStyle(depth: -10.0), child: const Icon(Icons.play_arrow)),
               const SizedBox(width: 12),
-              Neumorphic(
+              NeumorphicContainer(
                 padding: const EdgeInsets.all(18),
                 style: const NeumorphicStyle(boxShape: NeumorphicBoxShape.circle(), depth: -10.0),
                 child: const Icon(Icons.play_arrow),
@@ -418,21 +418,21 @@ Neumorphic(
           ),
           Row(
             children: <Widget>[
-              Neumorphic(
+              NeumorphicContainer(
                 drawSurfaceAboveChild: false,
                 margin: const EdgeInsets.all(8),
                 style: const NeumorphicStyle(surfaceIntensity: 1, shape: NeumorphicSurfaceType.concave),
                 child: Image.asset('assets/images/weeknd.jpg', height: 100, width: 100, fit: BoxFit.cover),
               ),
               const SizedBox(width: 12),
-              Neumorphic(
+              NeumorphicContainer(
                 drawSurfaceAboveChild: true,
                 margin: const EdgeInsets.all(8),
                 style: const NeumorphicStyle(surfaceIntensity: 1, shape: NeumorphicSurfaceType.concave),
                 child: Image.asset('assets/images/weeknd.jpg', height: 100, width: 100, fit: BoxFit.cover),
               ),
               const SizedBox(width: 12),
-              Neumorphic(
+              NeumorphicContainer(
                 drawSurfaceAboveChild: true,
                 margin: const EdgeInsets.all(8),
                 style: const NeumorphicStyle(intensity: 1, shape: NeumorphicSurfaceType.convex),
@@ -442,21 +442,21 @@ Neumorphic(
           ),
           Row(
             children: <Widget>[
-              Neumorphic(
+              NeumorphicContainer(
                 drawSurfaceAboveChild: false,
                 margin: const EdgeInsets.all(8),
                 style: const NeumorphicStyle(boxShape: NeumorphicBoxShape.circle(), surfaceIntensity: 1, shape: NeumorphicSurfaceType.concave),
                 child: Image.asset('assets/images/weeknd.jpg', height: 100, width: 100, fit: BoxFit.cover),
               ),
               const SizedBox(width: 12),
-              Neumorphic(
+              NeumorphicContainer(
                 drawSurfaceAboveChild: true,
                 margin: const EdgeInsets.all(8),
                 style: const NeumorphicStyle(surfaceIntensity: 1, boxShape: NeumorphicBoxShape.circle(), shape: NeumorphicSurfaceType.concave),
                 child: Image.asset('assets/images/weeknd.jpg', height: 100, width: 100, fit: BoxFit.cover),
               ),
               const SizedBox(width: 12),
-              Neumorphic(
+              NeumorphicContainer(
                 drawSurfaceAboveChild: true,
                 margin: const EdgeInsets.all(8),
                 style: const NeumorphicStyle(surfaceIntensity: 1, boxShape: NeumorphicBoxShape.circle(), shape: NeumorphicSurfaceType.convex),

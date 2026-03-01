@@ -86,8 +86,8 @@ class NeumorphicDebossDecorationPainter extends BoxPainter {
     if (style.depth != null) {
       invalidateDepth = this._cache.updateStyleDepth(style.depth!, 5);
       if (invalidateDepth) {
-        _blackShadowMaskPaint..maskFilter = _cache.maskFilterBlur;
-        _whiteShadowMaskPaint..maskFilter = _cache.maskFilterBlur;
+        _blackShadowMaskPaint..maskFilter = _cache.maskFilter;
+        _whiteShadowMaskPaint..maskFilter = _cache.maskFilter;
       }
     }
 
@@ -136,7 +136,7 @@ class NeumorphicDebossDecorationPainter extends BoxPainter {
     final Matrix4 matrix4 = Matrix4.identity()..scaleByDouble(_cache.scaleX, _cache.scaleY, 1.0, 1.0);
 
     canvas
-      ..saveLayer(_cache.layerRect, _whiteShadowPaint)
+      ..saveLayer(_cache.layerRect, Paint())
       ..translate(_cache.originOffset.dx, _cache.originOffset.dy)
       ..drawPath(path, _whiteShadowPaint)
       ..translate(_cache.witheShadowLeftTranslation, _cache.witheShadowTopTranslation)
@@ -144,7 +144,7 @@ class NeumorphicDebossDecorationPainter extends BoxPainter {
       ..restore();
 
     canvas
-      ..saveLayer(_cache.layerRect, _blackShadowPaint)
+      ..saveLayer(_cache.layerRect, Paint())
       ..translate(_cache.originOffset.dx, _cache.originOffset.dy)
       ..drawPath(path, _blackShadowPaint)
       ..translate(_cache.blackShadowLeftTranslation, _cache.blackShadowTopTranslation)

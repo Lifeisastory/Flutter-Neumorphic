@@ -36,10 +36,10 @@ class _PageState extends State<_Page> {
   }
 
   Widget _firstBox() {
-    return Neumorphic(
+    return NeumorphicContainer(
       margin: const EdgeInsets.symmetric(horizontal: 4),
       style: NeumorphicStyle(boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(8))),
-      child: Neumorphic(
+      child: NeumorphicContainer(
         style: const NeumorphicStyle(depth: -1, oppositeShadowLightSource: true),
         padding: const EdgeInsets.all(2),
         child: const SizedBox(width: 40, height: 60),
@@ -52,9 +52,9 @@ class _PageState extends State<_Page> {
       padding: const EdgeInsets.only(left: 8.0, right: 4),
       child: Transform.rotate(
         angle: 0.79,
-        child: Neumorphic(
+        child: NeumorphicContainer(
           style: NeumorphicStyle(lightSource: LightSource.topLeft, boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(8))),
-          child: Neumorphic(
+          child: NeumorphicContainer(
             style: const NeumorphicStyle(depth: -1, oppositeShadowLightSource: true, lightSource: LightSource.topLeft),
             child: const SizedBox(width: 50, height: 50),
           ),

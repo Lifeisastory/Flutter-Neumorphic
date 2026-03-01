@@ -185,7 +185,7 @@ class _NeumorphicIndicatorState extends State<NeumorphicIndicator> with TickerPr
     return SizedBox(
       height: widget.height,
       width: widget.width,
-      child: Neumorphic(
+      child: NeumorphicContainer(
         padding: EdgeInsets.zero,
         style: NeumorphicStyle(
           boxShape: NeumorphicBoxShape.stadium(),
@@ -203,7 +203,7 @@ class _NeumorphicIndicatorState extends State<NeumorphicIndicator> with TickerPr
                 alignment: widget.orientation == NeumorphicIndicatorOrientation.horizontal ? Alignment.centerLeft : Alignment.bottomCenter,
                 child: Padding(
                   padding: widget.padding,
-                  child: Neumorphic(
+                  child: NeumorphicContainer(
                     style: NeumorphicStyle(
                       boxShape: NeumorphicBoxShape.stadium(),
                       lightSource: widget.style.lightSource ?? theme.lightSource,

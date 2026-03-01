@@ -55,9 +55,9 @@ class __PageContentState extends State<_PageContent> {
 
   Widget _buildCard(BuildContext context) {
     return Container(
-      child: Neumorphic(
+      child: NeumorphicContainer(
         style: NeumorphicStyle(depth: 10, boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(20)), shape: NeumorphicSurfaceType.flat),
-        child: Neumorphic(
+        child: NeumorphicContainer(
           margin: const EdgeInsets.all(8),
           style: NeumorphicStyle(depth: 10, boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(20)), shape: NeumorphicSurfaceType.flat),
           child: SizedBox(
@@ -104,7 +104,7 @@ class __PageContentState extends State<_PageContent> {
                         right: 16,
                         child: SizedBox(
                           height: 60,
-                          child: Neumorphic(
+                          child: NeumorphicContainer(
                             style: NeumorphicStyle(
                               depth: 5,
                               intensity: 0.8,
@@ -124,7 +124,7 @@ class __PageContentState extends State<_PageContent> {
                             const SizedBox(height: 8),
                             Stack(
                               children: <Widget>[
-                                Neumorphic(
+                                NeumorphicContainer(
                                   style: NeumorphicStyle(
                                     shape: NeumorphicSurfaceType.convex,
                                     depth: -10,
@@ -135,7 +135,7 @@ class __PageContentState extends State<_PageContent> {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 18),
-                                  child: Neumorphic(
+                                  child: NeumorphicContainer(
                                     style: const NeumorphicStyle(shape: NeumorphicSurfaceType.convex, boxShape: NeumorphicBoxShape.circle(), depth: 10),
                                     child: const SizedBox(height: 30, width: 30),
                                   ),

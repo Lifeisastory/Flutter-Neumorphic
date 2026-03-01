@@ -41,7 +41,7 @@ class __PageState extends State<_Page> {
   static const maxHeight = 200.0;
 
   bool haveNeumorphicChild = false;
-  bool childOppositeLightsourceChild = false;
+  bool childOppositeLightSourceChild = false;
   bool drawAboveChild = false;
   double childMargin = 5;
   double childDepth = 5;
@@ -171,13 +171,13 @@ class __PageState extends State<_Page> {
   }
 
   Widget elementCustomizer() {
-    return Column(mainAxisSize: MainAxisSize.max, children: <Widget>[boxshapeWidget(), cornerRadiusSelector(), shapeWidget(), sizeSelector()]);
+    return Column(mainAxisSize: MainAxisSize.max, children: <Widget>[boxShapeWidget(), cornerRadiusSelector(), shapeWidget(), sizeSelector()]);
   }
 
   Widget childCustomizer() {
     return Column(
       mainAxisSize: MainAxisSize.max,
-      children: <Widget>[hasChildSelector(), drawAboveChildSelector(), childDepthSelector(), childMarginSelector(), childOppositeLightsourceSelector()],
+      children: <Widget>[hasChildSelector(), drawAboveChildSelector(), childDepthSelector(), childMarginSelector(), childOppositeLightSourceSelector()],
     );
   }
 
@@ -236,7 +236,7 @@ class __PageState extends State<_Page> {
   }
 
   Widget neumorphicChild() {
-    return Neumorphic(
+    return NeumorphicContainer(
       padding: EdgeInsets.zero,
       duration: const Duration(milliseconds: 300),
       margin: EdgeInsets.all(childMargin),
@@ -248,7 +248,7 @@ class __PageState extends State<_Page> {
         surfaceIntensity: surfaceIntensity,
         depth: childDepth,
         lightSource: lightSource,
-        oppositeShadowLightSource: childOppositeLightsourceChild,
+        oppositeShadowLightSource: childOppositeLightSourceChild,
       ),
       child: const SizedBox.expand(),
     );
@@ -260,8 +260,8 @@ class __PageState extends State<_Page> {
         const Padding(padding: EdgeInsets.only(left: 12), child: Text('Depth')),
         Expanded(
           child: Slider(
-            min: Neumorphic.MIN_DEPTH,
-            max: Neumorphic.MAX_DEPTH,
+            min: NeumorphicContainer.MIN_DEPTH,
+            max: NeumorphicContainer.MAX_DEPTH,
             value: depth,
             onChanged: (value) {
               setState(() {
@@ -281,8 +281,8 @@ class __PageState extends State<_Page> {
         const Padding(padding: EdgeInsets.only(left: 12), child: Text('Child Depth')),
         Expanded(
           child: Slider(
-            min: Neumorphic.MIN_DEPTH,
-            max: Neumorphic.MAX_DEPTH,
+            min: NeumorphicContainer.MIN_DEPTH,
+            max: NeumorphicContainer.MAX_DEPTH,
             value: childDepth,
             onChanged: (value) {
               setState(() {
@@ -363,7 +363,7 @@ class __PageState extends State<_Page> {
     );
   }
 
-  Widget childOppositeLightsourceSelector() {
+  Widget childOppositeLightSourceSelector() {
     return Stack(
       alignment: Alignment.center,
       children: <Widget>[
@@ -374,10 +374,10 @@ class __PageState extends State<_Page> {
         Align(
           alignment: Alignment.centerRight,
           child: Checkbox(
-            value: childOppositeLightsourceChild,
+            value: childOppositeLightSourceChild,
             onChanged: (value) {
               setState(() {
-                childOppositeLightsourceChild = value ?? false;
+                childOppositeLightSourceChild = value ?? false;
               });
             },
           ),
@@ -457,8 +457,8 @@ class __PageState extends State<_Page> {
         const Padding(padding: EdgeInsets.only(left: 12), child: Text('Intensity')),
         Expanded(
           child: Slider(
-            min: Neumorphic.MIN_INTENSITY, //in case of != 0
-            max: Neumorphic.MAX_INTENSITY,
+            min: NeumorphicContainer.MIN_INTENSITY, //in case of != 0
+            max: NeumorphicContainer.MAX_INTENSITY,
             value: intensity,
             onChanged: (value) {
               setState(() {
@@ -478,8 +478,8 @@ class __PageState extends State<_Page> {
         const Padding(padding: EdgeInsets.only(left: 12), child: Text('SurfaceIntensity')),
         Expanded(
           child: Slider(
-            min: Neumorphic.MIN_INTENSITY, //in case of != 0
-            max: Neumorphic.MAX_INTENSITY,
+            min: NeumorphicContainer.MIN_INTENSITY, //in case of != 0
+            max: NeumorphicContainer.MAX_INTENSITY,
             value: surfaceIntensity,
             onChanged: (value) {
               setState(() {
@@ -493,7 +493,7 @@ class __PageState extends State<_Page> {
     );
   }
 
-  Widget boxshapeWidget() {
+  Widget boxShapeWidget() {
     const Color textActiveColor = Colors.white;
     final Color textInactiveColor = Colors.black.withValues(alpha: 0.3);
 

@@ -36,34 +36,22 @@ class NeumorphicColors {
 
   static Color decorationWhiteColor(Color color, {required double intensity}) {
     // intensity act on opacity;
-    return _applyPercentageOnOpacity(
-      maxColor: color,
-      percent: intensity,
-    );
+    return _applyPercentageOnOpacity(maxColor: color, percent: intensity);
   }
 
   static Color decorationDarkColor(Color color, {required double intensity}) {
     // intensity act on opacity;
-    return _applyPercentageOnOpacity(
-      maxColor: color,
-      percent: intensity,
-    );
+    return _applyPercentageOnOpacity(maxColor: color, percent: intensity);
   }
 
   static Color embossWhiteColor(Color color, {required double intensity}) {
     // intensity act on opacity;
-    return _applyPercentageOnOpacity(
-      maxColor: color,
-      percent: intensity,
-    );
+    return _applyPercentageOnOpacity(maxColor: color, percent: intensity);
   }
 
   static Color embossDarkColor(Color color, {required double intensity}) {
     // intensity act on opacity;
-    return _applyPercentageOnOpacity(
-      maxColor: color,
-      percent: intensity,
-    );
+    return _applyPercentageOnOpacity(maxColor: color, percent: intensity);
   }
 
   static Color gradientShaderDarkColor({required double intensity}) {
@@ -78,7 +66,7 @@ class NeumorphicColors {
 
   static Color _applyPercentageOnOpacity({required Color maxColor, required double percent}) {
     final maxOpacity = maxColor.a;
-    final maxIntensity = Neumorphic.MAX_INTENSITY;
+    final maxIntensity = NeumorphicContainer.MAX_INTENSITY;
     final newOpacity = percent * maxOpacity / maxIntensity;
     final newColor = maxColor.withValues(alpha: newOpacity); //<-- intensity act on opacity;
     return newColor;

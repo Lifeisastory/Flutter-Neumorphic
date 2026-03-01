@@ -162,7 +162,7 @@ class _NeumorphicProgressState extends State<NeumorphicProgress> with TickerProv
       child: FractionallySizedBox(
         widthFactor: 1,
         //width: constraints.maxWidth,
-        child: Neumorphic(
+        child: NeumorphicContainer(
           padding: EdgeInsets.zero,
           style: NeumorphicStyle(
             boxShape: NeumorphicBoxShape.roundRect(widget.style.borderRadius),
@@ -278,7 +278,7 @@ class _NeumorphicProgressIndeterminateState extends State<NeumorphicProgressInde
       widthFactor: 1,
       child: SizedBox(
         height: widget.height,
-        child: Neumorphic(
+        child: NeumorphicContainer(
           padding: EdgeInsets.zero,
           style: NeumorphicStyle(
             boxShape: NeumorphicBoxShape.roundRect(widget.style.borderRadius),

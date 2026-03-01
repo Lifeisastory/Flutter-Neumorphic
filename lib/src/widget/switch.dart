@@ -124,7 +124,7 @@ class NeumorphicSwitch extends StatelessWidget {
   const NeumorphicSwitch({
     this.style = const NeumorphicSwitchStyle(),
     Key? key,
-    this.curve = Neumorphic.DEFAULT_CURVE,
+    this.curve = NeumorphicContainer.DEFAULT_CURVE,
     this.duration = const Duration(milliseconds: 200),
     this.value = false,
     this.onChanged,
@@ -149,7 +149,7 @@ class NeumorphicSwitch extends StatelessWidget {
               this.onChanged!(!this.value);
             }
           },
-          child: Neumorphic(
+          child: NeumorphicContainer(
             drawSurfaceAboveChild: false,
             style: NeumorphicStyle(
               boxShape: NeumorphicBoxShape.stadium(),
@@ -204,7 +204,7 @@ class NeumorphicSwitch extends StatelessWidget {
     if (themeDepth == null) return themeDepth;
     //force negative to have emboss
     final double depth = -1 * (this.style.trackDepth ?? themeDepth).abs();
-    return depth.clamp(Neumorphic.MIN_DEPTH, NeumorphicSwitch.MIN_EMBOSS_DEPTH);
+    return depth.clamp(NeumorphicContainer.MIN_DEPTH, NeumorphicSwitch.MIN_EMBOSS_DEPTH);
   }
 
   Color _getTrackColor(NeumorphicThemeData theme, bool enabled) {
@@ -254,7 +254,7 @@ class AnimatedThumb extends StatelessWidget {
       duration: this.duration,
       child: Padding(
         padding: const EdgeInsets.all(4.0),
-        child: Neumorphic(
+        child: NeumorphicContainer(
           style: NeumorphicStyle(
             boxShape: NeumorphicBoxShape.circle(),
             disableDepth: this.disableDepth,

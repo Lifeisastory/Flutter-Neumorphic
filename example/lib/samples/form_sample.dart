@@ -40,7 +40,7 @@ class __PageState extends State<_Page> {
               margin: const EdgeInsets.only(left: 12, right: 12, top: 10),
               child: const TopBar(actions: <Widget>[ThemeConfigurator()]),
             ),
-            Neumorphic(
+            NeumorphicContainer(
               margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               style: NeumorphicStyle(boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12))),
@@ -127,7 +127,7 @@ class _AvatarField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Neumorphic(
+      child: NeumorphicContainer(
         padding: const EdgeInsets.all(10),
         style: NeumorphicStyle(boxShape: const NeumorphicBoxShape.circle(), depth: NeumorphicTheme.debossDepth(context)),
         child: Icon(Icons.insert_emoticon, size: 120, color: Colors.black.withValues(alpha: 0.2)),
@@ -211,7 +211,7 @@ class __TextFieldState extends State<_TextField> {
             style: TextStyle(fontWeight: FontWeight.w700, color: NeumorphicTheme.defaultTextColor(context)),
           ),
         ),
-        Neumorphic(
+        NeumorphicContainer(
           margin: const EdgeInsets.only(left: 8, right: 8, top: 2, bottom: 4),
           style: NeumorphicStyle(depth: NeumorphicTheme.debossDepth(context), boxShape: const NeumorphicBoxShape.stadium()),
           padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 18),

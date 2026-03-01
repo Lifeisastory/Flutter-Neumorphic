@@ -32,10 +32,10 @@ export '../theme/neumorphic_theme.dart';
 /// drawSurfaceAboveChild - UseCase 2 :
 ///   put an image inside a neumorphic(emboss) :
 ///   drawSurfaceAboveChild=false -> the emboss effect is below the image -> not visible
-///   drawSurfaceAboveChild=true -> the emboss effeect effect is above the image -> visible
+///   drawSurfaceAboveChild=true -> the emboss effect effect is above the image -> visible
 ///
 @immutable
-class Neumorphic extends StatelessWidget {
+class NeumorphicContainer extends StatelessWidget {
   static const DEFAULT_DURATION = const Duration(milliseconds: 100);
   static const DEFAULT_CURVE = Curves.linear;
 
@@ -58,11 +58,11 @@ class Neumorphic extends StatelessWidget {
   final Duration duration;
   final bool drawSurfaceAboveChild; //if true => boxDecoration & foreground decoration, else => boxDecoration does all the work
 
-  Neumorphic({
+  NeumorphicContainer({
     Key? key,
     this.child,
-    this.duration = Neumorphic.DEFAULT_DURATION,
-    this.curve = Neumorphic.DEFAULT_CURVE,
+    this.duration = NeumorphicContainer.DEFAULT_DURATION,
+    this.curve = NeumorphicContainer.DEFAULT_CURVE,
     this.style,
     this.textStyle,
     this.margin = const EdgeInsets.all(0),

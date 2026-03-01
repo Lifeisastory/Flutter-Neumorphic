@@ -53,7 +53,7 @@ abstract class AbstractNeumorphicPainterCache {
     if (_cacheStyleDepth != newStyleDepth) {
       _cacheStyleDepth = newStyleDepth;
 
-      final depth = newStyleDepth.abs().clamp(0.0, _cacheRadius ?? 0 / radiusFactor);
+      final depth = newStyleDepth.abs().clamp(0.0, (_cacheRadius ?? 0) / radiusFactor);
       _depth = depth;
 
       this._updateMaskFilter(newDepth: depth);
@@ -120,12 +120,12 @@ abstract class AbstractNeumorphicPainterCache {
     return false;
   }
 
-  MaskFilter? _maskFilterBlur;
+  MaskFilter? _maskFilter;
 
-  MaskFilter? get maskFilterBlur => _maskFilterBlur;
+  MaskFilter? get maskFilter => _maskFilter;
 
   void _updateMaskFilter({required double newDepth}) {
-    this._maskFilterBlur = MaskFilter.blur(BlurStyle.normal, newDepth);
+    this._maskFilter = MaskFilter.blur(BlurStyle.normal, newDepth);
   }
 
   double? _styleIntensity;

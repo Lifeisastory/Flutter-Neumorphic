@@ -98,7 +98,7 @@ class __PageState extends State<_Page> {
   }
 
   Widget _buildImage(BuildContext context) {
-    return Neumorphic(
+    return NeumorphicContainer(
       style: const NeumorphicStyle(boxShape: NeumorphicBoxShape.circle()),
       child: SizedBox(height: 200, width: 200, child: Image.asset('assets/images/weeknd.jpg', fit: BoxFit.cover)),
     );

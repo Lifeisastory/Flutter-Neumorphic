@@ -154,8 +154,8 @@ class NeumorphicText extends StatelessWidget {
   NeumorphicText(
     this.text, {
     Key? key,
-    this.duration = Neumorphic.DEFAULT_DURATION,
-    this.curve = Neumorphic.DEFAULT_CURVE,
+    this.duration = NeumorphicContainer.DEFAULT_DURATION,
+    this.curve = NeumorphicContainer.DEFAULT_CURVE,
     this.style,
     this.textAlign = TextAlign.center,
     this.textStyle,
@@ -221,6 +221,14 @@ class __NeumorphicTextState extends material.State<_NeumorphicText> {
         child: AnimatedContainer(
           duration: this.widget.duration,
           curve: this.widget.curve,
+          decoration: NeumorphicTextDecoration(
+            isForeground: false,
+            textStyle: textStyle,
+            textAlign: widget.textAlign,
+            renderingByPath: true,
+            style: this.widget.style,
+            text: this.widget.text,
+          ),
           foregroundDecoration: NeumorphicTextDecoration(
             isForeground: true,
             textStyle: textStyle,

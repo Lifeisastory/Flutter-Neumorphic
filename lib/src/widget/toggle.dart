@@ -187,7 +187,7 @@ class NeumorphicToggle extends StatelessWidget {
           child: FractionallySizedBox(
             widthFactor: 1 / this.children.length,
             heightFactor: 1,
-            child: Neumorphic(
+            child: NeumorphicContainer(
               style: NeumorphicStyle(
                 boxShape: NeumorphicBoxShape.roundRect(this.style?.borderRadius ?? BorderRadius.all(Radius.circular(12))),
               ),
@@ -255,7 +255,7 @@ class NeumorphicToggle extends StatelessWidget {
   }
 
   Widget _background(BuildContext context) {
-    return Neumorphic(
+    return NeumorphicContainer(
       style: NeumorphicStyle(
           boxShape: NeumorphicBoxShape.roundRect(this.style?.borderRadius ?? BorderRadius.all(Radius.circular(12))),
           color: this.style?.backgroundColor,
@@ -292,7 +292,7 @@ class NeumorphicToggle extends StatelessWidget {
 
     //force negative to have emboss
     final double depth = -1 * (this.style?.depth ?? theme.depth).abs();
-    return depth.clamp(Neumorphic.MIN_DEPTH, NeumorphicToggle.MIN_EMBOSS_DEPTH);
+    return depth.clamp(NeumorphicContainer.MIN_DEPTH, NeumorphicToggle.MIN_EMBOSS_DEPTH);
   }
 
   void _notifyOnChange(int newValue) {

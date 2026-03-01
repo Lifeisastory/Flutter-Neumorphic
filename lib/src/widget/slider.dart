@@ -198,7 +198,7 @@ class _NeumorphicSliderState extends State<NeumorphicSlider> {
 
   Widget _generateThumb(BuildContext context, double size) {
     final theme = NeumorphicTheme.currentTheme(context);
-    return Neumorphic(
+    return NeumorphicContainer(
       style: NeumorphicStyle(
         disableDepth: widget.style.disableDepth,
         shape: NeumorphicSurfaceType.concave,

@@ -71,7 +71,7 @@ class __PageContentState extends State<_PageContent> {
   }
 
   Widget _bumpButton(Widget child) {
-    return Neumorphic(
+    return NeumorphicContainer(
       drawSurfaceAboveChild: false,
       style: const NeumorphicStyle(
         color: Color(0xFF2D3238),
@@ -148,7 +148,7 @@ class __PageContentState extends State<_PageContent> {
               color: NeumorphicTheme.accentColor(context),
               shape: NeumorphicSurfaceType.flat,
             ),
-            child: Neumorphic(
+            child: NeumorphicContainer(
               style: NeumorphicStyle(
                 surfaceIntensity: 0.7,
                 depth: 0,

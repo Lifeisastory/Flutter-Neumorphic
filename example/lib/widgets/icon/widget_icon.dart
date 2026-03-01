@@ -39,10 +39,12 @@ class _PageState extends State<_Page> {
           itemBuilder: (context, index) {
             return NeumorphicIcon(
               icons[index],
-              size: 80,
+              size: 20,
               style: const NeumorphicStyle(
                 //shape: NeumorphicShape.convex,
-                //surfaceIntensity: 1.0
+                //surfaceIntensity: 1.0,
+                depth: 1,
+                intensity: 1,
               ),
             );
           },

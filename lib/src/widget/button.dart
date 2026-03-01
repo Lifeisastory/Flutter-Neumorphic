@@ -62,8 +62,8 @@ class NeumorphicButton extends StatefulWidget {
     this.tooltip,
     this.drawSurfaceAboveChild = true,
     this.pressed, //true/false if you want to change the state of the button
-    this.duration = Neumorphic.DEFAULT_DURATION,
-    this.curve = Neumorphic.DEFAULT_CURVE,
+    this.duration = NeumorphicContainer.DEFAULT_DURATION,
+    this.curve = NeumorphicContainer.DEFAULT_CURVE,
     //this.accent,
     this.onPressed,
     this.minDistance = 0,
@@ -188,7 +188,7 @@ class _NeumorphicButtonState extends State<NeumorphicButton> {
       },
       child: animationScale.AnimatedScale(
         scale: _getScale(),
-        child: Neumorphic(
+        child: NeumorphicContainer(
           margin: widget.margin ?? const EdgeInsets.all(0),
           drawSurfaceAboveChild: widget.drawSurfaceAboveChild,
           duration: widget.duration,
