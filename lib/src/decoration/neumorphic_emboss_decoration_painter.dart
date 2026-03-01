@@ -102,10 +102,10 @@ class NeumorphicEmbossDecorationPainter extends BoxPainter {
     }
 
     bool invalidateShadowColors = false;
-    if (style.shadowLightColorEmboss != null && style.shadowDarkColorEmboss != null && style.intensity != null) {
+    if (style.shadowWhiteColorEmboss != null && style.shadowBlackColorEmboss != null && style.intensity != null) {
       invalidateShadowColors = this._cache.updateShadowColor(
-            newShadowLightColor: style.shadowLightColorEmboss!,
-            newShadowDarkColor: style.shadowDarkColorEmboss!,
+            newShadowLightColor: style.shadowWhiteColorEmboss!,
+            newShadowDarkColor: style.shadowBlackColorEmboss!,
             newIntensity: style.intensity!,
           );
       if (invalidateShadowColors) {

@@ -101,8 +101,8 @@ class NeumorphicDebossDecorationTextPainter extends BoxPainter {
     }
 
     final invalidateShadowColors = _cache.updateShadowColor(
-      newShadowLightColor: style.shadowLightColorDeboss ?? Colors.white,
-      newShadowDarkColor: style.shadowDarkColorDeboss ?? Colors.black,
+      newShadowLightColor: style.shadowWhiteColorDeboss ?? Colors.white,
+      newShadowDarkColor: style.shadowBlackColorDeboss ?? Colors.black,
       newIntensity: style.intensity ?? 0.25,
     );
 

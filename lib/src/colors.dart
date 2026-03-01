@@ -21,11 +21,15 @@ class NeumorphicColors {
   static const Color defaultBorder = Color(0x33000000);
   static const Color darkDefaultBorder = Color(0x33FFFFFF);
 
-  static const Color decorationMaxWhiteColor = Color(0xFFFFFFFF); //for intensity = 1
-  static const Color decorationMaxDarkColor = Color(0x8A000000); //for intensity = 1
+  static const Color embossMaxWhiteColor = Color(0xffe9e9e9);
+  static const Color embossMaxBlackColor = Color(0xffbdbdbd);
+  static const Color debossMaxWhiteColor = Color(0xffe8e8e8);
+  static const Color debossMaxBlackColor = Color(0xffbebebe);
 
-  static const Color embossMaxWhiteColor = Color(0x99FFFFFF); //for intensity = 1
-  static const Color embossMaxDarkColor = Color(0x73000000); //for intensity = 1
+  static const Color embossMaxWhiteColorDark = Color(0xff2f323b);
+  static const Color embossMaxBlackColorDark = Color(0xff24262b);
+  static const Color debossMaxWhiteColorDark = Color(0xff2f323b);
+  static const Color debossMaxBlackColorDark = Color(0xff25262b);
 
   static const Color _gradientShaderDarkColor = Color(0x8A000000);
   static const Color _gradientShaderWhiteColor = Color(0xFFFFFFFF);

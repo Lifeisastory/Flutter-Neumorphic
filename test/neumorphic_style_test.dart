@@ -8,10 +8,10 @@ void main() {
       
       expect(style.depth, isNull);
       expect(style.color, isNull);
-      expect(style.shadowLightColorEmboss, isNull);
-      expect(style.shadowLightColorDeboss, isNull);
-      expect(style.shadowDarkColorEmboss, isNull);
-      expect(style.shadowDarkColorDeboss, isNull);
+      expect(style.shadowWhiteColorEmboss, isNull);
+      expect(style.shadowWhiteColorDeboss, isNull);
+      expect(style.shadowBlackColorEmboss, isNull);
+      expect(style.shadowBlackColorDeboss, isNull);
       expect(style.shape, NeumorphicSurfaceType.flat);
       expect(style.boxShape, isNull);
       expect(style.border, isNotNull);
@@ -28,8 +28,8 @@ void main() {
       const style = NeumorphicStyle(
         depth: 8.0,
         color: color,
-        shadowLightColorEmboss: lightColor,
-        shadowDarkColorEmboss: darkColor,
+        shadowWhiteColorEmboss: lightColor,
+        shadowBlackColorEmboss: darkColor,
         shape: NeumorphicSurfaceType.convex,
         lightSource: LightSource.topRight,
         intensity: 0.8,
@@ -38,8 +38,8 @@ void main() {
       
       expect(style.depth, 8.0);
       expect(style.color, color);
-      expect(style.shadowLightColorEmboss, lightColor);
-      expect(style.shadowDarkColorEmboss, darkColor);
+      expect(style.shadowWhiteColorEmboss, lightColor);
+      expect(style.shadowBlackColorEmboss, darkColor);
       expect(style.shape, NeumorphicSurfaceType.convex);
       expect(style.lightSource, LightSource.topRight);
       expect(style.intensity, 0.8);

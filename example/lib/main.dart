@@ -16,20 +16,10 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       theme: NeumorphicThemeData(
         baseColor: Color(0xffd9d9d9),
-        shadowLightColor: Color(0xffe9e9e9),
-        shadowDarkColor: Color(0xffbdbdbd),
-        shadowLightColorEmboss: Color(0xffe8e8e8),
-        shadowDarkColorEmboss: Color(0xffbebebe),
-        lightSource: LightSource.topLeft,
         depth: 10,
       ),
-      darkTheme: NeumorphicThemeData(
+      darkTheme: NeumorphicThemeData.dark(
         baseColor: Color(0xff292c31),
-        shadowLightColor: Color(0xff2f323b),
-        shadowDarkColor: Color(0xff24262b),
-        shadowLightColorEmboss: Color(0xff2f323b),
-        shadowDarkColorEmboss: Color(0xff25262b),
-        lightSource: LightSource.topLeft,
         depth: 6,
       ),
       home: MyHomePage(),

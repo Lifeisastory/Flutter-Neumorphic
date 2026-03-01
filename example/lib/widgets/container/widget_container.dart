@@ -87,7 +87,7 @@ Neumorphic(
               intensity: 1,
               boxShape: .roundRect(const .all(.circular(20))),
               color: const Color(0xffd1d8da),
-              shadowLightColorDeboss: Colors.white,
+              shadowWhiteColorDeboss: Colors.white,
             ),
             child: const SizedBox(height: 50, width: 200),
           ),

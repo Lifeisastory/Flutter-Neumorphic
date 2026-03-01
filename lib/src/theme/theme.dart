@@ -30,7 +30,7 @@ const double _defaultBorderSize = 0.3;
 /// Contains all default values used in child Neumorphic Elements as
 /// default colors : baseColor, accentColor, variantColor
 /// default depth & intensities, used to generate white / dark shadows
-/// default lightsource, used to calculate the angle of the shadow
+/// default light source, used to calculate the angle of the shadow
 /// @see [LightSource]
 ///
 @immutable
@@ -40,10 +40,10 @@ class NeumorphicThemeData {
   final Color variantColor;
   final Color disabledColor;
 
-  final Color shadowLightColor;
-  final Color shadowDarkColor;
-  final Color shadowLightColorEmboss;
-  final Color shadowDarkColorEmboss;
+  final Color shadowWhiteColorEmboss;
+  final Color shadowBlackColorEmboss;
+  final Color shadowWhiteColorDeboss;
+  final Color shadowBlackColorDeboss;
 
   final NeumorphicBoxShape? _boxShape;
 
@@ -81,10 +81,10 @@ class NeumorphicThemeData {
     this.accentColor = _defaultAccent,
     this.variantColor = _defaultVariant,
     this.disabledColor = _defaultDisabledColor,
-    this.shadowLightColor = NeumorphicColors.decorationMaxWhiteColor,
-    this.shadowDarkColor = NeumorphicColors.decorationMaxDarkColor,
-    this.shadowLightColorEmboss = NeumorphicColors.embossMaxWhiteColor,
-    this.shadowDarkColorEmboss = NeumorphicColors.embossMaxDarkColor,
+    this.shadowWhiteColorEmboss = NeumorphicColors.embossMaxWhiteColor,
+    this.shadowBlackColorEmboss = NeumorphicColors.embossMaxBlackColor,
+    this.shadowWhiteColorDeboss = NeumorphicColors.debossMaxWhiteColor,
+    this.shadowBlackColorDeboss = NeumorphicColors.debossMaxBlackColor,
     this.defaultTextColor = _defaultTextColor,
     this.lightSource = _defaultLightSource,
     this.textTheme = const TextTheme(),
@@ -110,10 +110,10 @@ class NeumorphicThemeData {
     this.appBarTheme = const NeumorphicAppBarThemeData(),
     this.variantColor = NeumorphicColors.darkVariant,
     this.disabledColor = NeumorphicColors.darkDisabled,
-    this.shadowLightColor = NeumorphicColors.decorationMaxWhiteColor,
-    this.shadowDarkColor = NeumorphicColors.decorationMaxDarkColor,
-    this.shadowLightColorEmboss = NeumorphicColors.embossMaxWhiteColor,
-    this.shadowDarkColorEmboss = NeumorphicColors.embossMaxDarkColor,
+    this.shadowWhiteColorEmboss = NeumorphicColors.embossMaxWhiteColorDark,
+    this.shadowBlackColorEmboss = NeumorphicColors.embossMaxBlackColorDark,
+    this.shadowWhiteColorDeboss = NeumorphicColors.debossMaxWhiteColorDark,
+    this.shadowBlackColorDeboss = NeumorphicColors.debossMaxBlackColorDark,
     this.defaultTextColor = NeumorphicColors.darkDefaultTextColor,
     this.lightSource = _defaultLightSource,
     this.borderColor = NeumorphicColors.darkDefaultBorder,
@@ -140,10 +140,10 @@ class NeumorphicThemeData {
           buttonStyle == other.buttonStyle &&
           appBarTheme == other.appBarTheme &&
           accentColor == other.accentColor &&
-          shadowDarkColor == other.shadowDarkColor &&
-          shadowLightColor == other.shadowLightColor &&
-          shadowDarkColorEmboss == other.shadowDarkColorEmboss &&
-          shadowLightColorEmboss == other.shadowLightColorEmboss &&
+          shadowBlackColorEmboss == other.shadowBlackColorEmboss &&
+          shadowWhiteColorEmboss == other.shadowWhiteColorEmboss &&
+          shadowBlackColorDeboss == other.shadowBlackColorDeboss &&
+          shadowWhiteColorDeboss == other.shadowWhiteColorDeboss &&
           disabledColor == other.disabledColor &&
           variantColor == other.variantColor &&
           disableDepth == other.disableDepth &&
@@ -164,10 +164,10 @@ class NeumorphicThemeData {
       accentColor.hashCode ^
       variantColor.hashCode ^
       disabledColor.hashCode ^
-      shadowDarkColor.hashCode ^
-      shadowLightColor.hashCode ^
-      shadowDarkColorEmboss.hashCode ^
-      shadowLightColorEmboss.hashCode ^
+      shadowBlackColorEmboss.hashCode ^
+      shadowWhiteColorEmboss.hashCode ^
+      shadowBlackColorDeboss.hashCode ^
+      shadowWhiteColorDeboss.hashCode ^
       defaultTextColor.hashCode ^
       disableDepth.hashCode ^
       borderWidth.hashCode ^
@@ -214,10 +214,10 @@ class NeumorphicThemeData {
       disabledColor: disabledColor ?? this.disabledColor,
       defaultTextColor: defaultTextColor ?? this.defaultTextColor,
       disableDepth: disableDepth ?? this.disableDepth,
-      shadowDarkColor: shadowDarkColor ?? this.shadowDarkColor,
-      shadowLightColor: shadowLightColor ?? this.shadowLightColor,
-      shadowDarkColorEmboss: shadowDarkColorEmboss ?? this.shadowDarkColorEmboss,
-      shadowLightColorEmboss: shadowLightColorEmboss ?? this.shadowLightColorEmboss,
+      shadowBlackColorEmboss: shadowDarkColor ?? this.shadowBlackColorEmboss,
+      shadowWhiteColorEmboss: shadowLightColor ?? this.shadowWhiteColorEmboss,
+      shadowBlackColorDeboss: shadowDarkColorEmboss ?? this.shadowBlackColorDeboss,
+      shadowWhiteColorDeboss: shadowLightColorEmboss ?? this.shadowWhiteColorDeboss,
       depth: depth ?? this._depth,
       borderWidth: borderSize ?? this.borderWidth,
       borderColor: borderColor ?? this.borderColor,
@@ -236,10 +236,10 @@ class NeumorphicThemeData {
       disableDepth: other.disableDepth,
       disabledColor: other.disabledColor,
       defaultTextColor: other.defaultTextColor,
-      shadowDarkColor: other.shadowDarkColor,
-      shadowLightColor: other.shadowLightColor,
-      shadowDarkColorEmboss: other.shadowDarkColorEmboss,
-      shadowLightColorEmboss: other.shadowLightColorEmboss,
+      shadowBlackColorEmboss: other.shadowBlackColorEmboss,
+      shadowWhiteColorEmboss: other.shadowWhiteColorEmboss,
+      shadowBlackColorDeboss: other.shadowBlackColorDeboss,
+      shadowWhiteColorDeboss: other.shadowWhiteColorDeboss,
       textTheme: other.textTheme,
       iconTheme: other.iconTheme,
       buttonStyle: other.buttonStyle,
@@ -318,16 +318,16 @@ class NeumorphicStyle {
   final NeumorphicThemeData? theme;
 
   //override the "white" color
-  final Color? shadowLightColorEmboss;
+  final Color? shadowWhiteColorEmboss;
 
   //override the "dark" color
-  final Color? shadowDarkColorEmboss;
+  final Color? shadowBlackColorEmboss;
 
   //override the "white" color
-  final Color? shadowLightColorDeboss;
+  final Color? shadowWhiteColorDeboss;
 
   //override the "dark" color
-  final Color? shadowDarkColorDeboss;
+  final Color? shadowBlackColorDeboss;
 
   const NeumorphicStyle({
     this.shape = _defaultShape,
@@ -335,10 +335,10 @@ class NeumorphicStyle {
     this.border = const NeumorphicBorder.none(),
     this.color,
     this.boxShape, //nullable by default, will use the one defined in theme if not set
-    this.shadowLightColorEmboss,
-    this.shadowDarkColorEmboss,
-    this.shadowLightColorDeboss,
-    this.shadowDarkColorDeboss,
+    this.shadowWhiteColorEmboss,
+    this.shadowBlackColorEmboss,
+    this.shadowWhiteColorDeboss,
+    this.shadowBlackColorDeboss,
     double? depth,
     double? intensity,
     double surfaceIntensity = 0.25,
@@ -357,10 +357,10 @@ class NeumorphicStyle {
     this.color,
     this.boxShape,
     this.border = const NeumorphicBorder.none(),
-    this.shadowLightColorEmboss,
-    this.shadowDarkColorEmboss,
-    this.shadowLightColorDeboss,
-    this.shadowDarkColorDeboss,
+    this.shadowWhiteColorEmboss,
+    this.shadowBlackColorEmboss,
+    this.shadowWhiteColorDeboss,
+    this.shadowBlackColorDeboss,
     this.oppositeShadowLightSource = false,
     this.disableDepth,
     double? depth,
@@ -383,10 +383,10 @@ class NeumorphicStyle {
         boxShape: this.boxShape ?? theme.boxShape,
         shape: this.shape,
         border: this.border.copyWithThemeIfNull(color: theme.borderColor, width: theme.borderWidth),
-        shadowDarkColorEmboss: this.shadowDarkColorEmboss ?? theme.shadowDarkColor,
-        shadowLightColorEmboss: this.shadowLightColorEmboss ?? theme.shadowLightColor,
-        shadowDarkColorDeboss: this.shadowDarkColorDeboss ?? theme.shadowDarkColorEmboss,
-        shadowLightColorDeboss: this.shadowLightColorDeboss ?? theme.shadowLightColorEmboss,
+        shadowBlackColorEmboss: this.shadowBlackColorEmboss ?? theme.shadowBlackColorEmboss,
+        shadowWhiteColorEmboss: this.shadowWhiteColorEmboss ?? theme.shadowWhiteColorEmboss,
+        shadowBlackColorDeboss: this.shadowBlackColorDeboss ?? theme.shadowBlackColorDeboss,
+        shadowWhiteColorDeboss: this.shadowWhiteColorDeboss ?? theme.shadowWhiteColorDeboss,
         depth: this.depth ?? theme.depth,
         intensity: this.intensity ?? theme.intensity,
         disableDepth: this.disableDepth ?? theme.disableDepth,
@@ -403,10 +403,10 @@ class NeumorphicStyle {
           color == other.color &&
           boxShape == other.boxShape &&
           border == other.border &&
-          shadowDarkColorEmboss == other.shadowDarkColorEmboss &&
-          shadowLightColorEmboss == other.shadowLightColorEmboss &&
-          shadowDarkColorDeboss == other.shadowDarkColorDeboss &&
-          shadowLightColorDeboss == other.shadowLightColorDeboss &&
+          shadowBlackColorEmboss == other.shadowBlackColorEmboss &&
+          shadowWhiteColorEmboss == other.shadowWhiteColorEmboss &&
+          shadowBlackColorDeboss == other.shadowBlackColorDeboss &&
+          shadowWhiteColorDeboss == other.shadowWhiteColorDeboss &&
           disableDepth == other.disableDepth &&
           _depth == other._depth &&
           _intensity == other._intensity &&
@@ -419,11 +419,11 @@ class NeumorphicStyle {
   @override
   int get hashCode =>
       color.hashCode ^
-      shadowDarkColorEmboss.hashCode ^
+      shadowBlackColorEmboss.hashCode ^
       boxShape.hashCode ^
-      shadowLightColorEmboss.hashCode ^
-      shadowDarkColorDeboss.hashCode ^
-      shadowLightColorDeboss.hashCode ^
+      shadowWhiteColorEmboss.hashCode ^
+      shadowBlackColorDeboss.hashCode ^
+      shadowWhiteColorDeboss.hashCode ^
       _depth.hashCode ^
       border.hashCode ^
       _intensity.hashCode ^
@@ -455,10 +455,10 @@ class NeumorphicStyle {
       color: color ?? this.color,
       border: border ?? this.border,
       boxShape: boxShape ?? this.boxShape,
-      shadowDarkColorEmboss: shadowDarkColor ?? this.shadowDarkColorEmboss,
-      shadowLightColorEmboss: shadowLightColor ?? this.shadowLightColorEmboss,
-      shadowDarkColorDeboss: shadowDarkColorEmboss ?? this.shadowDarkColorDeboss,
-      shadowLightColorDeboss: shadowLightColorEmboss ?? this.shadowLightColorDeboss,
+      shadowBlackColorEmboss: shadowDarkColor ?? this.shadowBlackColorEmboss,
+      shadowWhiteColorEmboss: shadowLightColor ?? this.shadowWhiteColorEmboss,
+      shadowBlackColorDeboss: shadowDarkColorEmboss ?? this.shadowBlackColorDeboss,
+      shadowWhiteColorDeboss: shadowLightColorEmboss ?? this.shadowWhiteColorDeboss,
       depth: depth ?? this.depth,
       theme: this.theme,
       intensity: intensity ?? this.intensity,
