@@ -1,15 +1,12 @@
 library flutter_neumorphic;
 
-export 'package:flutter/material.dart' show TextTheme, ThemeMode, RouteFactory, GenerateAppTitle, InitialRouteListFactory;
-export 'package:flutter/widgets.dart';
-
 export 'src/colors.dart';
 export 'src/neumorphic_box_shape.dart';
 export 'src/surface_type.dart';
 export 'src/clip_path/neumorphic_path_provider.dart';
 export 'src/theme/app_bar.dart';
 export 'src/theme/neumorphic_theme.dart';
-export 'src/theme/theme.dart';
+export 'src/theme/themes.dart';
 export 'src/widget/app.dart';
 export 'src/widget/app_bar.dart';
 export 'src/widget/back_button.dart';
@@ -28,5 +25,3 @@ export 'src/widget/switch.dart';
 export 'src/widget/text.dart';
 export 'src/widget/toggle.dart';
 export 'src/widget/floating_action_button.dart';
-
-export 'package:flutter/material.dart';

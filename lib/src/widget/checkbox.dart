@@ -137,45 +137,45 @@ class NeumorphicCheckbox extends StatelessWidget {
     this.isEnabled = true,
   });
 
-  bool get isSelected => this.value;
+  bool get isSelected => value;
 
   void _onClick() {
-    this.onChanged(!this.value);
+    this.onChanged(!value);
   }
 
   @override
   Widget build(BuildContext context) {
     final NeumorphicThemeData theme = NeumorphicTheme.currentTheme(context);
-    final selectedColor = this.style.selectedColor ?? theme.accentColor;
+    final selectedColor = style.selectedColor ?? theme.accentColor;
 
-    final double selectedDepth = -1 * (this.style.selectedDepth ?? theme.depth).abs();
-    final double unselectedDepth = (this.style.unselectedDepth ?? theme.depth).abs();
-    final double selectedIntensity = (this.style.selectedIntensity ?? theme.intensity).abs().clamp(NeumorphicContainer.MIN_INTENSITY, NeumorphicContainer.MAX_INTENSITY);
-    final double unselectedIntensity = this.style.unselectedIntensity.clamp(NeumorphicContainer.MIN_INTENSITY, NeumorphicContainer.MAX_INTENSITY);
+    final double selectedDepth = -1 * (style.selectedDepth ?? theme.depth).abs();
+    final double unselectedDepth = (style.unselectedDepth ?? theme.depth).abs();
+    final double selectedIntensity = (style.selectedIntensity ?? theme.intensity).abs().clamp(NeumorphicContainer.MIN_INTENSITY, NeumorphicContainer.MAX_INTENSITY);
+    final double unselectedIntensity = style.unselectedIntensity.clamp(NeumorphicContainer.MIN_INTENSITY, NeumorphicContainer.MAX_INTENSITY);
 
     double depth = isSelected ? selectedDepth : unselectedDepth;
-    if (!this.isEnabled) {
+    if (!isEnabled) {
       depth = 0;
     }
 
     Color? color = isSelected ? selectedColor : null;
-    if (!this.isEnabled) {
+    if (!isEnabled) {
       color = null;
     }
 
     Color iconColor = isSelected ? theme.baseColor : selectedColor;
-    if (!this.isEnabled) {
+    if (!isEnabled) {
       iconColor = theme.disabledColor;
     }
 
     return NeumorphicButton(
-      padding: this.padding,
+      padding: padding,
       pressed: isSelected,
-      margin: this.margin,
-      duration: this.duration,
-      curve: this.curve,
+      margin: margin,
+      duration: duration,
+      curve: curve,
       onPressed: () {
-        if (this.isEnabled) {
+        if (isEnabled) {
           _onClick();
         }
       },
@@ -187,12 +187,12 @@ class NeumorphicCheckbox extends StatelessWidget {
         size: 20.0,
       ),
       style: NeumorphicStyle(
-        boxShape: this.style.boxShape,
-        border: this.style.border,
+        boxShape: style.boxShape,
+        border: style.border,
         color: color,
         depth: depth,
-        lightSource: this.style.lightSource ?? theme.lightSource,
-        disableDepth: this.style.disableDepth,
+        lightSource: style.lightSource ?? theme.lightSource,
+        disableDepth: style.disableDepth,
         intensity: isSelected ? selectedIntensity : unselectedIntensity,
         shape: NeumorphicSurfaceType.flat,
       ),

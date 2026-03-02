@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'dart:ui';
 
 import '../../flutter_neumorphic.dart';
@@ -81,10 +82,10 @@ class NeumorphicThemeData {
     this.accentColor = _defaultAccent,
     this.variantColor = _defaultVariant,
     this.disabledColor = _defaultDisabledColor,
-    this.shadowWhiteColorEmboss = NeumorphicColors.embossMaxWhiteColor,
-    this.shadowBlackColorEmboss = NeumorphicColors.embossMaxBlackColor,
-    this.shadowWhiteColorDeboss = NeumorphicColors.debossMaxWhiteColor,
-    this.shadowBlackColorDeboss = NeumorphicColors.debossMaxBlackColor,
+    this.shadowWhiteColorEmboss = NeumorphicColors.defaultEmbossWhiteColor,
+    this.shadowBlackColorEmboss = NeumorphicColors.defaultEmbossBlackColor,
+    this.shadowWhiteColorDeboss = NeumorphicColors.defaultDebossWhiteColor,
+    this.shadowBlackColorDeboss = NeumorphicColors.defaultDebossBlackColor,
     this.defaultTextColor = _defaultTextColor,
     this.lightSource = _defaultLightSource,
     this.textTheme = const TextTheme(),
@@ -110,10 +111,10 @@ class NeumorphicThemeData {
     this.appBarTheme = const NeumorphicAppBarThemeData(),
     this.variantColor = NeumorphicColors.darkVariant,
     this.disabledColor = NeumorphicColors.darkDisabled,
-    this.shadowWhiteColorEmboss = NeumorphicColors.embossMaxWhiteColorDark,
-    this.shadowBlackColorEmboss = NeumorphicColors.embossMaxBlackColorDark,
-    this.shadowWhiteColorDeboss = NeumorphicColors.debossMaxWhiteColorDark,
-    this.shadowBlackColorDeboss = NeumorphicColors.debossMaxBlackColorDark,
+    this.shadowWhiteColorEmboss = NeumorphicColors.darkDefaultEmbossWhiteColor,
+    this.shadowBlackColorEmboss = NeumorphicColors.darkDefaultEmbossBlackColor,
+    this.shadowWhiteColorDeboss = NeumorphicColors.darkDefaultEebossWhiteColor,
+    this.shadowBlackColorDeboss = NeumorphicColors.darkDefaultDebossBlackColor,
     this.defaultTextColor = NeumorphicColors.darkDefaultTextColor,
     this.lightSource = _defaultLightSource,
     this.borderColor = NeumorphicColors.darkDefaultBorder,
@@ -376,7 +377,7 @@ class NeumorphicStyle {
 
   double get surfaceIntensity => _surfaceIntensity.clamp(NeumorphicContainer.MIN_INTENSITY, NeumorphicContainer.MAX_INTENSITY);
 
-  NeumorphicStyle copyWithThemeIfNull(NeumorphicThemeData theme) {
+  NeumorphicStyle copyWithTheme(NeumorphicThemeData theme) {
     return NeumorphicStyle._withTheme(
         theme: theme,
         color: this.color ?? theme.baseColor,
@@ -477,7 +478,7 @@ class NeumorphicStyle {
 
   NeumorphicStyle applyDisableDepth() {
     if (disableDepth == true) {
-      return this.copyWith(depth: 0);
+      return copyWith(depth: 0);
     } else {
       return this;
     }

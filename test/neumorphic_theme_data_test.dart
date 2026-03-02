@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:my_neumorphic/flutter_neumorphic.dart';
 
@@ -110,7 +111,7 @@ void main() {
       final theme = NeumorphicTheme.of(context);
       
       expect(theme, isNotNull);
-      expect(theme!.current!.baseColor, const Color(0xFFDDE6E8));
+      expect(theme!.current.baseColor, const Color(0xFFDDE6E8));
     });
   });
 }

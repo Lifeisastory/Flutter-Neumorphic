@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../neumorphic_box_shape.dart';
-import '../theme/theme.dart';
+import '../theme/themes.dart';
 import 'cache/neumorphic_deboss_painter_cache.dart';
 
-export '../theme/theme.dart';
+export '../theme/themes.dart';
 
 class NeumorphicDebossDecorationPainter extends BoxPainter {
   NeumorphicDebossPainterCache _cache;

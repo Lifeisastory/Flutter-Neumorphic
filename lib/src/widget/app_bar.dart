@@ -1,4 +1,6 @@
-import 'package:my_neumorphic/flutter_neumorphic.dart';
+import 'package:flutter/material.dart';
+
+import '../../flutter_neumorphic.dart';
 
 class NeumorphicAppBar extends StatefulWidget implements PreferredSizeWidget {
   static const toolbarHeight = kToolbarHeight + 16 * 2;
@@ -93,8 +95,8 @@ class NeumorphicAppBar extends StatefulWidget implements PreferredSizeWidget {
     this.titleSpacing = NavigationToolbar.kMiddleSpacing,
     this.actionSpacing = defaultSpacing,
     this.padding = 16,
-  })  : preferredSize = Size.fromHeight(toolbarHeight),
-        super(key: key);
+  }) : preferredSize = Size.fromHeight(toolbarHeight),
+       super(key: key);
 
   @override
   NeumorphicAppBarState createState() => NeumorphicAppBarState();
@@ -147,21 +149,15 @@ class NeumorphicAppBarState extends State<NeumorphicAppBar> {
         leading = NeumorphicButton(
           padding: widget.buttonPadding,
           style: widget.buttonStyle,
-          child: nTheme?.current?.appBarTheme.icons.menuIcon,
+          child: nTheme?.current.appBarTheme.icons.menuIcon,
           onPressed: _handleDrawerButton,
           tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
         );
       } else {
         if (canPop)
           leading = useCloseButton
-              ? NeumorphicCloseButton(
-                  padding: widget.buttonPadding,
-                  style: widget.buttonStyle,
-                )
-              : NeumorphicBackButton(
-                  padding: widget.buttonPadding,
-                  style: widget.buttonStyle,
-                );
+              ? NeumorphicCloseButton(padding: widget.buttonPadding, style: widget.buttonStyle)
+              : NeumorphicBackButton(padding: widget.buttonPadding, style: widget.buttonStyle);
       }
     }
     if (leading != null) {
@@ -175,7 +171,7 @@ class NeumorphicAppBarState extends State<NeumorphicAppBar> {
     if (title != null) {
       // final AppBarTheme appBarTheme = AppBarTheme.of(context);
       title = DefaultTextStyle(
-        style: Theme.of(context).textTheme.titleLarge!.merge(widget.textStyle ?? nTheme?.current?.appBarTheme.textStyle),
+        style: Theme.of(context).textTheme.titleLarge!.merge(widget.textStyle ?? nTheme?.current.appBarTheme.textStyle),
         softWrap: false,
         overflow: TextOverflow.ellipsis,
         child: title,
@@ -188,13 +184,15 @@ class NeumorphicAppBarState extends State<NeumorphicAppBar> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: widget.actions!
-            .map((child) => Padding(
-                  padding: EdgeInsets.only(left: widget.actionSpacing),
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints.tightFor(width: kToolbarHeight, height: kToolbarHeight),
-                    child: child,
-                  ),
-                ))
+            .map(
+              (child) => Padding(
+                padding: EdgeInsets.only(left: widget.actionSpacing),
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints.tightFor(width: kToolbarHeight, height: kToolbarHeight),
+                  child: child,
+                ),
+              ),
+            )
             .toList(growable: false),
       );
     } else if (hasEndDrawer) {
@@ -203,26 +201,26 @@ class NeumorphicAppBarState extends State<NeumorphicAppBar> {
         child: NeumorphicButton(
           padding: widget.buttonPadding,
           style: widget.buttonStyle,
-          child: nTheme?.current?.appBarTheme.icons.menuIcon,
+          child: nTheme?.current.appBarTheme.icons.menuIcon,
           onPressed: _handleDrawerButtonEnd,
           tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
         ),
       );
     }
     return Container(
-      color: widget.color ?? nTheme?.current?.appBarTheme.color,
+      color: widget.color ?? nTheme?.current.appBarTheme.color,
       child: SafeArea(
         bottom: false,
         child: NeumorphicAppBarTheme(
           child: Padding(
             padding: EdgeInsets.all(widget.padding),
             child: IconTheme(
-              data: widget.iconTheme ?? nTheme?.current?.appBarTheme.iconTheme ?? nTheme?.current?.iconTheme ?? const IconThemeData(),
+              data: widget.iconTheme ?? nTheme?.current.appBarTheme.iconTheme ?? nTheme?.current.iconTheme ?? const IconThemeData(),
               child: NavigationToolbar(
                 leading: leading,
                 middle: title,
                 trailing: actions,
-                centerMiddle: widget._getEffectiveCenterTitle(theme, nTheme!.current!),
+                centerMiddle: widget._getEffectiveCenterTitle(theme, nTheme!.current),
                 middleSpacing: widget.titleSpacing,
               ),
             ),

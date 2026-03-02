@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:my_neumorphic/flutter_neumorphic.dart';
 
@@ -5,7 +6,7 @@ void main() {
   group('NeumorphicColors', () {
     test('decorationWhiteColor creates valid colors', () {
       const baseColor = Color(0xFF808080);
-      final result = NeumorphicColors.decorationWhiteColor(baseColor, intensity: 0.5);
+      final result = NeumorphicColors.embossWhiteColor(baseColor, intensity: 0.5);
       
       expect(result, isA<Color>());
       expect(result.alpha, lessThanOrEqualTo(baseColor.alpha));
@@ -13,7 +14,7 @@ void main() {
 
     test('decorationDarkColor creates valid colors', () {
       const baseColor = Color(0xFF808080);
-      final result = NeumorphicColors.decorationDarkColor(baseColor, intensity: 0.5);
+      final result = NeumorphicColors.embossBlackColor(baseColor, intensity: 0.5);
       
       expect(result, isA<Color>());
       expect(result.alpha, lessThanOrEqualTo(baseColor.alpha));
@@ -21,7 +22,7 @@ void main() {
 
     test('embossWhiteColor creates valid colors', () {
       const baseColor = Color(0xFF808080);
-      final result = NeumorphicColors.embossWhiteColor(baseColor, intensity: 0.5);
+      final result = NeumorphicColors.dmbossWhiteColor(baseColor, intensity: 0.5);
       
       expect(result, isA<Color>());
       expect(result.alpha, lessThanOrEqualTo(baseColor.alpha));
@@ -29,7 +30,7 @@ void main() {
 
     test('embossDarkColor creates valid colors', () {
       const baseColor = Color(0xFF808080);
-      final result = NeumorphicColors.embossDarkColor(baseColor, intensity: 0.5);
+      final result = NeumorphicColors.dmbossBlackColor(baseColor, intensity: 0.5);
       
       expect(result, isA<Color>());
       expect(result.alpha, lessThanOrEqualTo(baseColor.alpha));
@@ -43,7 +44,7 @@ void main() {
     });
 
     test('gradientShaderDarkColor creates valid colors', () {
-      final result = NeumorphicColors.gradientShaderDarkColor(intensity: 0.5);
+      final result = NeumorphicColors.gradientShaderBlackColor(intensity: 0.5);
       
       expect(result, isA<Color>());
       expect(result.alpha, lessThanOrEqualTo(255));
@@ -63,8 +64,8 @@ void main() {
     test('intensity parameter affects opacity', () {
       const baseColor = Color(0xFF808080);
       
-      final lowIntensity = NeumorphicColors.decorationWhiteColor(baseColor, intensity: 0.1);
-      final highIntensity = NeumorphicColors.decorationWhiteColor(baseColor, intensity: 0.9);
+      final lowIntensity = NeumorphicColors.embossWhiteColor(baseColor, intensity: 0.1);
+      final highIntensity = NeumorphicColors.embossWhiteColor(baseColor, intensity: 0.9);
       
       expect(lowIntensity.alpha, lessThan(highIntensity.alpha));
     });
@@ -72,8 +73,8 @@ void main() {
     test('handles edge intensity values', () {
       const baseColor = Color(0xFF808080);
       
-      final minIntensity = NeumorphicColors.decorationWhiteColor(baseColor, intensity: 0.0);
-      final maxIntensity = NeumorphicColors.decorationWhiteColor(baseColor, intensity: 1.0);
+      final minIntensity = NeumorphicColors.embossWhiteColor(baseColor, intensity: 0.0);
+      final maxIntensity = NeumorphicColors.embossWhiteColor(baseColor, intensity: 1.0);
       
       expect(minIntensity.alpha, equals(0));
       expect(maxIntensity.alpha, greaterThan(0));
@@ -92,10 +93,10 @@ void main() {
       ];
 
       for (final color in colors) {
-        final whiteColor = NeumorphicColors.decorationWhiteColor(color, intensity: 0.5);
-        final darkColor = NeumorphicColors.decorationDarkColor(color, intensity: 0.5);
-        final embossWhite = NeumorphicColors.embossWhiteColor(color, intensity: 0.5);
-        final embossDark = NeumorphicColors.embossDarkColor(color, intensity: 0.5);
+        final whiteColor = NeumorphicColors.embossWhiteColor(color, intensity: 0.5);
+        final darkColor = NeumorphicColors.embossBlackColor(color, intensity: 0.5);
+        final embossWhite = NeumorphicColors.dmbossWhiteColor(color, intensity: 0.5);
+        final embossDark = NeumorphicColors.dmbossBlackColor(color, intensity: 0.5);
 
         expect(whiteColor, isA<Color>());
         expect(darkColor, isA<Color>());
@@ -107,8 +108,8 @@ void main() {
     test('handles transparent colors', () {
       const transparentColor = Color(0x00000000);
       
-      final whiteColor = NeumorphicColors.decorationWhiteColor(transparentColor, intensity: 0.5);
-      final darkColor = NeumorphicColors.decorationDarkColor(transparentColor, intensity: 0.5);
+      final whiteColor = NeumorphicColors.embossWhiteColor(transparentColor, intensity: 0.5);
+      final darkColor = NeumorphicColors.embossBlackColor(transparentColor, intensity: 0.5);
       
       expect(whiteColor, isA<Color>());
       expect(darkColor, isA<Color>());

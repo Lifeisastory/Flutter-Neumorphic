@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:my_neumorphic/flutter_neumorphic.dart';
 
 class CalculatorSample extends StatefulWidget {
@@ -80,7 +81,7 @@ class _TopScreenWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NeumorphicContainer(
-      style: NeumorphicStyle(boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)), depth: -1 * NeumorphicTheme.of(context)!.current!.depth),
+      style: NeumorphicStyle(boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)), depth: -1 * NeumorphicTheme.of(context)!.current.depth),
       child: const FractionallySizedBox(
         widthFactor: 1,
         child: Padding(

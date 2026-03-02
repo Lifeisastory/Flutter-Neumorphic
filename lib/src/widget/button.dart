@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:my_neumorphic/flutter_neumorphic.dart';
+
+import '../../flutter_neumorphic.dart';
 import 'animation/animated_scale.dart' as animationScale;
 
 typedef void NeumorphicButtonClickListener();
@@ -19,7 +21,7 @@ typedef void NeumorphicButtonClickListener();
 ///
 /// It takes a [padding], default EdgeInsets.symmetric(horizontal: 8, vertical: 4)`
 ///
-/// It takes a [NeumorphicStyle] @see [Neumorphi]
+/// It takes a [NeumorphicStyle] @see [NeumorphicThemeData]
 ///
 /// ```
 ///  NeumorphicButton(
@@ -87,7 +89,9 @@ class _NeumorphicButtonState extends State<NeumorphicButton> {
     final appBarPresent = NeumorphicAppBarTheme.of(context) != null;
 
     final theme = NeumorphicTheme.currentTheme(context);
-    this.initialStyle = widget.style ?? (appBarPresent ? theme.appBarTheme.buttonStyle : (theme.buttonStyle ?? const NeumorphicStyle()));
+    initialStyle =
+        widget.style ??
+        (appBarPresent ? theme.appBarTheme.buttonStyle : (theme.buttonStyle ?? const NeumorphicStyle()));
     depth = widget.style?.depth ?? (appBarPresent ? theme.appBarTheme.buttonStyle.depth : theme.depth) ?? 0.0;
 
     setState(() {});
@@ -155,10 +159,7 @@ class _NeumorphicButtonState extends State<NeumorphicButton> {
   Widget build(BuildContext context) {
     final result = _build(context);
     if (widget.tooltip != null) {
-      return Tooltip(
-        message: widget.tooltip!,
-        child: result,
-      );
+      return Tooltip(message: widget.tooltip!, child: result);
     } else {
       return result;
     }
@@ -193,10 +194,11 @@ class _NeumorphicButtonState extends State<NeumorphicButton> {
           drawSurfaceAboveChild: widget.drawSurfaceAboveChild,
           duration: widget.duration,
           curve: widget.curve,
-          padding: widget.padding ?? (appBarPresent ? appBarTheme.buttonPadding : null) ?? const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-          style: initialStyle.copyWith(
-            depth: _getDepth(),
-          ),
+          padding:
+              widget.padding ??
+              (appBarPresent ? appBarTheme.buttonPadding : null) ??
+              const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+          style: initialStyle.copyWith(depth: _getDepth()),
           child: widget.child,
         ),
       ),

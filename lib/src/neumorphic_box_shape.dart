@@ -1,10 +1,11 @@
-import 'package:my_neumorphic/flutter_neumorphic.dart';
-import 'package:my_neumorphic/src/clip_path/rrect_path_provider.dart';
-import 'package:my_neumorphic/src/clip_path/stadium_path_provider.dart';
+import 'package:flutter/material.dart';
 
+import '../flutter_neumorphic.dart';
 import 'clip_path/beveled_path_provider.dart';
 import 'clip_path/circle_path_provider.dart';
 import 'clip_path/rect_path_provider.dart';
+import 'clip_path/rrect_path_provider.dart';
+import 'clip_path/stadium_path_provider.dart';
 
 export 'clip_path/custom_path/flutter_logo_path_provider.dart';
 

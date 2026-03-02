@@ -1,15 +1,17 @@
+import 'package:flutter/material.dart';
+
 import '../../../flutter_neumorphic.dart';
 import 'abstract_neumorphic_painter_cache.dart';
 
 class NeumorphicEmbossPainterCache extends AbstractNeumorphicPainterCache {
   @override
   Color generateShadowDarkColor({required Color color, required double intensity}) {
-    return NeumorphicColors.decorationDarkColor(color, intensity: intensity);
+    return NeumorphicColors.embossBlackColor(color, intensity: intensity);
   }
 
   @override
   Color generateShadowLightColor({required Color color, required double intensity}) {
-    return NeumorphicColors.decorationWhiteColor(color, intensity: intensity);
+    return NeumorphicColors.embossWhiteColor(color, intensity: intensity);
   }
 
   @override

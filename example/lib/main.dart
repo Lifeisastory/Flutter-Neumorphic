@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:my_neumorphic/flutter_neumorphic.dart';
 
 import 'main_home.dart';
@@ -84,7 +85,7 @@ class MyHomePage extends StatelessWidget {
   Color? _iconsColor(BuildContext context) {
     final theme = NeumorphicTheme.of(context);
     if (theme!.isUsingDark) {
-      return theme.current!.accentColor;
+      return theme.current.accentColor;
     } else {
       return null;
     }

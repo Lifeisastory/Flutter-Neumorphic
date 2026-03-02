@@ -1,4 +1,6 @@
-import 'package:my_neumorphic/flutter_neumorphic.dart';
+import 'package:flutter/material.dart';
+
+import '../../flutter_neumorphic.dart';
 
 typedef void NeumorphicSliderListener(double percent);
 

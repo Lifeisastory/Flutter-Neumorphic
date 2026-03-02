@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart';
 import 'dart:ui' as ui show FontFeature;
-
 import 'package:flutter/material.dart' as material;
-import 'package:my_neumorphic/src/decoration/neumorphic_text_decorations.dart';
 
 import '../../flutter_neumorphic.dart';
+import '../decoration/neumorphic_text_decorations.dart';
 
 export '../decoration/neumorphic_decorations.dart';
 export '../neumorphic_box_shape.dart';
@@ -164,7 +164,7 @@ class NeumorphicText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = NeumorphicTheme.currentTheme(context);
-    final NeumorphicStyle style = (this.style ?? NeumorphicStyle()).copyWithThemeIfNull(theme).applyDisableDepth();
+    final NeumorphicStyle style = (this.style ?? NeumorphicStyle()).copyWithTheme(theme).applyDisableDepth();
 
     return _NeumorphicText(
       textStyle: (this.textStyle ?? NeumorphicTextStyle()).textStyle,

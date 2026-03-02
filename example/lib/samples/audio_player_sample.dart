@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:my_neumorphic/flutter_neumorphic.dart';
 
 class AudioPlayerSample extends StatefulWidget {
@@ -177,7 +178,7 @@ class __PageState extends State<_Page> {
   Color? _iconsColor() {
     final theme = NeumorphicTheme.of(context);
     if (theme!.isUsingDark) {
-      return theme.current!.accentColor;
+      return theme.current.accentColor;
     } else {
       return null;
     }

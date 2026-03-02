@@ -1,8 +1,9 @@
 import 'dart:ui';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
-import 'package:my_neumorphic/src/widget/container.dart';
+
+import '../flutter_neumorphic.dart';
+
 
 /// Defines default colors used in Neumorphic theme & shadows generators
 @immutable
@@ -21,46 +22,46 @@ class NeumorphicColors {
   static const Color defaultBorder = Color(0x33000000);
   static const Color darkDefaultBorder = Color(0x33FFFFFF);
 
-  static const Color embossMaxWhiteColor = Color(0xffe9e9e9);
-  static const Color embossMaxBlackColor = Color(0xffbdbdbd);
-  static const Color debossMaxWhiteColor = Color(0xffe8e8e8);
-  static const Color debossMaxBlackColor = Color(0xffbebebe);
+  static const Color defaultEmbossWhiteColor = Color(0xffe9e9e9);
+  static const Color defaultEmbossBlackColor = Color(0xffbdbdbd);
+  static const Color defaultDebossWhiteColor = Color(0xffe8e8e8);
+  static const Color defaultDebossBlackColor = Color(0xffbebebe);
 
-  static const Color embossMaxWhiteColorDark = Color(0xff2f323b);
-  static const Color embossMaxBlackColorDark = Color(0xff24262b);
-  static const Color debossMaxWhiteColorDark = Color(0xff2f323b);
-  static const Color debossMaxBlackColorDark = Color(0xff25262b);
+  static const Color darkDefaultEmbossWhiteColor = Color(0xff2f323b);
+  static const Color darkDefaultEmbossBlackColor = Color(0xff24262b);
+  static const Color darkDefaultEebossWhiteColor = Color(0xff2f323b);
+  static const Color darkDefaultDebossBlackColor = Color(0xff25262b);
 
-  static const Color _gradientShaderDarkColor = Color(0x8A000000);
+  static const Color _gradientShaderBlackColor = Color(0x8A000000);
   static const Color _gradientShaderWhiteColor = Color(0xFFFFFFFF);
 
   static const Color defaultTextColor = Color(0xFF000000);
 
   NeumorphicColors._();
 
-  static Color decorationWhiteColor(Color color, {required double intensity}) {
-    // intensity act on opacity;
-    return _applyPercentageOnOpacity(maxColor: color, percent: intensity);
-  }
-
-  static Color decorationDarkColor(Color color, {required double intensity}) {
-    // intensity act on opacity;
-    return _applyPercentageOnOpacity(maxColor: color, percent: intensity);
-  }
-
   static Color embossWhiteColor(Color color, {required double intensity}) {
     // intensity act on opacity;
     return _applyPercentageOnOpacity(maxColor: color, percent: intensity);
   }
 
-  static Color embossDarkColor(Color color, {required double intensity}) {
+  static Color embossBlackColor(Color color, {required double intensity}) {
     // intensity act on opacity;
     return _applyPercentageOnOpacity(maxColor: color, percent: intensity);
   }
 
-  static Color gradientShaderDarkColor({required double intensity}) {
+  static Color dmbossWhiteColor(Color color, {required double intensity}) {
     // intensity act on opacity;
-    return _applyPercentageOnOpacity(maxColor: NeumorphicColors._gradientShaderDarkColor, percent: intensity);
+    return _applyPercentageOnOpacity(maxColor: color, percent: intensity);
+  }
+
+  static Color dmbossBlackColor(Color color, {required double intensity}) {
+    // intensity act on opacity;
+    return _applyPercentageOnOpacity(maxColor: color, percent: intensity);
+  }
+
+  static Color gradientShaderBlackColor({required double intensity}) {
+    // intensity act on opacity;
+    return _applyPercentageOnOpacity(maxColor: NeumorphicColors._gradientShaderBlackColor, percent: intensity);
   }
 
   static Color gradientShaderWhiteColor({required double intensity}) {

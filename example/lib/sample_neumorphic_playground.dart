@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:my_neumorphic/flutter_neumorphic.dart';
 
 void main() => runApp(const NeumorphicPlayground());
@@ -39,7 +40,7 @@ class __PageState extends State<_Page> {
   double width = 150.0;
 
   bool haveNeumorphicChild = false;
-  bool childOppositeLightsourceChild = false;
+  bool childOppositeLightSourceChild = false;
   bool drawAboveChild = false;
   double childMargin = 5;
   double childDepth = 5;
@@ -141,7 +142,7 @@ class __PageState extends State<_Page> {
         surfaceIntensity: surfaceIntensity,
         depth: childDepth,
         lightSource: lightSource,
-        oppositeShadowLightSource: childOppositeLightsourceChild,
+        oppositeShadowLightSource: childOppositeLightSourceChild,
       ),
       child: const SizedBox.expand(),
     );

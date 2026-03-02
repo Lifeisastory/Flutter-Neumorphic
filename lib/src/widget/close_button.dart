@@ -1,4 +1,6 @@
-import 'package:my_neumorphic/flutter_neumorphic.dart';
+import 'package:flutter/material.dart';
+
+import '../../flutter_neumorphic.dart';
 
 class NeumorphicCloseButton extends StatelessWidget {
   final VoidCallback? onPressed;
@@ -14,7 +16,7 @@ class NeumorphicCloseButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final nThemeIcons = NeumorphicTheme.of(context)!.current!.appBarTheme.icons;
+    final nThemeIcons = NeumorphicTheme.of(context)!.current.appBarTheme.icons;
     return NeumorphicButton(
       style: style,
       padding: padding,

@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart';
+
 import '../../flutter_neumorphic.dart';
 
-export 'inherited_neumorphic_theme.dart';
-export 'theme.dart';
+export 'neumorphic_theme_inherited.dart';
+export 'themes.dart';
 export 'theme_wrapper.dart';
 
 /// The NeumorphicTheme (provider)
@@ -38,23 +40,16 @@ export 'theme_wrapper.dart';
 ///   )
 ///
 class NeumorphicTheme extends StatefulWidget {
-  // Global fallback for apps that do not mount NeumorphicTheme/NeumorphicApp.
   static NeumorphicThemeData _globalTheme = neumorphicDefaultTheme;
   static NeumorphicThemeData _globalDarkTheme = neumorphicDefaultDarkTheme;
-  static bool _syncWithMaterialBrightness = false;
+  static bool _syncWithAppTheme = false;
 
-  /// Initialize global fallback theme behavior.
-  ///
-  /// Use this at app startup when you don't want to wrap the app with
-  /// [NeumorphicApp]/[NeumorphicTheme].
-  ///
-  /// If [syncWithMaterialBrightness] is true, Neumorphic widgets will follow
-  /// `Theme.of(context).brightness`, which already reflects MaterialApp's
-  /// `themeMode` resolution.
-  static void initialize({NeumorphicThemeData? theme, NeumorphicThemeData? darkTheme, bool syncWithMaterialBrightness = false}) {
+  /// 使用这个函数来同步app和此包的主题，避免直接侵入地在组件树顶部包裹NeumorphicTheme
+  /// 如果调用过这个函数，又包裹了NeumorphicTheme，仍会优先使用app的主题模式
+  static void initializeNeumorphicTheme({NeumorphicThemeData? theme, NeumorphicThemeData? darkTheme, bool syncWithAppTheme = false}) {
     _globalTheme = theme ?? _globalTheme;
     _globalDarkTheme = darkTheme ?? _globalDarkTheme;
-    _syncWithMaterialBrightness = syncWithMaterialBrightness;
+    _syncWithAppTheme = syncWithAppTheme;
   }
 
   final NeumorphicThemeData theme;
@@ -87,13 +82,16 @@ class NeumorphicTheme extends StatefulWidget {
     return theme.update(updater);
   }
 
+  /// 先判断是否初始化为与app主题同步，再判断是否包裹NeumorphicTheme
   static bool isUsingDark(BuildContext context) {
-    final theme = of(context);
-    if (theme == null) {
-      if (!_syncWithMaterialBrightness) return false;
-      return _tryGetMaterialBrightness(context) == Brightness.dark;
+    if (_syncWithAppTheme) {
+      return Theme.of(context).brightness == Brightness.dark ? true : false;
     }
-    return theme.isUsingDark;
+    final theme = of(context);
+    if (theme != null) {
+      return theme.isUsingDark;
+    }
+    return false;
   }
 
   static Color accentColor(BuildContext context) {
@@ -130,23 +128,14 @@ class NeumorphicTheme extends StatefulWidget {
   }
 
   static NeumorphicThemeData currentTheme(BuildContext context) {
-    final provider = NeumorphicTheme.of(context);
-    if (provider != null) {
-      return provider.current ?? neumorphicDefaultTheme;
+    if (_syncWithAppTheme) {
+      return Theme.of(context).brightness == Brightness.dark ? _globalDarkTheme : _globalTheme;
     }
-
-    if (_syncWithMaterialBrightness && _tryGetMaterialBrightness(context) == Brightness.dark) {
-      return _globalDarkTheme;
+    final provider = of(context);
+    if (provider != null) {
+      return provider.current;
     }
     return _globalTheme;
-  }
-
-  static Brightness? _tryGetMaterialBrightness(BuildContext context) {
-    try {
-      return Theme.of(context).brightness;
-    } catch (_) {
-      return null;
-    }
   }
 }
 
@@ -182,12 +171,12 @@ class _NeumorphicThemeState extends State<NeumorphicTheme> {
 
   @override
   Widget build(BuildContext context) {
+    /// 当调用NeumorphicThemeInherited里的update相关方法时，会调用这里传入的onChanged()，这时触发setState()，build()
+    /// 会重建NeumorphicThemeInherited，theme也就被更新了
     return NeumorphicThemeInherited(
-      value: _themeHost,
+      theme: _themeHost,
       onChanged: (value) {
-        setState(() {
-          _themeHost = value;
-        });
+        setState(() => _themeHost = value);
       },
       child: widget.child,
     );
