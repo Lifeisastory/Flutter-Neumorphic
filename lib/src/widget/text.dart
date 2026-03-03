@@ -36,30 +36,30 @@ class NeumorphicTextStyle {
   //final double decorationThickness;
 
   TextStyle get textStyle => TextStyle(
-        inherit: inherit,
-        fontSize: fontSize,
-        fontWeight: fontWeight,
-        fontStyle: fontStyle,
-        letterSpacing: letterSpacing,
-        wordSpacing: wordSpacing,
-        textBaseline: textBaseline,
-        height: height,
-        locale: locale,
-        fontFeatures: fontFeatures,
-        decoration: decoration,
-        debugLabel: debugLabel,
-        fontFamily: fontFamily,
-        fontFamilyFallback: fontFamilyFallback,
-        package: package,
-        //color: color,
-        //backgroundColor: backgroundColor,
-        //foreground: foreground,
-        //background: background,
-        //decoration: decoration,
-        //decorationColor: decorationColor,
-        //decorationStyle: decorationStyle,
-        //decorationThickness: decorationThickness,
-      );
+    inherit: inherit,
+    fontSize: fontSize,
+    fontWeight: fontWeight,
+    fontStyle: fontStyle,
+    letterSpacing: letterSpacing,
+    wordSpacing: wordSpacing,
+    textBaseline: textBaseline,
+    height: height,
+    locale: locale,
+    fontFeatures: fontFeatures,
+    decoration: decoration,
+    debugLabel: debugLabel,
+    fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
+    package: package,
+    //color: color,
+    //backgroundColor: backgroundColor,
+    //foreground: foreground,
+    //background: background,
+    //decoration: decoration,
+    //decorationColor: decorationColor,
+    //decorationStyle: decorationStyle,
+    //decorationThickness: decorationThickness,
+  );
 
   /// Creates a text style.
   ///
@@ -139,6 +139,33 @@ class NeumorphicTextStyle {
       //decorationStyle: decorationStyle ?? this.decorationStyle,
       //decorationThickness: decorationThickness ?? this.decorationThickness,
     );
+  }              
+
+  NeumorphicTextStyle copyWithStyleIfNull(TextStyle style) {
+    return NeumorphicTextStyle(                                                                             
+      inherit: style.inherit,
+      fontFamily: this.fontFamily ?? style.fontFamily,
+      fontFamilyFallback: this.fontFamilyFallback ?? style.fontFamilyFallback,
+      fontSize: this.fontSize ?? style.fontSize,
+      fontWeight: this.fontWeight ?? style.fontWeight,
+      fontStyle: this.fontStyle ?? style.fontStyle,
+      letterSpacing: this.letterSpacing ?? style.letterSpacing,
+      wordSpacing: this.wordSpacing ?? style.wordSpacing,
+      textBaseline: this.textBaseline ?? style.textBaseline,
+      height: this.height ?? style.height,
+      locale: this.locale ?? style.locale,
+      fontFeatures: this.fontFeatures ?? style.fontFeatures,
+      debugLabel: this.debugLabel ?? style.debugLabel,
+      //color: foreground == null && foreground == null ? this.color ?? style.color : null,
+      //backgroundColor: background == null && background == null ? this.backgroundColor ?? style.backgroundColor : null,
+      //foreground: this.foreground ?? style.foreground,
+      //background: this.background ?? style.background,
+      //shadows: this.shadows ?? style.shadows,
+      //decoration: this.decoration ?? style.decoration,
+      //decorationColor: this.decorationColor ?? style.decorationColor,
+      //decorationStyle: this.decorationStyle ?? style.decorationStyle,
+      //decorationThickness: this.decorationThickness ?? style.decorationThickness,
+    );
   }
 }
 
@@ -164,7 +191,7 @@ class NeumorphicText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = NeumorphicTheme.currentTheme(context);
-    final NeumorphicStyle style = (this.style ?? NeumorphicStyle()).copyWithTheme(theme).applyDisableDepth();
+    final NeumorphicStyle style = (this.style ?? NeumorphicStyle()).copyWithThemeIfNull(theme).applyDisableDepth();
 
     return _NeumorphicText(
       textStyle: (this.textStyle ?? NeumorphicTextStyle()).textStyle,
@@ -206,43 +233,39 @@ class __NeumorphicTextState extends material.State<_NeumorphicText> {
   Widget build(BuildContext context) {
     final TextPainter _textPainter = TextPainter(textDirection: TextDirection.ltr, textAlign: this.widget.textAlign);
     final textStyle = this.widget.textStyle;
-    _textPainter.text = TextSpan(
-      text: this.widget.text,
-      style: this.widget.textStyle,
+    _textPainter.text = TextSpan(text: this.widget.text, style: this.widget.textStyle);
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        _textPainter.layout(minWidth: 0, maxWidth: constraints.maxWidth);
+        final double width = _textPainter.width;
+        final double height = _textPainter.height;
+
+        return DefaultTextStyle(
+          style: textStyle,
+          child: AnimatedContainer(
+            duration: this.widget.duration,
+            curve: this.widget.curve,
+            decoration: NeumorphicTextDecoration(
+              isForeground: false,
+              textStyle: textStyle,
+              textAlign: widget.textAlign,
+              renderingByPath: true,
+              style: this.widget.style,
+              text: this.widget.text,
+            ),
+            foregroundDecoration: NeumorphicTextDecoration(
+              isForeground: true,
+              textStyle: textStyle,
+              textAlign: widget.textAlign,
+              renderingByPath: true,
+              style: this.widget.style,
+              text: this.widget.text,
+            ),
+            child: SizedBox(width: width, height: height),
+          ),
+        );
+      },
     );
-
-    return LayoutBuilder(builder: (context, constraints) {
-      _textPainter.layout(minWidth: 0, maxWidth: constraints.maxWidth);
-      final double width = _textPainter.width;
-      final double height = _textPainter.height;
-
-      return DefaultTextStyle(
-        style: textStyle,
-        child: AnimatedContainer(
-          duration: this.widget.duration,
-          curve: this.widget.curve,
-          decoration: NeumorphicTextDecoration(
-            isForeground: false,
-            textStyle: textStyle,
-            textAlign: widget.textAlign,
-            renderingByPath: true,
-            style: this.widget.style,
-            text: this.widget.text,
-          ),
-          foregroundDecoration: NeumorphicTextDecoration(
-            isForeground: true,
-            textStyle: textStyle,
-            textAlign: widget.textAlign,
-            renderingByPath: true,
-            style: this.widget.style,
-            text: this.widget.text,
-          ),
-          child: SizedBox(
-            width: width,
-            height: height,
-          ),
-        ),
-      );
-    });
   }
 }

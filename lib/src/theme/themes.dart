@@ -377,7 +377,7 @@ class NeumorphicStyle {
 
   double get surfaceIntensity => _surfaceIntensity.clamp(NeumorphicContainer.MIN_INTENSITY, NeumorphicContainer.MAX_INTENSITY);
 
-  NeumorphicStyle copyWithTheme(NeumorphicThemeData theme) {
+  NeumorphicStyle copyWithThemeIfNull(NeumorphicThemeData theme) {
     return NeumorphicStyle._withTheme(
         theme: theme,
         color: this.color ?? theme.baseColor,
