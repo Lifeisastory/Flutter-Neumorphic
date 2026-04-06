@@ -4,6 +4,8 @@ import '../../flutter_neumorphic.dart';
 
 class NeumorphicToggleStyle {
   final double? depth;
+  final double? secondaryDepth;
+  final double? secondaryIntensity;
   final bool? disableDepth;
   final BorderRadius borderRadius;
   final bool animateOpacity;
@@ -13,6 +15,8 @@ class NeumorphicToggleStyle {
 
   const NeumorphicToggleStyle({
     this.depth,
+    this.secondaryDepth,
+    this.secondaryIntensity,
     this.animateOpacity = true,
     this.backgroundColor,
     this.lightSource,
@@ -27,6 +31,8 @@ class NeumorphicToggleStyle {
       other is NeumorphicToggleStyle &&
           runtimeType == other.runtimeType &&
           depth == other.depth &&
+          secondaryDepth == other.secondaryDepth &&
+          secondaryIntensity == other.secondaryIntensity &&
           border == other.border &&
           backgroundColor == other.backgroundColor &&
           lightSource == other.lightSource &&
@@ -37,6 +43,8 @@ class NeumorphicToggleStyle {
   @override
   int get hashCode =>
       depth.hashCode ^
+      secondaryDepth.hashCode ^
+      secondaryIntensity.hashCode ^
       backgroundColor.hashCode ^
       lightSource.hashCode ^
       border.hashCode ^
@@ -192,6 +200,8 @@ class NeumorphicToggle extends StatelessWidget {
             child: NeumorphicContainer(
               style: NeumorphicStyle(
                 boxShape: NeumorphicBoxShape.roundRect(this.style?.borderRadius ?? BorderRadius.all(Radius.circular(12))),
+                secondaryDepth: this.style?.secondaryDepth,
+                secondaryIntensity: this.style?.secondaryIntensity,
               ),
               margin: this.padding,
               child: this.thumb,
@@ -263,6 +273,8 @@ class NeumorphicToggle extends StatelessWidget {
           color: this.style?.backgroundColor,
           disableDepth: this.style?.disableDepth,
           depth: _getTrackDepth(context),
+          secondaryDepth: this.style?.secondaryDepth,
+          secondaryIntensity: this.style?.secondaryIntensity,
           shape: NeumorphicSurfaceType.flat,
           border: this.style?.border ?? NeumorphicBorder.none(),
           lightSource: this.style?.lightSource ?? NeumorphicTheme.currentTheme(context).lightSource),

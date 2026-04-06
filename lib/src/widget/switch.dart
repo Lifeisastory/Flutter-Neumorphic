@@ -13,6 +13,8 @@ import '../../src/widget/animation/animated_scale.dart' as animationScale;
 ///
 class NeumorphicSwitchStyle {
   final double? trackDepth;
+  final double? secondaryDepth;
+  final double? secondaryIntensity;
   final Color? activeTrackColor;
   final Color? inactiveTrackColor;
   final Color? activeThumbColor;
@@ -27,6 +29,8 @@ class NeumorphicSwitchStyle {
 
   const NeumorphicSwitchStyle({
     this.trackDepth,
+    this.secondaryDepth,
+    this.secondaryIntensity,
     this.thumbShape = NeumorphicSurfaceType.concave,
     this.activeTrackColor,
     this.inactiveTrackColor,
@@ -45,6 +49,8 @@ class NeumorphicSwitchStyle {
       other is NeumorphicSwitchStyle &&
           runtimeType == other.runtimeType &&
           trackDepth == other.trackDepth &&
+          secondaryDepth == other.secondaryDepth &&
+          secondaryIntensity == other.secondaryIntensity &&
           trackBorder == other.trackBorder &&
           thumbBorder == other.thumbBorder &&
           lightSource == other.lightSource &&
@@ -59,6 +65,8 @@ class NeumorphicSwitchStyle {
   @override
   int get hashCode =>
       trackDepth.hashCode ^
+      secondaryDepth.hashCode ^
+      secondaryIntensity.hashCode ^
       activeTrackColor.hashCode ^
       trackBorder.hashCode ^
       thumbBorder.hashCode ^
@@ -159,6 +167,8 @@ class NeumorphicSwitch extends StatelessWidget {
               border: this.style.trackBorder,
               disableDepth: this.style.disableDepth,
               depth: _getTrackDepth(theme.depth),
+              secondaryDepth: this.style.secondaryDepth,
+              secondaryIntensity: this.style.secondaryIntensity,
               shape: NeumorphicSurfaceType.flat,
               color: _getTrackColor(theme, this.isEnabled),
             ),
@@ -175,6 +185,8 @@ class NeumorphicSwitch extends StatelessWidget {
                 lightSource: this.style.lightSource ?? theme.lightSource,
                 border: style.thumbBorder,
                 thumbColor: _getThumbColor(theme),
+                secondaryDepth: this.style.secondaryDepth,
+                secondaryIntensity: this.style.secondaryIntensity,
               ),
             ),
           ),
@@ -233,6 +245,8 @@ class AnimatedThumb extends StatelessWidget {
   final bool disableDepth;
   final NeumorphicBorder border;
   final LightSource lightSource;
+  final double? secondaryDepth;
+  final double? secondaryIntensity;
 
   AnimatedThumb({
     Key? key,
@@ -245,6 +259,8 @@ class AnimatedThumb extends StatelessWidget {
     this.border = const NeumorphicBorder.none(),
     this.lightSource = LightSource.topLeft,
     this.disableDepth = false,
+    this.secondaryDepth,
+    this.secondaryIntensity,
   }) : super(key: key);
 
   @override
@@ -262,6 +278,8 @@ class AnimatedThumb extends StatelessWidget {
             disableDepth: this.disableDepth,
             shape: shape,
             depth: this.depth,
+            secondaryDepth: this.secondaryDepth,
+            secondaryIntensity: this.secondaryIntensity,
             color: thumbColor,
             border: this.border,
             lightSource: this.lightSource,

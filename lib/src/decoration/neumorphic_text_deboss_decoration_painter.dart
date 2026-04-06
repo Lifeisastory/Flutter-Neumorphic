@@ -118,41 +118,47 @@ class NeumorphicDebossDecorationTextPainter extends BoxPainter {
     final constraints = ui.ParagraphConstraints(width: _cache.width);
     final paragraphStyle = textStyle.getParagraphStyle(textDirection: TextDirection.ltr, textAlign: textAlign);
 
-    _textParagraph = (ui.ParagraphBuilder(paragraphStyle)
-          ..pushStyle(ui.TextStyle(foreground: _borderPaint))
-          ..addText(text))
-        .build()
-      ..layout(constraints);
+    _textParagraph =
+        (ui.ParagraphBuilder(paragraphStyle)
+              ..pushStyle(ui.TextStyle(foreground: _borderPaint))
+              ..addText(text))
+            .build()
+          ..layout(constraints);
 
-    _innerTextParagraph = (ui.ParagraphBuilder(paragraphStyle)
-          ..pushStyle(ui.TextStyle(foreground: _backgroundPaint))
-          ..addText(text))
-        .build()
-      ..layout(constraints);
+    _innerTextParagraph =
+        (ui.ParagraphBuilder(paragraphStyle)
+              ..pushStyle(ui.TextStyle(foreground: _backgroundPaint))
+              ..addText(text))
+            .build()
+          ..layout(constraints);
 
-    _whiteShadowParagraph = (ui.ParagraphBuilder(paragraphStyle)
-          ..pushStyle(ui.TextStyle(foreground: _whiteShadowPaint))
-          ..addText(text))
-        .build()
-      ..layout(constraints);
+    _whiteShadowParagraph =
+        (ui.ParagraphBuilder(paragraphStyle)
+              ..pushStyle(ui.TextStyle(foreground: _whiteShadowPaint))
+              ..addText(text))
+            .build()
+          ..layout(constraints);
 
-    _whiteShadowMaskParagraph = (ui.ParagraphBuilder(paragraphStyle)
-          ..pushStyle(ui.TextStyle(foreground: _whiteShadowMaskPaint))
-          ..addText(text))
-        .build()
-      ..layout(constraints);
+    _whiteShadowMaskParagraph =
+        (ui.ParagraphBuilder(paragraphStyle)
+              ..pushStyle(ui.TextStyle(foreground: _whiteShadowMaskPaint))
+              ..addText(text))
+            .build()
+          ..layout(constraints);
 
-    _blackShadowTextParagraph = (ui.ParagraphBuilder(paragraphStyle)
-          ..pushStyle(ui.TextStyle(foreground: _blackShadowPaint))
-          ..addText(text))
-        .build()
-      ..layout(constraints);
+    _blackShadowTextParagraph =
+        (ui.ParagraphBuilder(paragraphStyle)
+              ..pushStyle(ui.TextStyle(foreground: _blackShadowPaint))
+              ..addText(text))
+            .build()
+          ..layout(constraints);
 
-    _blackShadowTextMaskParagraph = (ui.ParagraphBuilder(paragraphStyle)
-          ..pushStyle(ui.TextStyle(foreground: _blackShadowMaskPaint))
-          ..addText(text))
-        .build()
-      ..layout(constraints);
+    _blackShadowTextMaskParagraph =
+        (ui.ParagraphBuilder(paragraphStyle)
+              ..pushStyle(ui.TextStyle(foreground: _blackShadowMaskPaint))
+              ..addText(text))
+            .build()
+          ..layout(constraints);
 
     if (invalidateLightSource || invalidateDepth || invalidateSize) {
       _cache.updateTranslations();
@@ -182,7 +188,7 @@ class NeumorphicDebossDecorationTextPainter extends BoxPainter {
       ..saveLayer(_cache.layerRect, Paint())
       ..translate(_cache.originOffset.dx, _cache.originOffset.dy)
       ..drawParagraph(_whiteShadowParagraph, Offset.zero)
-      ..translate(_cache.witheShadowLeftTranslation, _cache.witheShadowTopTranslation)
+      ..translate(_cache.whiteShadowLeftTranslation, _cache.whiteShadowTopTranslation)
       ..drawParagraph(_whiteShadowMaskParagraph, Offset.zero)
       ..restore();
 

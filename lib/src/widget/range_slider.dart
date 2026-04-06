@@ -16,6 +16,8 @@ typedef void NeumorphicRangeSliderHighListener(double percent);
 @immutable
 class RangeSliderStyle {
   final double depth;
+  final double? secondaryDepth;
+  final double? secondaryIntensity;
   final bool disableDepth;
   final BorderRadius borderRadius;
   final Color? accent;
@@ -27,6 +29,8 @@ class RangeSliderStyle {
 
   const RangeSliderStyle({
     this.depth = 0,
+    this.secondaryDepth,
+    this.secondaryIntensity,
     this.disableDepth = false,
     this.borderRadius = const BorderRadius.all(Radius.circular(10)),
     this.accent,
@@ -42,6 +46,8 @@ class RangeSliderStyle {
       other is RangeSliderStyle &&
           runtimeType == other.runtimeType &&
           depth == other.depth &&
+          secondaryDepth == other.secondaryDepth &&
+          secondaryIntensity == other.secondaryIntensity &&
           lightSource == other.lightSource &&
           disableDepth == other.disableDepth &&
           borderRadius == other.borderRadius &&
@@ -53,6 +59,8 @@ class RangeSliderStyle {
   @override
   int get hashCode =>
       depth.hashCode ^
+      secondaryDepth.hashCode ^
+      secondaryIntensity.hashCode ^
       disableDepth.hashCode ^
       borderRadius.hashCode ^
       lightSource.hashCode ^
@@ -268,6 +276,8 @@ class _NeumorphicRangeSliderState extends State<NeumorphicRangeSlider> {
           style: ProgressStyle(
             disableDepth: widget.style.disableDepth,
             depth: widget.style.depth,
+            secondaryDepth: widget.style.secondaryDepth,
+            secondaryIntensity: widget.style.secondaryIntensity,
             border: widget.style.border,
             borderRadius: widget.style.borderRadius,
             accent: widget.style.accent ?? theme.accentColor,
@@ -304,6 +314,8 @@ class _NeumorphicRangeSliderState extends State<NeumorphicRangeSlider> {
         border: widget.style.thumbBorder,
         boxShape: NeumorphicBoxShape.circle(),
         lightSource: widget.style.lightSource ?? theme.lightSource,
+        secondaryDepth: widget.style.secondaryDepth,
+        secondaryIntensity: widget.style.secondaryIntensity,
       ),
       child: SizedBox(
         height: size,

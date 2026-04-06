@@ -114,6 +114,10 @@ class NeumorphicTheme extends StatefulWidget {
     return currentTheme(context).intensity;
   }
 
+  static double? secondaryIntensity(BuildContext context) {
+    return currentTheme(context).secondaryIntensity;
+  }
+
   static double? embossDepth(BuildContext context) {
     return currentTheme(context).depth;
   }
@@ -121,6 +125,14 @@ class NeumorphicTheme extends StatefulWidget {
   static double? debossDepth(BuildContext context) {
     // if (currentTheme(context).depth == null) return null;
     return -currentTheme(context).depth.abs();
+  }
+
+  static double? embossInnerDepth(BuildContext context) {
+    return currentTheme(context).secondaryDepth;
+  }
+
+  static double? debossOuterDepth(BuildContext context) {
+    return currentTheme(context).secondaryDepth;
   }
 
   static Color defaultTextColor(BuildContext context) {

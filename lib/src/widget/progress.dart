@@ -14,6 +14,8 @@ import 'container.dart';
 ///
 class ProgressStyle {
   final double depth;
+  final double? secondaryDepth;
+  final double? secondaryIntensity;
   final BorderRadius borderRadius;
   final BorderRadius? gradientBorderRadius;
   final Color? accent;
@@ -28,6 +30,8 @@ class ProgressStyle {
 
   const ProgressStyle({
     this.depth = 0,
+    this.secondaryDepth,
+    this.secondaryIntensity,
     this.disableDepth = false,
     this.borderRadius = const BorderRadius.all(Radius.circular(10.0)),
     this.gradientBorderRadius,
@@ -45,6 +49,8 @@ class ProgressStyle {
       other is ProgressStyle &&
           runtimeType == other.runtimeType &&
           depth == other.depth &&
+          secondaryDepth == other.secondaryDepth &&
+          secondaryIntensity == other.secondaryIntensity &&
           border == other.border &&
           disableDepth == other.disableDepth &&
           lightSource == other.lightSource &&
@@ -58,6 +64,8 @@ class ProgressStyle {
   @override
   int get hashCode =>
       depth.hashCode ^
+      secondaryDepth.hashCode ^
+      secondaryIntensity.hashCode ^
       disableDepth.hashCode ^
       borderRadius.hashCode ^
       lightSource.hashCode ^
@@ -169,6 +177,8 @@ class _NeumorphicProgressState extends State<NeumorphicProgress> with TickerProv
             disableDepth: widget.style.disableDepth,
             border: widget.style.border,
             depth: widget.style.depth,
+            secondaryDepth: widget.style.secondaryDepth,
+            secondaryIntensity: widget.style.secondaryIntensity,
             shape: NeumorphicSurfaceType.flat,
           ),
           child: AnimatedBuilder(
@@ -286,6 +296,8 @@ class _NeumorphicProgressIndeterminateState extends State<NeumorphicProgressInde
             border: widget.style.border,
             disableDepth: widget.style.disableDepth,
             depth: widget.style.depth,
+            secondaryDepth: widget.style.secondaryDepth,
+            secondaryIntensity: widget.style.secondaryIntensity,
             shape: NeumorphicSurfaceType.flat,
           ),
           child: LayoutBuilder(builder: (context, constraints) {

@@ -6,6 +6,8 @@ import 'cache/neumorphic_deboss_painter_cache.dart';
 
 export '../theme/themes.dart';
 
+/// 凹入
+
 class NeumorphicDebossDecorationPainter extends BoxPainter {
   NeumorphicDebossPainterCache _cache;
 
@@ -17,16 +19,24 @@ class NeumorphicDebossDecorationPainter extends BoxPainter {
   late Paint _whiteShadowMaskPaint;
   late Paint _blackShadowPaint;
   late Paint _blackShadowMaskPaint;
+  late Paint _whiteOuterPaint;
+  late Paint _whiteOuterMaskPaint;
+  late Paint _blackOuterPaint;
+  late Paint _blackOuterMaskPaint;
   late Paint _borderPaint;
 
   final bool drawShadow;
   final bool drawBackground;
 
-  NeumorphicDebossDecorationPainter(
-      {required this.style, required this.drawBackground, required this.drawShadow, required VoidCallback onChanged, NeumorphicBoxShape? shape})
-      : this.shape = shape ?? NeumorphicBoxShape.rect(),
-        _cache = NeumorphicDebossPainterCache(),
-        super(onChanged) {
+  NeumorphicDebossDecorationPainter({
+    required this.style,
+    required this.drawBackground,
+    required this.drawShadow,
+    required VoidCallback onChanged,
+    NeumorphicBoxShape? shape,
+  }) : this.shape = shape ?? NeumorphicBoxShape.rect(),
+       _cache = NeumorphicDebossPainterCache(),
+       super(onChanged) {
     _generatePainters();
   }
 
@@ -36,6 +46,10 @@ class NeumorphicDebossDecorationPainter extends BoxPainter {
     this._whiteShadowMaskPaint = Paint()..blendMode = BlendMode.dstOut;
     this._blackShadowPaint = Paint();
     this._blackShadowMaskPaint = Paint()..blendMode = BlendMode.dstOut;
+    this._whiteOuterPaint = Paint();
+    this._whiteOuterMaskPaint = Paint()..blendMode = BlendMode.dstOut;
+    this._blackOuterPaint = Paint();
+    this._blackOuterMaskPaint = Paint()..blendMode = BlendMode.dstOut;
 
     this._borderPaint = Paint()
       ..strokeCap = StrokeCap.round
@@ -48,6 +62,10 @@ class NeumorphicDebossDecorationPainter extends BoxPainter {
     _updateCache(offset: offset, configuration: configuration, newStyle: this.style);
 
     for (var subPath in _cache.subPaths) {
+      if (drawShadow) {
+        _paintOuterEdge(canvas, subPath);
+      }
+
       if (drawBackground) {
         _paintBackground(canvas, subPath);
       }
@@ -91,11 +109,20 @@ class NeumorphicDebossDecorationPainter extends BoxPainter {
       }
     }
 
+    bool invalidateSecondaryDepth = false;
+    if (style.secondaryDepth != null) {
+      invalidateSecondaryDepth = this._cache.updateSecondaryStyleDepth(style.secondaryDepth!, 5);
+      if (invalidateSecondaryDepth) {
+        _blackOuterPaint..maskFilter = _cache.secondaryMaskFilter;
+        _whiteOuterPaint..maskFilter = _cache.secondaryMaskFilter;
+      }
+    }
+
     final bool invalidateShadowColors = this._cache.updateShadowColor(
-          newShadowLightColor: style.shadowWhiteColorDeboss ?? Color(0xFFFFFFFF),
-          newShadowDarkColor: style.shadowBlackColorDeboss ?? Color(0xFF000000),
-          newIntensity: style.intensity ?? 0.25,
-        );
+      newShadowLightColor: style.shadowWhiteColorDeboss ?? Color(0xFFFFFFFF),
+      newShadowDarkColor: style.shadowBlackColorDeboss ?? Color(0xFF000000),
+      newIntensity: style.intensity ?? 0.25,
+    );
     if (invalidateShadowColors) {
       if (_cache.shadowLightColor != null) {
         _whiteShadowPaint..color = _cache.shadowLightColor!;
@@ -103,6 +130,28 @@ class NeumorphicDebossDecorationPainter extends BoxPainter {
       if (_cache.shadowDarkColor != null) {
         _blackShadowPaint..color = _cache.shadowDarkColor!;
       }
+    }
+
+    final bool invalidateSecondaryShadowColors = this._cache.updateSecondaryShadowColor(
+      newShadowLightColor: style.shadowWhiteColorDeboss ?? Color(0xFFFFFFFF),
+      newShadowDarkColor: style.shadowBlackColorDeboss ?? Color(0xFF000000),
+      newIntensity: style.secondaryIntensity ?? 0.5,
+    );
+    if (invalidateSecondaryShadowColors) {
+      if (_cache.secondaryShadowLightColor != null) {
+        _whiteOuterPaint..color = _cache.secondaryShadowLightColor!;
+      }
+      if (_cache.secondaryShadowDarkColor != null) {
+        _blackOuterPaint..color = _cache.secondaryShadowDarkColor!;
+      }
+    }
+
+    if (invalidateLightSource || invalidateDepth) {
+      _cache.updateDepthOffset();
+    }
+
+    if (invalidateLightSource || invalidateSecondaryDepth) {
+      _cache.updateSecondaryDepthOffset();
     }
 
     if (invalidateLightSource || invalidateDepth || invalidateSize) {
@@ -124,10 +173,31 @@ class NeumorphicDebossDecorationPainter extends BoxPainter {
         ..save()
         ..translate(offset.dx, offset.dy)
         ..drawPath(
-            path,
-            _borderPaint
-              ..color = style.border.color ?? Color(0x00000000)
-              ..strokeWidth = style.border.width ?? 0)
+          path,
+          _borderPaint
+            ..color = style.border.color ?? Color(0x00000000)
+            ..strokeWidth = style.border.width ?? 0,
+        )
+        ..restore();
+    }
+  }
+
+  void _paintOuterEdge(Canvas canvas, Path path) {
+    if (style.secondaryDepth != null && style.secondaryDepth!.abs() >= 0.1) {
+      canvas
+        ..saveLayer(_cache.layerRect, Paint())
+        ..translate(_cache.originOffset.dx + _cache.secondaryDepthOffset.dx, _cache.originOffset.dy + _cache.secondaryDepthOffset.dy)
+        ..drawPath(path, _blackOuterPaint)
+        ..translate(-_cache.secondaryDepthOffset.dx, -_cache.secondaryDepthOffset.dy)
+        ..drawPath(path, _blackOuterMaskPaint)
+        ..restore();
+
+      canvas
+        ..saveLayer(_cache.layerRect, Paint())
+        ..translate(_cache.originOffset.dx - _cache.secondaryDepthOffset.dx, _cache.originOffset.dy - _cache.secondaryDepthOffset.dy)
+        ..drawPath(path, _whiteOuterPaint)
+        ..translate(_cache.secondaryDepthOffset.dx, _cache.secondaryDepthOffset.dy)
+        ..drawPath(path, _whiteOuterMaskPaint)
         ..restore();
     }
   }
@@ -139,7 +209,7 @@ class NeumorphicDebossDecorationPainter extends BoxPainter {
       ..saveLayer(_cache.layerRect, Paint())
       ..translate(_cache.originOffset.dx, _cache.originOffset.dy)
       ..drawPath(path, _whiteShadowPaint)
-      ..translate(_cache.witheShadowLeftTranslation, _cache.witheShadowTopTranslation)
+      ..translate(_cache.whiteShadowLeftTranslation, _cache.whiteShadowTopTranslation)
       ..drawPath(path.transform(matrix4.storage), _whiteShadowMaskPaint)
       ..restore();
 

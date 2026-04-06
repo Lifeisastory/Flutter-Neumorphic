@@ -15,6 +15,8 @@ typedef void NeumorphicSliderListener(double percent);
 @immutable
 class SliderStyle {
   final double depth;
+  final double? secondaryDepth;
+  final double? secondaryIntensity;
   final bool disableDepth;
   final BorderRadius borderRadius;
   final Color? accent;
@@ -26,6 +28,8 @@ class SliderStyle {
 
   const SliderStyle({
     this.depth = 0,
+    this.secondaryDepth,
+    this.secondaryIntensity,
     this.disableDepth = false,
     this.borderRadius = const BorderRadius.all(Radius.circular(10)),
     this.accent,
@@ -41,6 +45,8 @@ class SliderStyle {
       other is SliderStyle &&
           runtimeType == other.runtimeType &&
           depth == other.depth &&
+          secondaryDepth == other.secondaryDepth &&
+          secondaryIntensity == other.secondaryIntensity &&
           disableDepth == other.disableDepth &&
           lightSource == other.lightSource &&
           borderRadius == other.borderRadius &&
@@ -52,6 +58,8 @@ class SliderStyle {
   @override
   int get hashCode =>
       depth.hashCode ^
+      secondaryDepth.hashCode ^
+      secondaryIntensity.hashCode ^
       disableDepth.hashCode ^
       borderRadius.hashCode ^
       border.hashCode ^
@@ -189,6 +197,8 @@ class _NeumorphicSliderState extends State<NeumorphicSlider> {
       style: ProgressStyle(
         disableDepth: widget.style.disableDepth,
         depth: widget.style.depth,
+        secondaryDepth: widget.style.secondaryDepth,
+        secondaryIntensity: widget.style.secondaryIntensity,
         border: widget.style.border,
         lightSource: widget.style.lightSource ?? theme.lightSource,
         borderRadius: widget.style.borderRadius,
@@ -208,6 +218,8 @@ class _NeumorphicSliderState extends State<NeumorphicSlider> {
         lightSource: widget.style.lightSource ?? theme.lightSource,
         color: widget.style.accent ?? theme.accentColor,
         boxShape: NeumorphicBoxShape.circle(),
+        secondaryDepth: widget.style.secondaryDepth,
+        secondaryIntensity: widget.style.secondaryIntensity,
       ),
       child: SizedBox(
         height: size,

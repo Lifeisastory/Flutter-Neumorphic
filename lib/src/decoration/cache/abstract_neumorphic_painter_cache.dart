@@ -64,6 +64,24 @@ abstract class AbstractNeumorphicPainterCache {
     return false;
   }
 
+  double? _cacheSecondaryStyleDepth;
+  double? _secondaryDepth;
+  double get secondaryDepth => _secondaryDepth ?? 0;
+
+  bool updateSecondaryStyleDepth(double newStyleDepth, double radiusFactor) {
+    if (_cacheSecondaryStyleDepth != newStyleDepth) {
+      _cacheSecondaryStyleDepth = newStyleDepth;
+
+      final depth = newStyleDepth.abs().clamp(0.0, (_cacheRadius ?? 0) / radiusFactor);
+      _secondaryDepth = depth;
+
+      this._updateSecondaryMaskFilter(newDepth: depth);
+
+      return true;
+    }
+    return false;
+  }
+
   Offset? _depthOffset;
 
   Offset get depthOffset => _depthOffset ?? Offset.zero;
@@ -71,6 +89,16 @@ abstract class AbstractNeumorphicPainterCache {
   void updateDepthOffset() {
     if (_depth != null) {
       _depthOffset = this.lightSource.offset.scale(_depth!, _depth!);
+    }
+  }
+
+  Offset? _secondaryDepthOffset;
+
+  Offset get secondaryDepthOffset => _secondaryDepthOffset ?? Offset.zero;
+
+  void updateSecondaryDepthOffset() {
+    if (_secondaryDepth != null) {
+      _secondaryDepthOffset = this.lightSource.offset.scale(_secondaryDepth!, _secondaryDepth!);
     }
   }
 
@@ -129,6 +157,14 @@ abstract class AbstractNeumorphicPainterCache {
     this._maskFilter = MaskFilter.blur(BlurStyle.normal, newDepth);
   }
 
+  MaskFilter? _secondaryMaskFilter;
+
+  MaskFilter? get secondaryMaskFilter => _secondaryMaskFilter;
+
+  void _updateSecondaryMaskFilter({required double newDepth}) {
+    this._secondaryMaskFilter = MaskFilter.blur(BlurStyle.normal, newDepth);
+  }
+
   double? _styleIntensity;
   Color? _styleShadowLightColor;
   Color? _shadowLightColor;
@@ -167,8 +203,43 @@ abstract class AbstractNeumorphicPainterCache {
     return invalidate;
   }
 
+  double? _styleSecondaryIntensity;
+  Color? _styleSecondaryShadowLightColor;
+  Color? _secondaryShadowLightColor;
+
+  Color? get secondaryShadowLightColor => _secondaryShadowLightColor;
+  Color? _styleSecondaryShadowDarkColor;
+  Color? _secondaryShadowDarkColor;
+
+  Color? get secondaryShadowDarkColor => _secondaryShadowDarkColor;
+
+  bool updateSecondaryShadowColor({required Color newShadowLightColor, required Color newShadowDarkColor, required double newIntensity}) {
+    bool invalidateIntensity = false;
+    bool invalidate = false;
+    if (_styleSecondaryIntensity != newIntensity) {
+      invalidate = true;
+      invalidateIntensity = true;
+      _styleSecondaryIntensity = newIntensity;
+    }
+    if (invalidateIntensity || _styleSecondaryShadowLightColor != newShadowLightColor) {
+      _styleSecondaryShadowLightColor = newShadowLightColor;
+      _secondaryShadowLightColor = this.generateShadowLightColor(color: newShadowLightColor, intensity: newIntensity);
+
+      invalidate = true;
+    }
+    if (invalidate || _styleSecondaryShadowDarkColor != newShadowDarkColor) {
+      _styleSecondaryShadowDarkColor = newShadowDarkColor;
+      _secondaryShadowDarkColor = this.generateShadowDarkColor(color: newShadowDarkColor, intensity: newIntensity);
+      invalidate = true;
+    }
+    return invalidate;
+  }
+
   //call after _cacheWidth & _cacheHeight set
   void updateTranslations();
+
+  //call after _cacheWidth & _cacheHeight set
+  void updateSecondaryTranslations();
 
   final List<Path> subPaths = [];
   Path? _path;
