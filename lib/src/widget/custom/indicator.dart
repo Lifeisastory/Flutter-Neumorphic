@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import 'container.dart';
+import '../../../flutter_neumorphic.dart';
 
 /// A Style to customize the [NeumorphicIndicator]
 ///
@@ -15,8 +15,8 @@ import 'container.dart';
 class IndicatorStyle {
   //final double borderRadius;
   final double depth;
-  final double? secondaryDepth;
-  final double? secondaryIntensity;
+  final double? borderDepth;
+  final double? borderIntensity;
   final bool? disableDepth;
   final Color? accent;
   final Color? variant;
@@ -27,8 +27,8 @@ class IndicatorStyle {
 
   const IndicatorStyle({
     this.depth = -4,
-    this.secondaryDepth,
-    this.secondaryIntensity,
+    this.borderDepth,
+    this.borderIntensity,
     this.accent,
     this.lightSource,
     this.variant,
@@ -43,8 +43,8 @@ class IndicatorStyle {
       other is IndicatorStyle &&
           runtimeType == other.runtimeType &&
           depth == other.depth &&
-          secondaryDepth == other.secondaryDepth &&
-          secondaryIntensity == other.secondaryIntensity &&
+          borderDepth == other.borderDepth &&
+          borderIntensity == other.borderIntensity &&
           disableDepth == other.disableDepth &&
           accent == other.accent &&
           lightSource == other.lightSource &&
@@ -54,7 +54,7 @@ class IndicatorStyle {
 
   @override
   int get hashCode =>
-      depth.hashCode ^ secondaryDepth.hashCode ^ secondaryIntensity.hashCode ^ disableDepth.hashCode ^ accent.hashCode ^ variant.hashCode ^ lightSource.hashCode ^ gradientStart.hashCode ^ gradientEnd.hashCode;
+      depth.hashCode ^ borderDepth.hashCode ^ borderIntensity.hashCode ^ disableDepth.hashCode ^ accent.hashCode ^ variant.hashCode ^ lightSource.hashCode ^ gradientStart.hashCode ^ gradientEnd.hashCode;
 }
 
 enum NeumorphicIndicatorOrientation { vertical, horizontal }
@@ -198,8 +198,8 @@ class _NeumorphicIndicatorState extends State<NeumorphicIndicator> with TickerPr
           lightSource: widget.style.lightSource ?? theme.lightSource,
           disableDepth: widget.style.disableDepth,
           depth: widget.style.depth,
-          secondaryDepth: widget.style.secondaryDepth,
-          secondaryIntensity: widget.style.secondaryIntensity,
+          borderDepth: widget.style.borderDepth,
+          borderIntensity: widget.style.borderIntensity,
           shape: NeumorphicSurfaceType.flat,
         ),
         child: AnimatedBuilder(
@@ -215,8 +215,8 @@ class _NeumorphicIndicatorState extends State<NeumorphicIndicator> with TickerPr
                     style: NeumorphicStyle(
                       boxShape: NeumorphicBoxShape.stadium(),
                       lightSource: widget.style.lightSource ?? theme.lightSource,
-                      secondaryDepth: widget.style.secondaryDepth,
-                      secondaryIntensity: widget.style.secondaryIntensity,
+                      borderDepth: widget.style.borderDepth,
+                      borderIntensity: widget.style.borderIntensity,
                     ),
                     child: Container(
                         decoration: BoxDecoration(

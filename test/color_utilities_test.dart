@@ -22,7 +22,7 @@ void main() {
 
     test('embossWhiteColor creates valid colors', () {
       const baseColor = Color(0xFF808080);
-      final result = NeumorphicColors.dmbossWhiteColor(baseColor, intensity: 0.5);
+      final result = NeumorphicColors.debossWhiteColor(baseColor, intensity: 0.5);
       
       expect(result, isA<Color>());
       expect(result.alpha, lessThanOrEqualTo(baseColor.alpha));
@@ -30,7 +30,7 @@ void main() {
 
     test('embossDarkColor creates valid colors', () {
       const baseColor = Color(0xFF808080);
-      final result = NeumorphicColors.dmbossBlackColor(baseColor, intensity: 0.5);
+      final result = NeumorphicColors.debossBlackColor(baseColor, intensity: 0.5);
       
       expect(result, isA<Color>());
       expect(result.alpha, lessThanOrEqualTo(baseColor.alpha));
@@ -95,8 +95,8 @@ void main() {
       for (final color in colors) {
         final whiteColor = NeumorphicColors.embossWhiteColor(color, intensity: 0.5);
         final darkColor = NeumorphicColors.embossBlackColor(color, intensity: 0.5);
-        final embossWhite = NeumorphicColors.dmbossWhiteColor(color, intensity: 0.5);
-        final embossDark = NeumorphicColors.dmbossBlackColor(color, intensity: 0.5);
+        final embossWhite = NeumorphicColors.debossWhiteColor(color, intensity: 0.5);
+        final embossDark = NeumorphicColors.debossBlackColor(color, intensity: 0.5);
 
         expect(whiteColor, isA<Color>());
         expect(darkColor, isA<Color>());

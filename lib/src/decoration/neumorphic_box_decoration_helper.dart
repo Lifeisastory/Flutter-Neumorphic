@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 
 import '../theme/themes.dart';
 
-Shader getGradientShader({required Rect gradientRect, required LightSource source, double intensity = 0.25}) {
+Shader getSurfaceGradientShader({required Rect gradientRect, required LightSource source, double intensity = 0.25}) {
   var sourceInvert = source.invert();
 
   final currentIntensity = intensity * (3 / 5);

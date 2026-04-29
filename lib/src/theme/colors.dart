@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
 
-import '../flutter_neumorphic.dart';
+import '../../flutter_neumorphic.dart';
 
 
 /// Defines default colors used in Neumorphic theme & shadows generators
@@ -29,7 +29,7 @@ class NeumorphicColors {
 
   static const Color darkDefaultEmbossWhiteColor = Color(0xff2f323b);
   static const Color darkDefaultEmbossBlackColor = Color(0xff24262b);
-  static const Color darkDefaultEebossWhiteColor = Color(0xff2f323b);
+  static const Color darkDefaultDebossWhiteColor = Color(0xff2f323b);
   static const Color darkDefaultDebossBlackColor = Color(0xff25262b);
 
   static const Color _gradientShaderBlackColor = Color(0x8A000000);
@@ -49,12 +49,12 @@ class NeumorphicColors {
     return _applyPercentageOnOpacity(maxColor: color, percent: intensity);
   }
 
-  static Color dmbossWhiteColor(Color color, {required double intensity}) {
+  static Color debossWhiteColor(Color color, {required double intensity}) {
     // intensity act on opacity;
     return _applyPercentageOnOpacity(maxColor: color, percent: intensity);
   }
 
-  static Color dmbossBlackColor(Color color, {required double intensity}) {
+  static Color debossBlackColor(Color color, {required double intensity}) {
     // intensity act on opacity;
     return _applyPercentageOnOpacity(maxColor: color, percent: intensity);
   }

@@ -15,14 +15,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       themeMode: ThemeMode.light,
-      theme: NeumorphicThemeData(
-        baseColor: Color(0xffd9d9d9),
-        depth: 10,
-      ),
-      darkTheme: NeumorphicThemeData.dark(
-        baseColor: Color(0xff292c31),
-        depth: 6,
-      ),
+      theme: NeumorphicThemeData(baseColor: Color(0xffd9d9d9), depth: 6),
+      darkTheme: NeumorphicThemeData.dark(baseColor: Color(0xff292c31), depth: 6),
       home: MyHomePage(),
     );
   }
@@ -53,7 +47,16 @@ class MyHomePage extends StatelessWidget {
               onPressed: () {
                 NeumorphicTheme.of(context)!.themeMode = NeumorphicTheme.isUsingDark(context) ? ThemeMode.light : ThemeMode.dark;
               },
-              style: NeumorphicStyle(shape: NeumorphicSurfaceType.flat, boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(8))),
+              style: NeumorphicStyle(
+                color: Colors.white.withValues(alpha: 0.05),
+                boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(8)),
+                shadowWhiteColorEmboss: Colors.white,
+                shadowBlackColorEmboss: Colors.black,
+                depth: 10,
+                intensity: 0.1,
+                borderDepth: 0.3,
+                borderIntensity: 0.2,
+              ),
               padding: const EdgeInsets.all(12.0),
               child: Text('Toggle Theme', style: TextStyle(color: _textColor(context))),
             ),

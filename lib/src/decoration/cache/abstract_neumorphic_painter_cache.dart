@@ -24,8 +24,6 @@ abstract class AbstractNeumorphicPainterCache {
 
   Rect? get layerRect => _layerRect;
 
-  AbstractNeumorphicPainterCache();
-
   bool updateSize({required Offset newOffset, required Size newSize}) {
     if (this._cacheOffset != newOffset || this._cacheWidth != newSize.width || this._cacheHeight != newSize.height) {
       this._cacheWidth = newSize.width;
@@ -64,18 +62,18 @@ abstract class AbstractNeumorphicPainterCache {
     return false;
   }
 
-  double? _cacheSecondaryStyleDepth;
-  double? _secondaryDepth;
-  double get secondaryDepth => _secondaryDepth ?? 0;
+  double? _cacheBorderStyleDepth;
+  double? _borderDepth;
+  double get borderDepth => _borderDepth ?? 0;
 
-  bool updateSecondaryStyleDepth(double newStyleDepth, double radiusFactor) {
-    if (_cacheSecondaryStyleDepth != newStyleDepth) {
-      _cacheSecondaryStyleDepth = newStyleDepth;
+  bool updateBorderStyleDepth(double newStyleDepth, double radiusFactor) {
+    if (_cacheBorderStyleDepth != newStyleDepth) {
+      _cacheBorderStyleDepth = newStyleDepth;
 
       final depth = newStyleDepth.abs().clamp(0.0, (_cacheRadius ?? 0) / radiusFactor);
-      _secondaryDepth = depth;
+      _borderDepth = depth;
 
-      this._updateSecondaryMaskFilter(newDepth: depth);
+      this._updateBorderMaskFilter(newDepth: depth);
 
       return true;
     }
@@ -92,13 +90,13 @@ abstract class AbstractNeumorphicPainterCache {
     }
   }
 
-  Offset? _secondaryDepthOffset;
+  Offset? _borderDepthOffset;
 
-  Offset get secondaryDepthOffset => _secondaryDepthOffset ?? Offset.zero;
+  Offset get borderDepthOffset => _borderDepthOffset ?? Offset.zero;
 
-  void updateSecondaryDepthOffset() {
-    if (_secondaryDepth != null) {
-      _secondaryDepthOffset = this.lightSource.offset.scale(_secondaryDepth!, _secondaryDepth!);
+  void updateBorderDepthOffset() {
+    if (_borderDepth != null) {
+      _borderDepthOffset = this.lightSource.offset.scale(_borderDepth!, _borderDepth!);
     }
   }
 
@@ -157,12 +155,12 @@ abstract class AbstractNeumorphicPainterCache {
     this._maskFilter = MaskFilter.blur(BlurStyle.normal, newDepth);
   }
 
-  MaskFilter? _secondaryMaskFilter;
+  MaskFilter? _borderMaskFilter;
 
-  MaskFilter? get secondaryMaskFilter => _secondaryMaskFilter;
+  MaskFilter? get borderMaskFilter => _borderMaskFilter;
 
-  void _updateSecondaryMaskFilter({required double newDepth}) {
-    this._secondaryMaskFilter = MaskFilter.blur(BlurStyle.normal, newDepth);
+  void _updateBorderMaskFilter({required double newDepth}) {
+    this._borderMaskFilter = MaskFilter.blur(BlurStyle.normal, newDepth);
   }
 
   double? _styleIntensity;
@@ -203,33 +201,33 @@ abstract class AbstractNeumorphicPainterCache {
     return invalidate;
   }
 
-  double? _styleSecondaryIntensity;
-  Color? _styleSecondaryShadowLightColor;
-  Color? _secondaryShadowLightColor;
+  double? _styleBorderIntensity;
+  Color? _styleBorderShadowLightColor;
+  Color? _borderShadowLightColor;
 
-  Color? get secondaryShadowLightColor => _secondaryShadowLightColor;
-  Color? _styleSecondaryShadowDarkColor;
-  Color? _secondaryShadowDarkColor;
+  Color? get borderShadowLightColor => _borderShadowLightColor;
+  Color? _styleBorderShadowDarkColor;
+  Color? _borderShadowDarkColor;
 
-  Color? get secondaryShadowDarkColor => _secondaryShadowDarkColor;
+  Color? get borderShadowDarkColor => _borderShadowDarkColor;
 
-  bool updateSecondaryShadowColor({required Color newShadowLightColor, required Color newShadowDarkColor, required double newIntensity}) {
+  bool updateBorderShadowColor({required Color newShadowLightColor, required Color newShadowDarkColor, required double newIntensity}) {
     bool invalidateIntensity = false;
     bool invalidate = false;
-    if (_styleSecondaryIntensity != newIntensity) {
+    if (_styleBorderIntensity != newIntensity) {
       invalidate = true;
       invalidateIntensity = true;
-      _styleSecondaryIntensity = newIntensity;
+      _styleBorderIntensity = newIntensity;
     }
-    if (invalidateIntensity || _styleSecondaryShadowLightColor != newShadowLightColor) {
-      _styleSecondaryShadowLightColor = newShadowLightColor;
-      _secondaryShadowLightColor = this.generateShadowLightColor(color: newShadowLightColor, intensity: newIntensity);
+    if (invalidateIntensity || _styleBorderShadowLightColor != newShadowLightColor) {
+      _styleBorderShadowLightColor = newShadowLightColor;
+      _borderShadowLightColor = this.generateShadowLightColor(color: newShadowLightColor, intensity: newIntensity);
 
       invalidate = true;
     }
-    if (invalidate || _styleSecondaryShadowDarkColor != newShadowDarkColor) {
-      _styleSecondaryShadowDarkColor = newShadowDarkColor;
-      _secondaryShadowDarkColor = this.generateShadowDarkColor(color: newShadowDarkColor, intensity: newIntensity);
+    if (invalidate || _styleBorderShadowDarkColor != newShadowDarkColor) {
+      _styleBorderShadowDarkColor = newShadowDarkColor;
+      _borderShadowDarkColor = this.generateShadowDarkColor(color: newShadowDarkColor, intensity: newIntensity);
       invalidate = true;
     }
     return invalidate;
@@ -239,7 +237,7 @@ abstract class AbstractNeumorphicPainterCache {
   void updateTranslations();
 
   //call after _cacheWidth & _cacheHeight set
-  void updateSecondaryTranslations();
+  void updateBorderTranslations();
 
   final List<Path> subPaths = [];
   Path? _path;

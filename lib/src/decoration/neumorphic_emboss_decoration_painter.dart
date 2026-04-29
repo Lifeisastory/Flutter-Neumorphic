@@ -5,8 +5,6 @@ import '../theme/themes.dart';
 import 'cache/neumorphic_emboss_painter_cache.dart';
 import 'neumorphic_box_decoration_helper.dart';
 
-/// 凸出
-
 class NeumorphicEmbossDecorationPainter extends BoxPainter {
   final NeumorphicStyle style;
   final NeumorphicBoxShape shape;
@@ -14,28 +12,33 @@ class NeumorphicEmbossDecorationPainter extends BoxPainter {
   NeumorphicEmbossPainterCache _cache = NeumorphicEmbossPainterCache();
 
   late Paint _backgroundPaint;
+  // 外围阴影
   late Paint _whiteShadowPaint;
   late Paint _whiteShadowMaskPaint;
   late Paint _blackShadowPaint;
   late Paint _blackShadowMaskPaint;
-  late Paint _whiteForegroundPaint;
-  late Paint _whiteForegroundMaskPaint;
-  late Paint _blackForegroundPaint;
-  late Paint _blackForegroundMaskPaint;
-  late Paint _gradientPaint;
+  // 边框前景亮部和暗部
+  late Paint _whiteBorderPaint;
+  late Paint _whiteBorderMaskPaint;
+  late Paint _blackBorderPaint;
+  late Paint _blackBorderMaskPaint;
+  // 表面效果
+  late Paint _surfaceGradientPaint;
+  // 绘制简单的线条边框
   late Paint _borderPaint;
 
   void generatePainters() {
     this._backgroundPaint = Paint();
+    
     this._whiteShadowPaint = Paint();
     this._whiteShadowMaskPaint = Paint()..blendMode = BlendMode.dstOut;
     this._blackShadowPaint = Paint();
     this._blackShadowMaskPaint = Paint()..blendMode = BlendMode.dstOut;
-    this._whiteForegroundPaint = Paint();
-    this._whiteForegroundMaskPaint = Paint()..blendMode = BlendMode.dstOut;
-    this._blackForegroundPaint = Paint();
-    this._blackForegroundMaskPaint = Paint()..blendMode = BlendMode.dstOut;
-    this._gradientPaint = Paint();
+    this._whiteBorderPaint = Paint();
+    this._whiteBorderMaskPaint = Paint()..blendMode = BlendMode.dstOut;
+    this._blackBorderPaint = Paint();
+    this._blackBorderMaskPaint = Paint()..blendMode = BlendMode.dstOut;
+    this._surfaceGradientPaint = Paint();
 
     this._borderPaint = Paint()
       ..strokeCap = StrokeCap.round
@@ -43,19 +46,24 @@ class NeumorphicEmbossDecorationPainter extends BoxPainter {
       ..style = PaintingStyle.stroke;
   }
 
-  final bool drawGradient;
-  final bool drawShadow;
-  final bool drawBackground;
-  final bool renderingByPath;
-
+  final bool isPaintSurfaceGradient;
+  final bool isPaintShadow;
+  final bool isPaintBackground;
+  final bool isRenderByPath;
+  
+  /// 浮雕
+  /// 
+  /// [isPaintSurfaceGradient] 是否绘制表面凸出或凹陷的渐变效果，可以在 [getSurfaceGradientShader] 中自定义渐变颜色
+  /// [isPaintShadow] 是否绘制阴影，为false则没有拟物效果
+  /// [isPaintBackground] 是否绘制decoration的背景色，一般只在次decoration做为背景时才需要绘制背景色
   NeumorphicEmbossDecorationPainter({
     required this.style,
     required this.shape,
-    required this.drawGradient,
-    required this.drawShadow,
-    required this.drawBackground,
+    required this.isPaintSurfaceGradient,
+    required this.isPaintShadow,
+    required this.isPaintBackground,
     required VoidCallback onChanged,
-    this.renderingByPath = true,
+    this.isRenderByPath = true,
   }) : super(onChanged) {
     generatePainters();
   }
@@ -63,14 +71,14 @@ class NeumorphicEmbossDecorationPainter extends BoxPainter {
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
     _updateCache(offset, configuration);
-
-    for (var subPath in _cache.subPaths) {
-      if (drawShadow) {
-        _drawShadow(offset: offset, canvas: canvas, path: subPath);
+    
+    if (isPaintShadow) {
+      for (var subPath in _cache.subPaths) {
+        _paintShadow(offset: offset, canvas: canvas, path: subPath);
       }
     }
 
-    if (renderingByPath) {
+    if (isRenderByPath) {
       for (var subPath in _cache.subPaths) {
         _drawElement(offset: offset, canvas: canvas, path: subPath);
       }
@@ -80,53 +88,53 @@ class NeumorphicEmbossDecorationPainter extends BoxPainter {
   }
 
   void _updateCache(Offset offset, ImageConfiguration configuration) {
-    bool invalidateSize = false;
+    bool invalidSize = false;
     if (configuration.size != null) {
-      invalidateSize = this._cache.updateSize(newOffset: offset, newSize: configuration.size!);
-      if (invalidateSize) {
+      invalidSize = this._cache.updateSize(newOffset: offset, newSize: configuration.size!);
+      if (invalidSize) {
         _cache.updatePath(newPath: shape.customShapePathProvider.getPath(configuration.size!));
       }
     }
 
-    bool invalidateLightSource = false;
+    bool invalidLightSource = false;
     if (style.color != null) {
-      invalidateLightSource = this._cache.updateLightSource(style.lightSource, style.oppositeShadowLightSource);
+      invalidLightSource = this._cache.updateLightSource(style.lightSource, style.oppositeShadowLightSource);
     }
 
-    bool invalidateColor = false;
+    bool invalidColor = false;
     if (style.color != null) {
-      invalidateColor = this._cache.updateStyleColor(style.color!);
-      if (invalidateColor) {
+      invalidColor = this._cache.updateStyleColor(style.color!);
+      if (invalidColor) {
         _backgroundPaint..color = _cache.backgroundColor;
       }
     }
 
-    bool invalidateDepth = false;
+    bool invalidDepth = false;
     if (style.depth != null) {
-      invalidateDepth = this._cache.updateStyleDepth(style.depth!, 3);
-      if (invalidateDepth) {
+      invalidDepth = this._cache.updateStyleDepth(style.depth!, 3);
+      if (invalidDepth) {
         _blackShadowPaint..maskFilter = _cache.maskFilter;
         _whiteShadowPaint..maskFilter = _cache.maskFilter;
       }
     }
 
-    bool invalidateSecondaryDepth = false;
-    if (style.secondaryDepth != null) {
-      invalidateSecondaryDepth = this._cache.updateSecondaryStyleDepth(style.secondaryDepth!, 3);
-      if (invalidateSecondaryDepth) {
-        _blackForegroundMaskPaint..maskFilter = _cache.secondaryMaskFilter;
-        _whiteForegroundMaskPaint..maskFilter = _cache.secondaryMaskFilter;
+    bool invalidBorderDepth = false;
+    if (style.borderDepth != null) {
+      invalidBorderDepth = this._cache.updateBorderStyleDepth(style.borderDepth!, 3);
+      if (invalidBorderDepth) {
+        _blackBorderMaskPaint..maskFilter = _cache.borderMaskFilter;
+        _whiteBorderMaskPaint..maskFilter = _cache.borderMaskFilter;
       }
     }
 
-    bool invalidateShadowColors = false;
+    bool invalidShadowColors = false;
     if (style.shadowWhiteColorEmboss != null && style.shadowBlackColorEmboss != null && style.intensity != null) {
-      invalidateShadowColors = this._cache.updateShadowColor(
+      invalidShadowColors = this._cache.updateShadowColor(
         newShadowLightColor: style.shadowWhiteColorEmboss!,
         newShadowDarkColor: style.shadowBlackColorEmboss!,
         newIntensity: style.intensity!,
       );
-      if (invalidateShadowColors) {
+      if (invalidShadowColors) {
         if (_cache.shadowLightColor != null) {
           _whiteShadowPaint..color = _cache.shadowLightColor!;
         }
@@ -136,37 +144,37 @@ class NeumorphicEmbossDecorationPainter extends BoxPainter {
       }
     }
 
-    bool invalidateSecondaryShadowColors = false;
-    if (style.shadowWhiteColorEmboss != null && style.shadowBlackColorEmboss != null && style.secondaryIntensity != null) {
-      invalidateSecondaryShadowColors = this._cache.updateSecondaryShadowColor(
+    bool invalidBorderShadowColors = false;
+    if (style.shadowWhiteColorEmboss != null && style.shadowBlackColorEmboss != null && style.borderIntensity != null) {
+      invalidBorderShadowColors = this._cache.updateBorderShadowColor(
         newShadowLightColor: style.shadowWhiteColorEmboss!,
         newShadowDarkColor: style.shadowBlackColorEmboss!,
-        newIntensity: style.secondaryIntensity!,
+        newIntensity: style.borderIntensity!,
       );
-      if (invalidateSecondaryShadowColors) {
-        if (_cache.secondaryShadowLightColor != null) {
-          _whiteForegroundPaint..color = _cache.secondaryShadowLightColor!;
+      if (invalidBorderShadowColors) {
+        if (_cache.borderShadowLightColor != null) {
+          _whiteBorderPaint..color = _cache.borderShadowLightColor!;
         }
-        if (_cache.secondaryShadowDarkColor != null) {
-          _blackForegroundPaint..color = _cache.secondaryShadowDarkColor!;
+        if (_cache.borderShadowDarkColor != null) {
+          _blackBorderPaint..color = _cache.borderShadowDarkColor!;
         }
       }
     }
 
-    if (invalidateDepth || invalidateLightSource) {
+    if (invalidDepth || invalidLightSource) {
       _cache.updateDepthOffset();
     }
 
-    if (invalidateLightSource || invalidateDepth || invalidateSize) {
+    if (invalidLightSource || invalidDepth || invalidSize) {
       _cache.updateTranslations();
     }
 
-    if (invalidateLightSource || invalidateSecondaryDepth || invalidateSize) {
-      _cache.updateSecondaryTranslations();
+    if (invalidLightSource || invalidBorderDepth || invalidSize) {
+      _cache.updateBorderTranslations();
     }
   }
 
-  void _drawShadow({required Canvas canvas, required Offset offset, required Path path}) {
+  void _paintShadow({required Canvas canvas, required Offset offset, required Path path}) {
     if (style.depth != null && style.depth!.abs() >= 0.1) {
       canvas
         ..saveLayer(_cache.layerRect, Paint())
@@ -187,18 +195,20 @@ class NeumorphicEmbossDecorationPainter extends BoxPainter {
   }
 
   void _drawElement({required Canvas canvas, required Offset offset, required Path path}) {
-    if (drawBackground) {
-      _drawBackground(offset: offset, canvas: canvas, path: path);
+    if (isPaintBackground) {
+      _paintBackground(offset: offset, canvas: canvas, path: path);
     }
-    if (this.drawGradient) {
-      _drawGradient(offset: offset, canvas: canvas, path: path);
+    if (this.isPaintSurfaceGradient) {
+      _paintSurfaceGradient(offset: offset, canvas: canvas, path: path);
     }
     if (style.border.isEnabled) {
       _drawBorder(canvas: canvas, offset: offset, path: path);
+    } else {
+      _paintBorder(canvas: canvas, offset: offset, path: path);
     }
   }
 
-  void _drawBackground({required Canvas canvas, required Offset offset, required Path path}) {
+  void _paintBackground({required Canvas canvas, required Offset offset, required Path path}) {
     canvas
       ..save()
       ..translate(offset.dx, offset.dy)
@@ -206,39 +216,24 @@ class NeumorphicEmbossDecorationPainter extends BoxPainter {
       ..restore();
   }
 
-  void _drawGradient({required Canvas canvas, required Offset offset, required Path path}) {
+  /// 绘制表面效果
+  /// [NeumorphicSurfaceType.concave] 凹入
+  /// [NeumorphicSurfaceType.convex] 凸出
+  void _paintSurfaceGradient({required Canvas canvas, required Offset offset, required Path path}) {
     if (style.shape == NeumorphicSurfaceType.concave || style.shape == NeumorphicSurfaceType.convex) {
       final pathRect = path.getBounds();
 
-      _gradientPaint
-        ..shader = getGradientShader(
+      _surfaceGradientPaint
+        ..shader = getSurfaceGradientShader(
           gradientRect: pathRect,
           intensity: style.surfaceIntensity,
           source: style.shape == NeumorphicSurfaceType.concave ? this.style.lightSource : this.style.lightSource.invert(),
         );
 
       canvas
-        ..saveLayer(pathRect.translate(offset.dx, offset.dy), _gradientPaint)
+        ..saveLayer(pathRect.translate(offset.dx, offset.dy), _surfaceGradientPaint)
         ..translate(offset.dx, offset.dy)
-        ..drawPath(path, _gradientPaint)
-        ..restore();
-    } else {
-      final Matrix4 matrix4 = Matrix4.identity()..scaleByDouble(_cache.secondaryScaleX, _cache.secondaryScaleY, 1.0, 1.0);
-
-      canvas
-        ..saveLayer(_cache.layerRect, Paint())
-        ..translate(_cache.originOffset.dx, _cache.originOffset.dy)
-        ..drawPath(path, _whiteForegroundPaint)
-        ..translate(_cache.secondaryBlackShadowLeftTranslation, _cache.secondaryBlackShadowTopTranslation)
-        ..drawPath(path.transform(matrix4.storage), _whiteForegroundMaskPaint)
-        ..restore();
-
-      canvas
-        ..saveLayer(_cache.layerRect, Paint())
-        ..translate(_cache.originOffset.dx, _cache.originOffset.dy)
-        ..drawPath(path, _blackForegroundPaint)
-        ..translate(_cache.secondaryWhiteShadowLeftTranslation, _cache.secondaryWhiteShadowTopTranslation)
-        ..drawPath(path.transform(matrix4.storage), _blackForegroundMaskPaint)
+        ..drawPath(path, _surfaceGradientPaint)
         ..restore();
     }
   }
@@ -256,5 +251,24 @@ class NeumorphicEmbossDecorationPainter extends BoxPainter {
         )
         ..restore();
     }
+  }
+
+  void _paintBorder({required Canvas canvas, required Offset offset, required Path path}){
+    final Matrix4 matrix4 = Matrix4.identity()..scaleByDouble(_cache.borderScaleX, _cache.borderScaleY, 1.0, 1.0);
+    canvas
+      ..saveLayer(_cache.layerRect, Paint())
+      ..translate(_cache.originOffset.dx, _cache.originOffset.dy)
+      ..drawPath(path, _whiteBorderPaint)
+      ..translate(_cache.borderBlackShadowLeftTranslation, _cache.borderBlackShadowTopTranslation)
+      ..drawPath(path.transform(matrix4.storage), _whiteBorderMaskPaint)
+      ..restore();
+
+    canvas
+      ..saveLayer(_cache.layerRect, Paint())
+      ..translate(_cache.originOffset.dx, _cache.originOffset.dy)
+      ..drawPath(path, _blackBorderPaint)
+      ..translate(_cache.borderWhiteShadowLeftTranslation, _cache.borderWhiteShadowTopTranslation)
+      ..drawPath(path.transform(matrix4.storage), _blackBorderMaskPaint)
+      ..restore();
   }
 }

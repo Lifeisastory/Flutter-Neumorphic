@@ -13,8 +13,8 @@ class NeumorphicDebossDecorationTextPainter extends BoxPainter {
   final TextStyle textStyle;
   final TextAlign textAlign;
 
-  final bool drawShadow;
-  final bool drawBackground;
+  final bool isPaintShadow;
+  final bool isPaintBackground;
 
   final NeumorphicDebossPainterCache _cache = NeumorphicDebossPainterCache();
 
@@ -37,8 +37,8 @@ class NeumorphicDebossDecorationTextPainter extends BoxPainter {
     required this.text,
     required this.textStyle,
     required this.textAlign,
-    required this.drawBackground,
-    required this.drawShadow,
+    required this.isPaintBackground,
+    required this.isPaintShadow,
     required VoidCallback onChanged,
   }) : super(onChanged) {
     _generatePainters();
@@ -63,16 +63,16 @@ class NeumorphicDebossDecorationTextPainter extends BoxPainter {
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
     _updateCache(offset: offset, configuration: configuration);
 
-    if (drawBackground) {
-      _drawBackground(canvas: canvas);
+    if (isPaintBackground) {
+      _paintBackground(canvas: canvas);
+    }
+
+    if (isPaintShadow) {
+      _paintShadows(canvas: canvas);
     }
 
     if (style.border.isEnabled) {
       _drawBorder(canvas: canvas);
-    }
-
-    if (drawShadow) {
-      _drawShadows(canvas: canvas);
     }
   }
 
@@ -165,7 +165,7 @@ class NeumorphicDebossDecorationTextPainter extends BoxPainter {
     }
   }
 
-  void _drawBackground({required Canvas canvas}) {
+  void _paintBackground({required Canvas canvas}) {
     canvas
       ..save()
       ..translate(_cache.originOffset.dx, _cache.originOffset.dy)
@@ -183,7 +183,7 @@ class NeumorphicDebossDecorationTextPainter extends BoxPainter {
     }
   }
 
-  void _drawShadows({required Canvas canvas}) {
+  void _paintShadows({required Canvas canvas}) {
     canvas
       ..saveLayer(_cache.layerRect, Paint())
       ..translate(_cache.originOffset.dx, _cache.originOffset.dy)

@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import 'button.dart';
-import 'container.dart';
+import '../../../flutter_neumorphic.dart';
 
 typedef void NeumorphicRadioListener<T>(T value);
 
@@ -27,8 +26,8 @@ class NeumorphicRadioStyle {
   final Color? unselectedColor; //null for unchanged color
 
   final double? intensity;
-  final double? secondaryDepth;
-  final double? secondaryIntensity;
+  final double? borderDepth;
+  final double? borderIntensity;
   final NeumorphicSurfaceType? shape;
 
   final NeumorphicBorder border;
@@ -46,8 +45,8 @@ class NeumorphicRadioStyle {
     this.boxShape,
     this.border = const NeumorphicBorder.none(),
     this.intensity,
-    this.secondaryDepth,
-    this.secondaryIntensity,
+    this.borderDepth,
+    this.borderIntensity,
     this.shape,
   });
 
@@ -65,8 +64,8 @@ class NeumorphicRadioStyle {
           unselectedColor == other.unselectedColor &&
           boxShape == other.boxShape &&
           intensity == other.intensity &&
-          secondaryDepth == other.secondaryDepth &&
-          secondaryIntensity == other.secondaryIntensity &&
+          borderDepth == other.borderDepth &&
+          borderIntensity == other.borderIntensity &&
           shape == other.shape;
 
   @override
@@ -80,8 +79,8 @@ class NeumorphicRadioStyle {
       border.hashCode ^
       unselectedDepth.hashCode ^
       intensity.hashCode ^
-      secondaryDepth.hashCode ^
-      secondaryIntensity.hashCode ^
+      borderDepth.hashCode ^
+      borderIntensity.hashCode ^
       shape.hashCode;
 }
 
@@ -229,8 +228,8 @@ class NeumorphicRadio<T> extends StatelessWidget {
         lightSource: this.style.lightSource ?? theme.lightSource,
         disableDepth: this.style.disableDepth,
         intensity: this.style.intensity,
-        secondaryDepth: this.style.secondaryDepth,
-        secondaryIntensity: this.style.secondaryIntensity,
+        borderDepth: this.style.borderDepth,
+        borderIntensity: this.style.borderIntensity,
         depth: depth,
         shape: this.style.shape ?? NeumorphicSurfaceType.flat,
       ),

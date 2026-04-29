@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../flutter_neumorphic.dart';
+import '../../../flutter_neumorphic.dart';
 
 typedef void NeumorphicRangeSliderLowListener(double percent);
 typedef void NeumorphicRangeSliderHighListener(double percent);
@@ -16,8 +16,8 @@ typedef void NeumorphicRangeSliderHighListener(double percent);
 @immutable
 class RangeSliderStyle {
   final double depth;
-  final double? secondaryDepth;
-  final double? secondaryIntensity;
+  final double? borderDepth;
+  final double? borderIntensity;
   final bool disableDepth;
   final BorderRadius borderRadius;
   final Color? accent;
@@ -29,8 +29,8 @@ class RangeSliderStyle {
 
   const RangeSliderStyle({
     this.depth = 0,
-    this.secondaryDepth,
-    this.secondaryIntensity,
+    this.borderDepth,
+    this.borderIntensity,
     this.disableDepth = false,
     this.borderRadius = const BorderRadius.all(Radius.circular(10)),
     this.accent,
@@ -46,8 +46,8 @@ class RangeSliderStyle {
       other is RangeSliderStyle &&
           runtimeType == other.runtimeType &&
           depth == other.depth &&
-          secondaryDepth == other.secondaryDepth &&
-          secondaryIntensity == other.secondaryIntensity &&
+          borderDepth == other.borderDepth &&
+          borderIntensity == other.borderIntensity &&
           lightSource == other.lightSource &&
           disableDepth == other.disableDepth &&
           borderRadius == other.borderRadius &&
@@ -59,8 +59,8 @@ class RangeSliderStyle {
   @override
   int get hashCode =>
       depth.hashCode ^
-      secondaryDepth.hashCode ^
-      secondaryIntensity.hashCode ^
+      borderDepth.hashCode ^
+      borderIntensity.hashCode ^
       disableDepth.hashCode ^
       borderRadius.hashCode ^
       lightSource.hashCode ^
@@ -276,8 +276,8 @@ class _NeumorphicRangeSliderState extends State<NeumorphicRangeSlider> {
           style: ProgressStyle(
             disableDepth: widget.style.disableDepth,
             depth: widget.style.depth,
-            secondaryDepth: widget.style.secondaryDepth,
-            secondaryIntensity: widget.style.secondaryIntensity,
+            borderDepth: widget.style.borderDepth,
+            borderIntensity: widget.style.borderIntensity,
             border: widget.style.border,
             borderRadius: widget.style.borderRadius,
             accent: widget.style.accent ?? theme.accentColor,
@@ -314,8 +314,8 @@ class _NeumorphicRangeSliderState extends State<NeumorphicRangeSlider> {
         border: widget.style.thumbBorder,
         boxShape: NeumorphicBoxShape.circle(),
         lightSource: widget.style.lightSource ?? theme.lightSource,
-        secondaryDepth: widget.style.secondaryDepth,
-        secondaryIntensity: widget.style.secondaryIntensity,
+        borderDepth: widget.style.borderDepth,
+        borderIntensity: widget.style.borderIntensity,
       ),
       child: SizedBox(
         height: size,

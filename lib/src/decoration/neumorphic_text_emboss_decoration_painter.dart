@@ -66,21 +66,21 @@ class NeumorphicEmbossDecorationTextPainter extends BoxPainter {
       ..color = style.border.color ?? Color(0xFFFFFFFF);
   }
 
-  final bool drawGradient;
-  final bool drawShadow;
-  final bool drawBackground;
-  final bool renderingByPath;
+  final bool isPaintSurfaceGradient;
+  final bool isPaintShadow;
+  final bool isPaintBackground;
+  final bool isRenderByPath;
 
   NeumorphicEmbossDecorationTextPainter({
     required this.style,
     required this.textStyle,
     required this.text,
-    required this.drawGradient,
-    required this.drawShadow,
-    required this.drawBackground,
+    required this.isPaintSurfaceGradient,
+    required this.isPaintShadow,
+    required this.isPaintBackground,
     required VoidCallback onChanged,
     required this.textAlign,
-    this.renderingByPath = true,
+    this.isRenderByPath = true,
   }) : _cache = NeumorphicEmbossPainterCache(),
        super(onChanged) {
     generatePainters();
@@ -90,8 +90,8 @@ class NeumorphicEmbossDecorationTextPainter extends BoxPainter {
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
     _updateCache(offset, configuration);
 
-    if (drawShadow) {
-      _drawShadow(offset: offset, canvas: canvas, path: _cache.path);
+    if (isPaintShadow) {
+      _paintShadow(offset: offset, canvas: canvas, path: _cache.path);
     }
 
     _drawElement(offset: offset, canvas: canvas, path: _cache.path);
@@ -183,7 +183,7 @@ class NeumorphicEmbossDecorationTextPainter extends BoxPainter {
       ..pushStyle(
         ui.TextStyle(
           foreground: _gradientPaint
-            ..shader = getGradientShader(
+            ..shader = getSurfaceGradientShader(
               gradientRect: Rect.fromLTRB(0, 0, _cache.width, _cache.height),
               intensity: style.surfaceIntensity,
               source: style.shape == NeumorphicSurfaceType.concave ? this.style.lightSource : this.style.lightSource.invert(),
@@ -204,7 +204,7 @@ class NeumorphicEmbossDecorationTextPainter extends BoxPainter {
     }
   }
 
-  void _drawShadow({required Canvas canvas, required Offset offset, required Path path}) {
+  void _paintShadow({required Canvas canvas, required Offset offset, required Path path}) {
     if (style.depth != null && style.depth!.abs() >= 0.1) {
       canvas
         // ..saveLayer(_cache.layerRect, Paint())
@@ -227,18 +227,18 @@ class NeumorphicEmbossDecorationTextPainter extends BoxPainter {
   }
 
   void _drawElement({required Canvas canvas, required Offset offset, required Path path}) {
-    if (drawBackground) {
-      _drawBackground(offset: offset, canvas: canvas, path: path);
+    if (isPaintBackground) {
+      _paintBackground(offset: offset, canvas: canvas, path: path);
     }
-    if (this.drawGradient) {
-      _drawGradient(offset: offset, canvas: canvas, path: path);
+    if (this.isPaintSurfaceGradient) {
+      _paintSurfaceGradient(offset: offset, canvas: canvas, path: path);
     }
     if (style.border.isEnabled) {
       _drawBorder(canvas: canvas, offset: offset, path: path);
     }
   }
 
-  void _drawBackground({required Canvas canvas, required Offset offset, required Path path}) {
+  void _paintBackground({required Canvas canvas, required Offset offset, required Path path}) {
     canvas
       ..save()
       ..translate(offset.dx, offset.dy)
@@ -246,7 +246,7 @@ class NeumorphicEmbossDecorationTextPainter extends BoxPainter {
       ..restore();
   }
 
-  void _drawGradient({required Canvas canvas, required Offset offset, required Path path}) {
+  void _paintSurfaceGradient({required Canvas canvas, required Offset offset, required Path path}) {
     if (style.shape == NeumorphicSurfaceType.concave || style.shape == NeumorphicSurfaceType.convex) {
       canvas
         ..saveLayer(_cache.layerRect, _gradientPaint)

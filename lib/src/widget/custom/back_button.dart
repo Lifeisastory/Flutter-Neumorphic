@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 
-import '../../flutter_neumorphic.dart';
+import '../../../flutter_neumorphic.dart';
 
-class NeumorphicCloseButton extends StatelessWidget {
+class NeumorphicBackButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final NeumorphicStyle? style;
   final EdgeInsets? padding;
+  final bool forward;
 
-  const NeumorphicCloseButton({
+  const NeumorphicBackButton({
     Key? key,
     this.onPressed,
     this.style,
     this.padding,
+    this.forward = false,
   }) : super(key: key);
 
   @override
@@ -20,8 +22,8 @@ class NeumorphicCloseButton extends StatelessWidget {
     return NeumorphicButton(
       style: style,
       padding: padding,
-      tooltip: MaterialLocalizations.of(context).closeButtonTooltip,
-      child: nThemeIcons.closeIcon,
+      tooltip: MaterialLocalizations.of(context).backButtonTooltip,
+      child: forward ? nThemeIcons.forwardIcon : nThemeIcons.backIcon,
       onPressed: onPressed ?? () => Navigator.maybePop(context),
     );
   }

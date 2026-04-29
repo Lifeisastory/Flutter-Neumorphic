@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../flutter_neumorphic.dart';
+import '../../../flutter_neumorphic.dart';
 
 class NeumorphicToggleStyle {
   final double? depth;
-  final double? secondaryDepth;
-  final double? secondaryIntensity;
+  final double? borderDepth;
+  final double? borderIntensity;
   final bool? disableDepth;
   final BorderRadius borderRadius;
   final bool animateOpacity;
@@ -15,8 +15,8 @@ class NeumorphicToggleStyle {
 
   const NeumorphicToggleStyle({
     this.depth,
-    this.secondaryDepth,
-    this.secondaryIntensity,
+    this.borderDepth,
+    this.borderIntensity,
     this.animateOpacity = true,
     this.backgroundColor,
     this.lightSource,
@@ -31,8 +31,8 @@ class NeumorphicToggleStyle {
       other is NeumorphicToggleStyle &&
           runtimeType == other.runtimeType &&
           depth == other.depth &&
-          secondaryDepth == other.secondaryDepth &&
-          secondaryIntensity == other.secondaryIntensity &&
+          borderDepth == other.borderDepth &&
+          borderIntensity == other.borderIntensity &&
           border == other.border &&
           backgroundColor == other.backgroundColor &&
           lightSource == other.lightSource &&
@@ -43,8 +43,8 @@ class NeumorphicToggleStyle {
   @override
   int get hashCode =>
       depth.hashCode ^
-      secondaryDepth.hashCode ^
-      secondaryIntensity.hashCode ^
+      borderDepth.hashCode ^
+      borderIntensity.hashCode ^
       backgroundColor.hashCode ^
       lightSource.hashCode ^
       border.hashCode ^
@@ -200,8 +200,8 @@ class NeumorphicToggle extends StatelessWidget {
             child: NeumorphicContainer(
               style: NeumorphicStyle(
                 boxShape: NeumorphicBoxShape.roundRect(this.style?.borderRadius ?? BorderRadius.all(Radius.circular(12))),
-                secondaryDepth: this.style?.secondaryDepth,
-                secondaryIntensity: this.style?.secondaryIntensity,
+                borderDepth: this.style?.borderDepth,
+                borderIntensity: this.style?.borderIntensity,
               ),
               margin: this.padding,
               child: this.thumb,
@@ -234,8 +234,8 @@ class NeumorphicToggle extends StatelessWidget {
 
   Alignment _alignment() {
     double percentX = selectedIndex / (this.children.length - 1);
-    double aligmentX = -1.0 + (2.0 * percentX);
-    return Alignment(aligmentX, 0.0);
+    double alignmentX = -1.0 + (2.0 * percentX);
+    return Alignment(alignmentX, 0.0);
   }
 
   Widget _backgroundAtIndex(int index) {
@@ -273,8 +273,8 @@ class NeumorphicToggle extends StatelessWidget {
           color: this.style?.backgroundColor,
           disableDepth: this.style?.disableDepth,
           depth: _getTrackDepth(context),
-          secondaryDepth: this.style?.secondaryDepth,
-          secondaryIntensity: this.style?.secondaryIntensity,
+          borderDepth: this.style?.borderDepth,
+          borderIntensity: this.style?.borderIntensity,
           shape: NeumorphicSurfaceType.flat,
           border: this.style?.border ?? NeumorphicBorder.none(),
           lightSource: this.style?.lightSource ?? NeumorphicTheme.currentTheme(context).lightSource),

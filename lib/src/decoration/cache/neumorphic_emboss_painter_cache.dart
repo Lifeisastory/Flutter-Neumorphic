@@ -37,18 +37,19 @@ class NeumorphicEmbossPainterCache extends AbstractNeumorphicPainterCache {
 
   late double scaleX;
   late double scaleY;
-  late double secondaryXDepth;
-  late double secondaryYDepth;
-  late double secondaryXPadding;
-  late double secondaryYPadding;
-  late double secondaryBlackShadowLeftTranslation;
-  late double secondaryBlackShadowTopTranslation;
-  late double secondaryWhiteShadowLeftTranslation;
-  late double secondaryWhiteShadowTopTranslation;
-  late double secondaryScaledWidth;
-  late double secondaryScaledHeight;
-  late double secondaryScaleX;
-  late double secondaryScaleY;
+
+  late double borderXDepth;
+  late double borderYDepth;
+  late double borderXPadding;
+  late double borderYPadding;
+  late double borderBlackShadowLeftTranslation;
+  late double borderBlackShadowTopTranslation;
+  late double borderWhiteShadowLeftTranslation;
+  late double borderWhiteShadowTopTranslation;
+  late double borderScaledWidth;
+  late double borderScaledHeight;
+  late double borderScaleX;
+  late double borderScaleY;
 
   //call after _cacheWidth & _cacheHeight set
   @override
@@ -72,22 +73,22 @@ class NeumorphicEmbossPainterCache extends AbstractNeumorphicPainterCache {
   }
 
   @override
-  void updateSecondaryTranslations() {
-    this.secondaryXDepth = this.lightSource.dx * this.secondaryDepth;
-    this.secondaryYDepth = this.lightSource.dy * this.secondaryDepth;
-    this.secondaryXPadding = 2 * (1 - this.lightSource.dx.abs()) * this.secondaryDepth;
-    this.secondaryYPadding = 2 * (1 - this.lightSource.dy.abs()) * this.secondaryDepth;
+  void updateBorderTranslations() {
+    this.borderXDepth = this.lightSource.dx * this.borderDepth;
+    this.borderYDepth = this.lightSource.dy * this.borderDepth;
+    this.borderXPadding = 2 * (1 - this.lightSource.dx.abs()) * this.borderDepth;
+    this.borderYPadding = 2 * (1 - this.lightSource.dy.abs()) * this.borderDepth;
 
-    this.secondaryWhiteShadowLeftTranslation = secondaryXDepth - secondaryXPadding;
-    this.secondaryWhiteShadowTopTranslation = secondaryYDepth - secondaryYPadding;
+    this.borderWhiteShadowLeftTranslation = borderXDepth - borderXPadding;
+    this.borderWhiteShadowTopTranslation = borderYDepth - borderYPadding;
 
-    this.secondaryBlackShadowLeftTranslation = -(secondaryXDepth + secondaryXPadding);
-    this.secondaryBlackShadowTopTranslation = -(secondaryYDepth + secondaryYPadding);
+    this.borderBlackShadowLeftTranslation = -(borderXDepth + borderXPadding);
+    this.borderBlackShadowTopTranslation = -(borderYDepth + borderYPadding);
 
-    this.secondaryScaledWidth = this.width + 2 * secondaryXPadding;
-    this.secondaryScaledHeight = this.height + 2 * secondaryYPadding;
+    this.borderScaledWidth = this.width + 2 * borderXPadding;
+    this.borderScaledHeight = this.height + 2 * borderYPadding;
 
-    this.secondaryScaleX = this.secondaryScaledWidth / this.width;
-    this.secondaryScaleY = this.secondaryScaledHeight / this.height;
+    this.borderScaleX = this.borderScaledWidth / this.width;
+    this.borderScaleY = this.borderScaledHeight / this.height;
   }
 }

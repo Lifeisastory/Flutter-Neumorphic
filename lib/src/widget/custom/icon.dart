@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../flutter_neumorphic.dart';
+import '../../../flutter_neumorphic.dart';
 
-export '../decoration/neumorphic_decorations.dart';
-export '../neumorphic_box_shape.dart';
-export '../theme/neumorphic_theme.dart';
+export '../../decoration/neumorphic_decorations.dart';
+export '../../neumorphic_box_shape.dart';
+export '../../theme/neumorphic_theme.dart';
 
 @immutable
 class NeumorphicIcon extends StatelessWidget {

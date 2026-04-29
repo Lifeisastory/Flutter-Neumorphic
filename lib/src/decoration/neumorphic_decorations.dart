@@ -10,38 +10,35 @@ import 'neumorphic_deboss_decoration_painter.dart';
 class NeumorphicDecoration extends Decoration {
   final NeumorphicStyle style;
   final NeumorphicBoxShape shape;
-  final bool splitBackgroundForeground;
-  final bool renderingByPath;
+  final bool isBackgroundForegroundSplit;
+  final bool isRenderByPath;
   final bool isForeground;
 
   NeumorphicDecoration({
     required this.style,
     required this.isForeground,
-    required this.renderingByPath,
-    required this.splitBackgroundForeground,
+    required this.isRenderByPath,
+    required this.isBackgroundForegroundSplit,
     required this.shape,
   });
 
   @override
   BoxPainter createBoxPainter([VoidCallback? onChanged]) {
-    //print("createBoxPainter : ${style.depth}");
     if (style.depth != null && style.depth! >= 0) {
       return NeumorphicEmbossDecorationPainter(
         style: style,
-        drawGradient: (isForeground && splitBackgroundForeground) || (!isForeground && !splitBackgroundForeground),
-        drawBackground: !isForeground,
-        //only box draw background
-        drawShadow: !isForeground,
-        //only box draw shadow
-        renderingByPath: this.renderingByPath,
+        isPaintSurfaceGradient: (isForeground && isBackgroundForegroundSplit) || (!isForeground && !isBackgroundForegroundSplit),
+        isPaintBackground: !isForeground,
+        isPaintShadow: !isForeground,
+        isRenderByPath: this.isRenderByPath,
         onChanged: onChanged ?? () {},
         shape: shape,
       );
     } else {
       return NeumorphicDebossDecorationPainter(
-        drawBackground: !isForeground,
         style: style,
-        drawShadow: (isForeground && splitBackgroundForeground) || (!isForeground && !splitBackgroundForeground),
+        isPaintBackground: !isForeground,
+        isPaintShadow: !isForeground,
         onChanged: onChanged ?? () {},
         shape: shape,
       );
@@ -66,8 +63,8 @@ class NeumorphicDecoration extends Decoration {
     print("scale");
     return NeumorphicDecoration(
         isForeground: this.isForeground,
-        renderingByPath: this.renderingByPath,
-        splitBackgroundForeground: this.splitBackgroundForeground,
+        isRenderByPath: this.isRenderByPath,
+        isBackgroundForegroundSplit: this.isBackgroundForegroundSplit,
         shape: NeumorphicBoxShape.lerp(null, shape, factor)!,
         style: style.copyWith());
   }
@@ -93,8 +90,8 @@ class NeumorphicDecoration extends Decoration {
     return NeumorphicDecoration(
         isForeground: a.isForeground,
         shape: NeumorphicBoxShape.lerp(a.shape, b.shape, t)!,
-        splitBackgroundForeground: a.splitBackgroundForeground,
-        renderingByPath: a.renderingByPath,
+        isBackgroundForegroundSplit: a.isBackgroundForegroundSplit,
+        isRenderByPath: a.isRenderByPath,
         style: a.style.copyWith(
           border: NeumorphicBorder.lerp(aStyle.border, bStyle.border, t),
           intensity: lerpDouble(aStyle.intensity, bStyle.intensity, t),
@@ -115,10 +112,10 @@ class NeumorphicDecoration extends Decoration {
           runtimeType == other.runtimeType &&
           style == other.style &&
           shape == other.shape &&
-          splitBackgroundForeground == other.splitBackgroundForeground &&
+          isBackgroundForegroundSplit == other.isBackgroundForegroundSplit &&
           isForeground == other.isForeground &&
-          renderingByPath == other.renderingByPath;
+          isRenderByPath == other.isRenderByPath;
 
   @override
-  int get hashCode => style.hashCode ^ shape.hashCode ^ splitBackgroundForeground.hashCode ^ isForeground.hashCode ^ renderingByPath.hashCode;
+  int get hashCode => style.hashCode ^ shape.hashCode ^ isBackgroundForegroundSplit.hashCode ^ isForeground.hashCode ^ isRenderByPath.hashCode;
 }

@@ -1,8 +1,8 @@
 name: my_neumorphic
 description: A complete, ready to use, Neumorphic ui kit for Flutter. Dark theming compatible & fully customizable.
 version: 3.5.3
-homepage: https://github.com/gsmlg-app/Flutter-Neumorphic
-issue_tracker: https://github.com/gsmlg-app/Flutter-Neumorphic/issues
+#homepage: https://github.com/gsmlg-app/Flutter-Neumorphic
+#issue_tracker: https://github.com/gsmlg-app/Flutter-Neumorphic/issues
 
 environment:
   sdk: ">=3.10.0 <4.0.0"

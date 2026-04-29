@@ -11,7 +11,7 @@ class NeumorphicTextDecoration extends Decoration {
   final NeumorphicStyle style;
   final TextStyle textStyle;
   final String text;
-  final bool renderingByPath;
+  final bool isRenderByPath;
   final bool isForeground;
   final TextAlign textAlign;
 
@@ -19,7 +19,7 @@ class NeumorphicTextDecoration extends Decoration {
     required this.style,
     required this.textStyle,
     required this.isForeground,
-    required this.renderingByPath,
+    required this.isRenderByPath,
     required this.text,
     required this.textAlign,
   });
@@ -32,12 +32,10 @@ class NeumorphicTextDecoration extends Decoration {
         style: style,
         textStyle: textStyle,
         textAlign: textAlign,
-        drawGradient: isForeground,
-        drawBackground: !isForeground,
-        //only box draw background
-        drawShadow: !isForeground,
-        //only box draw shadow
-        renderingByPath: this.renderingByPath,
+        isPaintSurfaceGradient: isForeground,
+        isPaintBackground: !isForeground,
+        isPaintShadow: !isForeground,
+        isRenderByPath: this.isRenderByPath,
         onChanged: onChanged ?? () {},
         text: text,
       );
@@ -46,8 +44,8 @@ class NeumorphicTextDecoration extends Decoration {
         style: style,
         textStyle: textStyle,
         textAlign: textAlign,
-        drawBackground: isForeground,
-        drawShadow: isForeground,
+        isPaintBackground: !isForeground,
+        isPaintShadow: !isForeground,
         onChanged: onChanged ?? () {},
         text: text,
       );
@@ -75,7 +73,7 @@ class NeumorphicTextDecoration extends Decoration {
     return NeumorphicTextDecoration(
         textAlign: this.textAlign,
         isForeground: this.isForeground,
-        renderingByPath: this.renderingByPath,
+        isRenderByPath: this.isRenderByPath,
         text: text,
         textStyle: textStyle,
         style: style.copyWith());
@@ -104,7 +102,7 @@ class NeumorphicTextDecoration extends Decoration {
         text: a.text,
         textAlign: a.textAlign,
         textStyle: TextStyle.lerp(a.textStyle, b.textStyle, t) ?? TextStyle(),
-        renderingByPath: a.renderingByPath,
+        isRenderByPath: a.isRenderByPath,
         style: a.style.copyWith(
           border: NeumorphicBorder.lerp(aStyle.border, bStyle.border, t),
           intensity: lerpDouble(aStyle.intensity, bStyle.intensity, t),
@@ -126,8 +124,8 @@ class NeumorphicTextDecoration extends Decoration {
           text == other.text &&
           textStyle == other.textStyle &&
           isForeground == other.isForeground &&
-          renderingByPath == other.renderingByPath;
+          isRenderByPath == other.isRenderByPath;
 
   @override
-  int get hashCode => style.hashCode ^ text.hashCode ^ textStyle.hashCode ^ isForeground.hashCode ^ renderingByPath.hashCode;
+  int get hashCode => style.hashCode ^ text.hashCode ^ textStyle.hashCode ^ isForeground.hashCode ^ isRenderByPath.hashCode;
 }

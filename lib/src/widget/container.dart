@@ -122,22 +122,19 @@ class _NeumorphicContainer extends StatelessWidget {
         curve: this.curve,
         child: NeumorphicBoxShapeClipper(
           shape: shape,
-          child: Padding(
-            padding: this.padding,
-            child: this.child,
-          ),
+          child: Padding(padding: this.padding, child: this.child),
         ),
         foregroundDecoration: NeumorphicDecoration(
           isForeground: true,
-          renderingByPath: shape.customShapePathProvider.oneGradientPerPath,
-          splitBackgroundForeground: this.drawSurfaceAboveChild,
+          isRenderByPath: shape.customShapePathProvider.oneGradientPerPath,
+          isBackgroundForegroundSplit: this.drawSurfaceAboveChild,
           style: this.style,
           shape: shape,
         ),
         decoration: NeumorphicDecoration(
           isForeground: false,
-          renderingByPath: shape.customShapePathProvider.oneGradientPerPath,
-          splitBackgroundForeground: this.drawSurfaceAboveChild,
+          isRenderByPath: shape.customShapePathProvider.oneGradientPerPath,
+          isBackgroundForegroundSplit: this.drawSurfaceAboveChild,
           style: this.style,
           shape: shape,
         ),
