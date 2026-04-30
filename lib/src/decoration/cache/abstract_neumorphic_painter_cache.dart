@@ -212,25 +212,25 @@ abstract class AbstractNeumorphicPainterCache {
   Color? get borderShadowDarkColor => _borderShadowDarkColor;
 
   bool updateBorderShadowColor({required Color newShadowLightColor, required Color newShadowDarkColor, required double newIntensity}) {
-    bool invalidateIntensity = false;
-    bool invalidate = false;
+    bool invalidIntensity = false;
+    bool invalid = false;
     if (_styleBorderIntensity != newIntensity) {
-      invalidate = true;
-      invalidateIntensity = true;
+      invalid = true;
+      invalidIntensity = true;
       _styleBorderIntensity = newIntensity;
     }
-    if (invalidateIntensity || _styleBorderShadowLightColor != newShadowLightColor) {
+    if (invalidIntensity || _styleBorderShadowLightColor != newShadowLightColor) {
       _styleBorderShadowLightColor = newShadowLightColor;
       _borderShadowLightColor = this.generateShadowLightColor(color: newShadowLightColor, intensity: newIntensity);
 
-      invalidate = true;
+      invalid = true;
     }
-    if (invalidate || _styleBorderShadowDarkColor != newShadowDarkColor) {
+    if (invalid || _styleBorderShadowDarkColor != newShadowDarkColor) {
       _styleBorderShadowDarkColor = newShadowDarkColor;
       _borderShadowDarkColor = this.generateShadowDarkColor(color: newShadowDarkColor, intensity: newIntensity);
-      invalidate = true;
+      invalid = true;
     }
-    return invalidate;
+    return invalid;
   }
 
   //call after _cacheWidth & _cacheHeight set

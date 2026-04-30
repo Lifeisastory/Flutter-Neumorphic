@@ -238,6 +238,7 @@ class NeumorphicEmbossDecorationPainter extends BoxPainter {
     }
   }
 
+  /// 画简单的单一颜色边框
   void _drawBorder({required Canvas canvas, required Offset offset, required Path path}) {
     if (style.border.width != null && style.border.width! > 0) {
       canvas
@@ -253,6 +254,7 @@ class NeumorphicEmbossDecorationPainter extends BoxPainter {
     }
   }
 
+  /// 画拟物边框，包含边框的亮部和暗部
   void _paintBorder({required Canvas canvas, required Offset offset, required Path path}){
     final Matrix4 matrix4 = Matrix4.identity()..scaleByDouble(_cache.borderScaleX, _cache.borderScaleY, 1.0, 1.0);
     canvas

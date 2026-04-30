@@ -18,10 +18,11 @@ class NeumorphicDebossDecorationPainter extends BoxPainter {
   late Paint _whiteShadowMaskPaint;
   late Paint _blackShadowPaint;
   late Paint _blackShadowMaskPaint;
-  late Paint _whiteOuterPaint;
-  late Paint _whiteOuterMaskPaint;
-  late Paint _blackOuterPaint;
-  late Paint _blackOuterMaskPaint;
+  late Paint _whiteBorderPaint;
+  late Paint _whiteBorderMaskPaint;
+  late Paint _blackBorderPaint;
+  late Paint _blackBorderMaskPaint;
+  
   late Paint _borderPaint;
 
   final bool isPaintShadow;
@@ -46,10 +47,10 @@ class NeumorphicDebossDecorationPainter extends BoxPainter {
     this._whiteShadowMaskPaint = Paint()..blendMode = BlendMode.dstOut;
     this._blackShadowPaint = Paint();
     this._blackShadowMaskPaint = Paint()..blendMode = BlendMode.dstOut;
-    this._whiteOuterPaint = Paint();
-    this._whiteOuterMaskPaint = Paint()..blendMode = BlendMode.dstOut;
-    this._blackOuterPaint = Paint();
-    this._blackOuterMaskPaint = Paint()..blendMode = BlendMode.dstOut;
+    this._whiteBorderPaint = Paint();
+    this._whiteBorderMaskPaint = Paint()..blendMode = BlendMode.dstOut;
+    this._blackBorderPaint = Paint();
+    this._blackBorderMaskPaint = Paint()..blendMode = BlendMode.dstOut;
 
     this._borderPaint = Paint()
       ..strokeCap = StrokeCap.round
@@ -79,49 +80,49 @@ class NeumorphicDebossDecorationPainter extends BoxPainter {
   }
 
   void _updateCache({required Offset offset, required ImageConfiguration configuration, required NeumorphicStyle newStyle}) {
-    bool invalidateSize = false;
+    bool invalidSize = false;
     if (configuration.size != null) {
-      invalidateSize = this._cache.updateSize(newOffset: offset, newSize: configuration.size!);
-      if (invalidateSize) {
+      invalidSize = this._cache.updateSize(newOffset: offset, newSize: configuration.size!);
+      if (invalidSize) {
         _cache.updatePath(newPath: shape.customShapePathProvider.getPath(configuration.size!));
       }
     }
 
-    bool invalidateLightSource = false;
-    invalidateLightSource = this._cache.updateLightSource(style.lightSource, style.oppositeShadowLightSource);
+    bool invalidLightSource = false;
+    invalidLightSource = this._cache.updateLightSource(style.lightSource, style.oppositeShadowLightSource);
 
-    bool invalidateColor = false;
+    bool invalidColor = false;
     if (style.color != null) {
-      invalidateColor = this._cache.updateStyleColor(style.color!);
-      if (invalidateColor) {
+      invalidColor = this._cache.updateStyleColor(style.color!);
+      if (invalidColor) {
         _backgroundPaint..color = _cache.backgroundColor;
       }
     }
 
-    bool invalidateDepth = false;
+    bool invalidDepth = false;
     if (style.depth != null) {
-      invalidateDepth = this._cache.updateStyleDepth(style.depth!, 5);
-      if (invalidateDepth) {
+      invalidDepth = this._cache.updateStyleDepth(style.depth!, 5);
+      if (invalidDepth) {
         _blackShadowMaskPaint..maskFilter = _cache.maskFilter;
         _whiteShadowMaskPaint..maskFilter = _cache.maskFilter;
       }
     }
 
-    bool invalidateBorderDepth = false;
+    bool invalidBorderDepth = false;
     if (style.borderDepth != null) {
-      invalidateBorderDepth = this._cache.updateBorderStyleDepth(style.borderDepth!, 5);
-      if (invalidateBorderDepth) {
-        _blackOuterPaint..maskFilter = _cache.borderMaskFilter;
-        _whiteOuterPaint..maskFilter = _cache.borderMaskFilter;
+      invalidBorderDepth = this._cache.updateBorderStyleDepth(style.borderDepth!, 5);
+      if (invalidBorderDepth) {
+        _blackBorderPaint..maskFilter = _cache.borderMaskFilter;
+        _whiteBorderPaint..maskFilter = _cache.borderMaskFilter;
       }
     }
 
-    final bool invalidateShadowColors = this._cache.updateShadowColor(
+    final bool invalidShadowColors = this._cache.updateShadowColor(
       newShadowLightColor: style.shadowWhiteColorDeboss ?? Color(0xFFFFFFFF),
       newShadowDarkColor: style.shadowBlackColorDeboss ?? Color(0xFF000000),
       newIntensity: style.intensity ?? 0.25,
     );
-    if (invalidateShadowColors) {
+    if (invalidShadowColors) {
       if (_cache.shadowLightColor != null) {
         _whiteShadowPaint..color = _cache.shadowLightColor!;
       }
@@ -130,29 +131,29 @@ class NeumorphicDebossDecorationPainter extends BoxPainter {
       }
     }
 
-    final bool invalidateBorderShadowColors = this._cache.updateBorderShadowColor(
+    final bool invalidBorderShadowColors = this._cache.updateBorderShadowColor(
       newShadowLightColor: style.shadowWhiteColorDeboss ?? Color(0xFFFFFFFF),
       newShadowDarkColor: style.shadowBlackColorDeboss ?? Color(0xFF000000),
       newIntensity: style.borderIntensity ?? 0.5,
     );
-    if (invalidateBorderShadowColors) {
+    if (invalidBorderShadowColors) {
       if (_cache.borderShadowLightColor != null) {
-        _whiteOuterPaint..color = _cache.borderShadowLightColor!;
+        _whiteBorderPaint..color = _cache.borderShadowLightColor!;
       }
       if (_cache.borderShadowDarkColor != null) {
-        _blackOuterPaint..color = _cache.borderShadowDarkColor!;
+        _blackBorderPaint..color = _cache.borderShadowDarkColor!;
       }
     }
 
-    if (invalidateLightSource || invalidateDepth) {
+    if (invalidLightSource || invalidDepth) {
       _cache.updateDepthOffset();
     }
 
-    if (invalidateLightSource || invalidateBorderDepth) {
+    if (invalidLightSource || invalidBorderDepth) {
       _cache.updateBorderDepthOffset();
     }
 
-    if (invalidateLightSource || invalidateDepth || invalidateSize) {
+    if (invalidLightSource || invalidDepth || invalidSize) {
       _cache.updateTranslations();
     }
   }
@@ -185,17 +186,17 @@ class NeumorphicDebossDecorationPainter extends BoxPainter {
       canvas
         ..saveLayer(_cache.layerRect, Paint())
         ..translate(_cache.originOffset.dx + _cache.borderDepthOffset.dx, _cache.originOffset.dy + _cache.borderDepthOffset.dy)
-        ..drawPath(path, _blackOuterPaint)
+        ..drawPath(path, _blackBorderPaint)
         ..translate(-_cache.borderDepthOffset.dx, -_cache.borderDepthOffset.dy)
-        ..drawPath(path, _blackOuterMaskPaint)
+        ..drawPath(path, _blackBorderMaskPaint)
         ..restore();
 
       canvas
         ..saveLayer(_cache.layerRect, Paint())
         ..translate(_cache.originOffset.dx - _cache.borderDepthOffset.dx, _cache.originOffset.dy - _cache.borderDepthOffset.dy)
-        ..drawPath(path, _whiteOuterPaint)
+        ..drawPath(path, _whiteBorderPaint)
         ..translate(_cache.borderDepthOffset.dx, _cache.borderDepthOffset.dy)
-        ..drawPath(path, _whiteOuterMaskPaint)
+        ..drawPath(path, _whiteBorderMaskPaint)
         ..restore();
     }
   }

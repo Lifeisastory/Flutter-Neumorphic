@@ -33,6 +33,7 @@ class MyHomePage extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          spacing: 20,
           children: <Widget>[
             NeumorphicButton(
               onPressed: () {
@@ -43,7 +44,6 @@ class MyHomePage extends StatelessWidget {
               child: Icon(Icons.favorite_border, color: _iconsColor(context)),
             ),
             NeumorphicButton(
-              margin: const EdgeInsets.only(top: 12),
               onPressed: () {
                 NeumorphicTheme.of(context)!.themeMode = NeumorphicTheme.isUsingDark(context) ? ThemeMode.light : ThemeMode.dark;
               },
@@ -54,14 +54,30 @@ class MyHomePage extends StatelessWidget {
                 shadowBlackColorEmboss: Colors.black,
                 depth: 10,
                 intensity: 0.1,
-                borderDepth: 0.3,
-                borderIntensity: 0.2,
+                borderDepth: 20,
+                borderIntensity: 1,
+              ),
+              padding: const EdgeInsets.all(100.0),
+              child: Text('Toggle Theme', style: TextStyle(color: _textColor(context))),
+            ),
+            NeumorphicButton(
+              onPressed: () {
+                NeumorphicTheme.of(context)!.themeMode = NeumorphicTheme.isUsingDark(context) ? ThemeMode.light : ThemeMode.dark;
+              },
+              style: NeumorphicStyle(
+                color: Colors.white.withValues(alpha: 0.05),
+                boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(8)),
+                shadowWhiteColorEmboss: Colors.white,
+                shadowBlackColorEmboss: Colors.black,
+                depth: 10,
+                intensity: 0.1,
+                borderDepth: 0.1,
+                borderIntensity: 1,
               ),
               padding: const EdgeInsets.all(12.0),
               child: Text('Toggle Theme', style: TextStyle(color: _textColor(context))),
             ),
             NeumorphicButton(
-              margin: const EdgeInsets.only(top: 12),
               onPressed: () {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
