@@ -16,7 +16,12 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       themeMode: ThemeMode.light,
       theme: NeumorphicThemeData(baseColor: Color(0xffd9d9d9), depth: 6),
-      darkTheme: NeumorphicThemeData.dark(baseColor: Color(0xff292c31), depth: 6),
+      darkTheme: NeumorphicThemeData.dark(
+        baseColor: Color(0xff25292e),
+        depth: 6,
+        // shadowWhiteColorEmboss: Color(0xff202328),
+        // shadowBlackColorEmboss: Color(0xff151819),
+      ),
       home: MyHomePage(),
     );
   }
@@ -48,13 +53,11 @@ class MyHomePage extends StatelessWidget {
                 NeumorphicTheme.of(context)!.themeMode = NeumorphicTheme.isUsingDark(context) ? ThemeMode.light : ThemeMode.dark;
               },
               style: NeumorphicStyle(
-                color: Colors.white.withValues(alpha: 0.05),
+                color: Colors.transparent,
                 boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(8)),
-                shadowWhiteColorEmboss: Colors.white,
-                shadowBlackColorEmboss: Colors.black,
-                depth: 10,
-                intensity: 0.1,
-                borderDepth: 20,
+                depth: 5,
+                intensity: 0.6,
+                borderDepth: 0.8,
                 borderIntensity: 1,
               ),
               padding: const EdgeInsets.all(100.0),
@@ -65,13 +68,11 @@ class MyHomePage extends StatelessWidget {
                 NeumorphicTheme.of(context)!.themeMode = NeumorphicTheme.isUsingDark(context) ? ThemeMode.light : ThemeMode.dark;
               },
               style: NeumorphicStyle(
-                color: Colors.white.withValues(alpha: 0.05),
+                color: Colors.transparent,
                 boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(8)),
-                shadowWhiteColorEmboss: Colors.white,
-                shadowBlackColorEmboss: Colors.black,
-                depth: 10,
-                intensity: 0.1,
-                borderDepth: 0.1,
+                depth: 4,
+                intensity: 0.4,
+                borderDepth: 0.4,
                 borderIntensity: 1,
               ),
               padding: const EdgeInsets.all(12.0),

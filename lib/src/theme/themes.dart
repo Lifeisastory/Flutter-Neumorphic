@@ -225,7 +225,7 @@ class NeumorphicThemeData {
     double? borderSize,
     LightSource? lightSource,
   }) {
-    return new NeumorphicThemeData(
+    return NeumorphicThemeData(
       baseColor: baseColor ?? this.baseColor,
       textTheme: textTheme ?? this.textTheme,
       iconTheme: iconTheme ?? this.iconTheme,
@@ -254,7 +254,7 @@ class NeumorphicThemeData {
   /// Create a copy of this theme
   /// With possibly new values given from the given second theme
   NeumorphicThemeData copyFrom({required NeumorphicThemeData other}) {
-    return new NeumorphicThemeData(
+    return NeumorphicThemeData(
       baseColor: other.baseColor,
       accentColor: other.accentColor,
       variantColor: other.variantColor,

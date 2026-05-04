@@ -100,6 +100,12 @@
 - 反过来看，真正会画到外部的是 emboss 的 `_paintShadow` 和 deboss 的 `_paintBorder`：前者负责外投影，后者负责凹槽口外唇。它们都通过“先偏移画，再用原 path 抠掉重叠”的方式避免覆盖组件主体。
 - 当前小 `borderDepth` 问题来自 emboss 拟物边框这套 mask 几何在亚像素深度下几乎重合：当放大/平移后的 mask 与原 path 差异小于一个逻辑像素时，方向性的内部亮暗带会退化成 path 抗锯齿残差。
 
+### 已知渲染缺陷
+- 大 `depth` 下的明暗阴影可能相互污染：`updateStyleDepth` 会把 `depth.abs()` 裁剪到控件半径的一部分，但同一个裁剪后的 depth 同时驱动阴影偏移和 `MaskFilter.blur`。当 depth 接近上限时，emboss 外投影的白色 pass 与黑色 pass 分别合成到同一个 canvas，二者没有互相排除对方阴影区域，重叠处会发生 alpha 叠加，视觉上可能发灰或暗部压过亮部。deboss 的内部阴影同样由两个独立 pass 合成，主 `depth` 过大时内侧高光和内侧暗影也可能在形状内部重叠。
+- 过小 `borderDepth` 会让 emboss 拟物边框方向性退化：`borderScaleX/Y` 几乎等于 `1`，白/黑 mask 的平移量也接近亚像素，放大和平移后的 mask 与原 path 几乎重合。结果不再稳定表现为左上高亮、右下阴影，而可能留下图形一周都可见的亮色和暗色抗锯齿残留。
+- 过小 `borderDepth` 也会削弱 deboss 洞口外唇：deboss `_paintBorder` 使用 `borderDepthOffset` 平移 blurred path 后再用原 path 扣除中心。当 offset 与 blur 都接近亚像素时，凹槽口的亮/暗外唇会变成非常薄的边缘残留，方向性弱，亮色和暗色可能沿洞口一周同时出现。
+- 当前显式 `NeumorphicBorder` 只能画单色 stroke，不能直接替代拟物边框的左上高光/右下阴影。如果要处理小 `borderDepth`，更合适的 fallback 是方向性渐变 stroke 或按光源分区的双 stroke，而不是现有普通 stroke。
+
 ## 关键关系
 - [../src/neumorphic_box_shape.dart](../src/neumorphic_box_shape.dart) depends_on [../src/clip_path/](../src/clip_path/)：构造函数选择具体 path provider，显式 import，置信度高。
 - [../src/clip_path/neumorphic_path_provider.dart](../src/clip_path/neumorphic_path_provider.dart) depends_on Flutter `CustomClipper<Path>`：继承关系，说明 path provider 同时是裁剪器，置信度高。
@@ -151,3 +157,4 @@
 - 只读取了 [../](../) 下的 `lib` 范围：插件名称、依赖版本、示例工程和测试覆盖没有纳入判断；需要读取仓库根目录配置才能确认包元数据和外部使用方式。
 - 部分源码注释存在编码异常：行为判断基于代码本身，注释语义置信度低。
 - `StadiumPathProvider` 通过超大圆角 RRect 间接得到 stadium path；最终半径约束由 Flutter 的 RRect/path 实现处理，这一点从本库源码只能确认意图，具体归一化细节属于 Flutter 框架实现。
+- 阴影/边框缺陷属于源码结构可确认、视觉表现需渲染验证的问题：大 `depth` 和小 `borderDepth` 的退化机制可以从 painter pass、mask、blur 与平移公式确认，但具体阈值仍受设备像素比、Flutter 后端、shape 复杂度和颜色对比影响。
